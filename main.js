@@ -52,7 +52,7 @@ function setAutomatic(){
   return obj
    }
 //=========================
-=======
+
 //Codigo gs JP
 //------------------------
 function doGet(e) {
