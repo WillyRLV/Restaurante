@@ -18,6 +18,10 @@
     margin: 0px 50px 0px 50px;
   }
 
+  .navbar-brand>img {
+    display: inline-block;
+  }
+
   .badge{
     margin: 0px 0px 0px 10px;
     background-color: rgb(11, 212, 196);
@@ -46,7 +50,7 @@
   }
 /*BODY*/
 *{
-    box-sizing: border-box;
+    /* box-sizing: border-box; */
     padding: 0;
     margin: 0;
     
@@ -66,8 +70,10 @@
   hr{
     width: 40%;
     opacity: 80%;
-    
-    color: black;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid gray;
   }
 
   .platos{
@@ -133,6 +139,10 @@
     border-radius: 10%;
    }
 
+   .form-b{
+    justify-content: right;
+   }
+
    /*Adaptable(Responsivo)*/
    @media screen and (max-width:500px) {
     .platos{
@@ -149,6 +159,10 @@
     hr{
       width:80%;
       
+    }
+  
+    .form-b{
+      justify-content: center;
     }
   
   }
