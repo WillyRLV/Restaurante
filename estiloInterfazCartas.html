@@ -45,8 +45,10 @@
     border-radius: 50%;
   }
 /*BODY*/
-  body{
-    width: 100%;
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
     
   }
 
@@ -69,25 +71,35 @@
   }
 
   .platos{
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
     margin-left: 150px;
     margin-top: 70px;
     
   }
 
   /*CARTAS DE LOS PLATOS*/
+
+
+
+  .button{
+   text-align: center;
+  }
   
   .card{
+    width: 300px ;
+    height: 300px;
         display: flex;
         flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
+        justify-content: center !important;
+        align-items: center !important;
+        flex-direction: column !important;
         gap: 4px;
-        padding-bottom: 30px;
-        text-align: center;
         font-weight: bolder;
         border-radius: 6px;
-        border-top: none;
-        border-left: none;
         border-bottom: rgb(175, 174, 174) 3.5px inset;
         border-right: rgb(175, 174, 174) 3.5px inset;
         /*box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);*/
@@ -107,6 +119,12 @@
 
   .color-texto-1{
     color: rgb(129, 127, 2);
+  }
+
+  .img-box{
+    width:auto ;
+    height: 130px;
+    background-color: aqua;
   }
   
   .imagen-cartas{
