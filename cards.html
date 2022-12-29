@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <base target="_top">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+</head>
+
+<body>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            height: auto;
+            background-color: red;
+        }
+
+        .content-card {
+            background-color: yellow;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 300px;
+            width: 250px;
+        }
+
+        .imagen-carta {
+            width: 100px;
+        }
+
+        .all-con{
+            display: flex;
+            flex-direction: column !important;
+        }
+    </style>
+    <section class="container">
+        <div id="content-card" class="content-card">
+
+        </div>
+         <!--Modal-->
+    <div class="modal fade" id="modalId" role="dialog">
+        <div class="modal-dialog bg-success">
+            <div class="modal-content">
+                <div class="modal-header pb-2">
+                    <button type="button" class="close" data-dismiss="modal">
+                        &times;
+                    </button>
+                    <h1 class="font-weight-light ml-4">Descripcion</h1>
+
+                </div>
+                <div class="modal-body">
+                    <div class="row mt-2 p-3">
+                        <div class="col-md-6">
+                            <img src="" width="100%" height="200px" class="rounded" />
+                        </div>
+                        <div class="col-md-6 all-con">
+                            <h2 class="nomb_producto"></h2>
+                            <p style="box-sizing: border-box;" class="producto_desc"></p>
+                            <h4  class="producto_precio"></h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+   
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+      <!-- Latest compiled JavaScript -->
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+       
+    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            setInterval(function () {
+
+                google.script.run.withSuccessHandler(data => {
+
+                    renderCard(data.proyectos)
+                    console.log(data.prec)
+
+
+
+                }).dataFood();
+
+                $(document).ready(function() {
+            $(".cardlink").click(function() {
+                $(".rounded").attr("src",$(this).siblings("img").attr("Src"));
+                $(".nomb_producto").text($(this).siblings("h2").text());
+                $(".producto_desc").text($(this).siblings("p").text());
+                $(".producto_precio").text($(this).siblings("h4").text());
+
+
+
+            });
+        });
+
+            }, 1000)
+
+
+          
+
+        })
+
+        const remove = (sel) => document.querySelectorAll(sel).forEach(el => el.remove());
+        const renderCard = (obj) => {
+
+
+            // document.getElementById('loader').style.display = 'none';
+            const htmlres = document.getElementById('content-card')
+
+
+            remove(".card");
+            obj.map((b) => {
+
+                const html = `<div class="card" >
+          <h2>${b.nomb}</h2>
+          <img src="${b.img}" class="imagen-carta" class="card-img-top" alt="...">
+          <p>${b.dec}</p>
+          <h4>${b.prec}</h4>
+
+          <a href="#" class="cardlink" data-toggle="modal" data-target="#modalId">Ver más</a>
+       </div>`;
+
+                htmlres.innerHTML += html;
+                //  htmlres.parentNode.removeChild(htmlres);
+
+            })
+
+            // const htmlres = document.getElementById('content-card')
+
+            // const x = obj.map( b => {return  b.nomb})
+            // console.log(x)
+
+        }
+     
+
+    </script>
+
+</body>
+
+</html>
