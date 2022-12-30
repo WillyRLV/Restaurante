@@ -15,10 +15,84 @@
   <!--Icono Bootstrap-->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 
-  <?!= include('estiloInterfazCartas'); ?>
+  <?!= include('estilopizarra'); ?>
 </head>
 
 <body>
+  <style>
+           * {
+            padding: 0;
+            margin: 0;
+        }
+    
+      
+        .just-especial {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .contenido-card {
+          margin: auto;
+          width: 80%;
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .card-p {
+            padding: 60px 0 20px 0;
+            background-color: #E3E3E3;
+            width: 400px;
+            border-radius: 10px;
+        }
+
+        .head-time {
+            display: flex;
+            justify-content: center ;
+            flex-direction: row;
+            gap: 60px;
+        }
+
+        .data-client  {
+           
+            
+            width: 300px;
+           
+        }
+
+        /* atributo lista */
+
+        .attributes {
+           width: 400p;
+            
+        
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10ch, 1fr));
+  grid-gap: em;
+}
+
+.attributes dt {
+  grid-column-start: 1;
+  color: #99941F;
+  font-size: 1.1em;
+  font-weight: bold;
+}
+.attributes dd {
+  grid-column-start: span 2;
+  color: #56755D;
+  font-weight: bold;
+}
+
+
+/*pedidos*/
+.titulo-pedido{
+    color: #248F89;
+}
+  </style>
   <header>
     <nav class="navbar navbar-expand-lg ">
       <div class="container-fluid">
@@ -33,13 +107,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-center">
             <li class="nav-item">
-              <a class="nav-link "  aria-current="page"><span class="badge ">Listado</span></a>
+              <a  class="nav-link "  aria-current="page"><span class="badge ">Listado</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link"><span class="badge ">Cartas</span></a>
+              <a id="cartas" class="nav-link"><span class="badge ">Cartas</span></a>
             </li>
             <li class="nav-item">
-              <a id="hola" class="nav-link"><span class="badge ">Pizarra</span></a>
+              <a  class="nav-link"><span class="badge ">Pizarra</span></a>
              
             </li>
           </ul>
@@ -53,16 +127,17 @@
   </header>
 
   <div class="menu">
-    <h1>Carta</h1>
+    <h1>Pizarra</h1>
     <hr>
   </div>
 
-  <div class="platos" id="content-card">
+  <div class="contenido-card " id="contenido-card">
     
   </div>
+  
 
     <!--Modal-->
-    <div class="modal fade" id="modalId" role="dialog">
+    <!-- <div class="modal fade" id="modalId" role="dialog">
       <div class="modal-dialog bg-success">
           <div class="modal-content">
               <div class="modal-header pb-2">
@@ -86,7 +161,7 @@
               </div>
           </div>
       </div>
-  </div>
+  </div> -->
   <!-- jQuery library -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
   <!-- Latest compiled JavaScript -->
@@ -100,59 +175,74 @@
       window.open(<?= url ?>, '_top')
     }
 
-    document.getElementById("hola").onclick = function() {
+    document.getElementById("cartas").onclick = function() {
 
 
       google.script.run
         .withSuccessHandler(function (url) {
           window.open(url, '_top');
         })
-        .getPageUrl('pizarra');
+        .getPageUrl('interfaz');
     };
 
-    window.addEventListener("load",function() {
+    window.addEventListener("DOMContentLoaded",function() {
    
-
+      setInterval(function(){
       google.script.run.withSuccessHandler(data => {
 
 renderCard(data.proyectos);
-$(document).ready(function() {
-            $(".cardlink").click(function() {
-                $(".rounded").attr("src",$(this).siblings("img").attr("Src"));
-                $(".nomb_producto").text($(this).siblings("h2").text());
-                $(".producto_desc").text($(this).siblings("p").text());
-                $(".producto_precio").text($(this).siblings("h4").text());
+// $(document).ready(function() {
+//             $(".cardlink").click(function() {
+//                 $(".rounded").attr("src",$(this).siblings("img").attr("Src"));
+//                 $(".nomb_producto").text($(this).siblings("h2").text());
+//                 $(".producto_desc").text($(this).siblings("p").text());
+//                 $(".producto_precio").text($(this).siblings("h4").text());
 
 
 
-            });
-        });
+//             });
+//         });
 
-}).dataFood();
+}).dataCom();
+      },2000)
     })
 
 // <div class="button">
 //<button class="btn" type="submit"><i class="ver bi bi-search"></i></button>
 
 
+const remove = (sel) => document.querySelectorAll(sel).forEach(el => el.remove());
+
 //render dinamic card
     const renderCard = (obj) => {
-const htmlres = document.getElementById('content-card')
+const htmlres = document.getElementById('contenido-card')
+remove(".card-p");
 obj.map((b) => {
 
-    const html = `<div class="card">
-      <div class="card-body text-center">
-        <h2 class="card-title texto-cartas color-texto">${b.nomb}</h2>
-        <img src="${b.img}" class="imagen-cartas" 
-          class="card-img-top" alt="..."/>
-         
-          <p class="descripcion">${b.dec}</p>
-          <h4>${b.prec}</h4>
-          <a href="#" class="cardlink" data-toggle="modal" data-target="#modalId"><i class="ver bi bi-search"></i></a>
-      </div>
-      </div>
-     
-    </div>`;
+    const html = `<div class="card-p just-especial ">
+                <div class="head-time">
+                    <h3>${b.hora}</h3>
+                    <h3>${b.fecha}</h3>
+                </div>
+                <div class="data-client">
+                        <dl class="attributes">
+                            <dt>Nombre :</dt>
+                            <dd>${b.nombre}</dd>
+                            <dt>Apellido :</dt>
+                            <dd>${b.apellido}</dd>
+                            <dt>Distrito :</dt>
+                            <dd>${b.distrito}</dd>
+                            <dt>Dirección :</dt>
+                            <dd>${b.direccion}</dd>
+                            <dt>Telefono :</dt>
+                            <dd>${b.telefono}</dd>   
+                        </dl>
+                </div>
+                <div>
+                    <h3 class="titulo-pedido">PEDIDO(S)</h3><br>
+                    <h4>${b.pedidos}</h4>
+                </div>
+            </div>`;
     htmlres.innerHTML += html;
 })
 }
