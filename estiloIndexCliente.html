@@ -1,0 +1,179 @@
+<style>
+  /*BODY*/
+  * {
+
+    padding: 0;
+    margin: 0;
+
+  }
+
+  /*h1*/
+  .menu {
+    margin-left: 100px;
+  }
+
+  .menu h1 {
+    margin-left: 50px;
+    margin-top: 20px;
+    color: gray;
+  }
+
+  hr {
+    width: 40%;
+    opacity: 80%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid gray;
+  }
+
+  .platos {
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-left: 150px;
+    margin-top: 70px;
+
+  }
+
+  /*CARTAS DE LOS PLATOS*/
+
+
+
+  .button {
+    text-align: center;
+  }
+
+  .card {
+    width: 230px;
+    height: 300px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center !important;
+    align-items: center !important;
+    flex-direction: column !important;
+    gap: 4px;
+    font-weight: bolder;
+    border-radius: 6px;
+    border-bottom: rgb(175, 174, 174) 3.5px inset;
+    border-right: rgb(175, 174, 174) 3.5px inset;
+    /*box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);*/
+    background-color: rgb(192, 190, 190) !important;
+    cursor: default;
+    transition: all 200ms ease;
+  }
+
+  .card:hover {
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.4);
+  }
+
+
+  .color-texto {
+    color: rgb(9, 92, 112);
+  }
+
+  .color-texto-1 {
+    color: rgb(129, 127, 2);
+  }
+
+  .img-box {
+    width: auto;
+    height: 130px;
+    background-color: aqua;
+  }
+
+  .imagen-cartas {
+    width: 100px;
+    margin-top: 10px;
+    border-radius: 10%;
+  }
+
+
+
+  /*Adaptable(Responsivo)*/
+  @media screen and (max-width:500px) {
+    .platos {
+      margin-left: 5rem;
+      margin-top: 50px;
+      text-align: center;
+
+    }
+
+    .menu {
+      margin-left: 5rem;
+    }
+
+    hr {
+      width: 80%;
+
+    }
+
+  }
+
+  /*----------*/
+
+  .BtnC{
+    font-family: TradeGothicLTStdLight,sans-serif;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 10px;
+  } 
+  
+  .botonContador{
+    display: flex;
+    border: 1px solid #ccc;
+    padding: 5px 15px;
+    border-radius: 25px;
+    align-items: center;
+    background-color: #fff;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .cantidad{
+    width: 60px;
+    text-align: center;
+    color: #000;
+    font-size: 17px;
+    border-radius: 2px;
+    font-family: TradeGothicLTStd-Bold;
+    line-height: 1;
+    border: none;
+    display: inline-block;
+    background-color: transparent;
+    outline: none;
+    cursor: pointer;
+
+  }
+
+ .operadorMenos{
+  background: #fff;
+    text-align: center;
+    line-height: 30px;
+    color: #000;
+    font-size: 20px;
+    border-radius: 2px;
+    padding-bottom: 5px;
+    cursor: pointer;
+    border: none;
+ }
+
+ .operadorMas{
+  background: #fff;
+    text-align: center;
+    line-height: 30px;
+    color: #000;
+    font-size: 20px;
+    border-radius: 2px;
+    padding-bottom: 5px;
+    cursor: pointer;
+    border: none;
+ }
+
+
+
+
+</style>
