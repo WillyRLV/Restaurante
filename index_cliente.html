@@ -8,8 +8,9 @@
   <title>Document</title>
 
   <!-- Bootstrap-->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
   <!-- Latest compiled and minified CSS 3.4 -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
 
@@ -23,10 +24,10 @@
   <header>
     <nav class="navbar navbar-expand-lg ">
       <div class="container-fluid">
-        
+
         <a class="navbar-brand" style="font-size: 13px;"><img class="icono_persona"
-          src="https://e7.pngegg.com/pngimages/290/731/png-clipart-computer-icons-user-username-avatar-person.png"
-          alt="logo_persona"> Cliente</a>
+            src="https://e7.pngegg.com/pngimages/290/731/png-clipart-computer-icons-user-username-avatar-person.png"
+            alt="logo_persona"> Cliente</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -34,14 +35,18 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-center">
             <li class="nav-item">
-              <a class="nav-link "  aria-current="page"><span class="badge ">Carta</span></a>
+              <button id="btn_carta" class="nav-link btn_barra badge b_badge" type="button">Carta</button>
             </li>
             <li class="nav-item">
-              <a class="nav-link"><span class="badge ">Pedido</span></a>
+              <a class="nav-link"><span class="badge b_badge ">Pedido</span></a>
             </li>
             <li class="nav-item">
-              <a id="hola" class="nav-link"><span class="badge ">Carrito</span></a>
-             
+              <button id="btn_carrito" class="nav-link position-relative btn_barra badge b_badge" type="button">Carrito
+                <span class="count badge translate-middle">
+                  0
+                </span>
+              </button>
+
             </li>
           </ul>
         </div>
@@ -49,42 +54,128 @@
     </nav>
   </header>
 
+  <div id="bloqueCarta">
+    <div class="menu">
+      <h1>Carta</h1>
+      <hr />
+    </div>
 
-  <div class="menu">
-    <h1>Carta</h1>
-    <hr />
-  </div>
+    <div class="platos" id="content-card">
 
-  <div class="platos" id="content-card">
+    </div>
 
-  </div>
+    <!--Modal-->
+    <div class="modal fade" id="modalId" role="dialog">
+      <div class="modal-dialog bg-success">
+        <div class="modal-content">
+          <div class="modal-header pb-2">
+            <button type="button" class="close" data-dismiss="modal">
+              &times;
+            </button>
+            <h1 class="font-weight-light ml-4">Descripcion</h1>
 
-  <!--Modal-->
-  <div class="modal fade" id="modalId" role="dialog">
-    <div class="modal-dialog bg-success">
-      <div class="modal-content">
-        <div class="modal-header pb-2">
-          <button type="button" class="close" data-dismiss="modal">
-            &times;
-          </button>
-          <h1 class="font-weight-light ml-4">Descripcion</h1>
-
-        </div>
-        <div class="modal-body">
-          <div class="row mt-2 p-3">
-            <div class="col-md-6">
-              <img src="" width="100%" height="200px" class="rounded" />
-            </div>
-            <div class="col-md-6 all-con">
-              <h2 class="nomb_producto"></h2>
-              <p style="box-sizing: border-box;" class="producto_desc"></p>
-              <h4 class="producto_precio"></h4>
+          </div>
+          <div class="modal-body">
+            <div class="row mt-2 p-3">
+              <div class="col-md-6">
+                <img src="" width="100%" height="200px" class="rounded" />
+              </div>
+              <div class="col-md-6 all-con">
+                <h2 class="nomb_producto"></h2>
+                <p style="box-sizing: border-box;" class="producto_desc"></p>
+                <h4 class="producto_precio"></h4>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+
+  <div id="bloqueCarrito" style="display: none;">
+    <div class="Lista_Carrito">
+      <table class="table table-striped jss562">
+        <thead>
+          <tr class="table_row">
+            <th class="estilo_celda">Producto</th>
+            <th class="estilo_celda">Descripcion</th>
+            <th class="estilo_celda">Precio/Unidad</th>
+            <th class="estilo_celda">Cantidad</th>
+            <th class="estilo_celda">Monto General</th>
+            <th class="estilo_celda"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><img class="imagen_tabla" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Lomo-saltado-perudelights.jpg/640px-Lomo-saltado-perudelights.jpg" alt="plato"></td>
+            <td>Lomo Saltado</td>
+            <td>S/ 30</td>
+            <td><div class="BtnCTabla">  
+              <div class="botonContadorTabla">
+                <button  class="operadorMenos btn" type="button" >-</button>
+                <input  type="text" size="25" value="0" class="cantidadTabla" min="1" readonly="readonly" />
+                <button  class="operadorMas btn" type="button" marcador="${b.id}" >+</button>
+              </div>
+            </div></td>
+            <td><input class="input_carrito" type="text" value="0" readonly></td>
+            <td><i class="basura bi bi-trash3"></i></td>
+          </tr>
+          <tr>
+            <td><img class="imagen_tabla" src="https://portal.andina.pe/EDPfotografia3/Thumbnail/2019/09/28/000623004W.jpg" alt="plato"></td>
+            <td>Chancho al palo </td>
+            <td>S/ 30</td>
+            <td><div class="BtnCTabla">  
+              <div class="botonContadorTabla">
+                <button  class="operadorMenos btn" type="button" >-</button>
+                <input  type="text" size="25" value="0" class="cantidadTabla" min="1" readonly="readonly" />
+                <button  class="operadorMas btn" type="button" >+</button>
+              </div>
+            </div></td>
+            <td><input class="input_carrito" type="text" value="0" readonly></td>
+            <td><i class="basura bi bi-trash3"></i></td>
+          </tr>
+          <tr>
+            <td><img class="imagen_tabla" src="https://i.ytimg.com/vi/U8UTf19AVGA/maxresdefault.jpg" alt="plato"></td>
+            <td>Calamares </td>
+            <td>S/ 45</td>
+            <td><div class="BtnCTabla">  
+              <div class="botonContadorTabla">
+                <button  class="operadorMenos btn" type="button" >-</button>
+                <input  type="text" size="25" value="0" class="cantidadTabla" min="1" readonly="readonly" />
+                <button  class="operadorMas btn" type="button" >+</button>
+              </div>
+            </div></td>
+            <td><input class="input_carrito" type="text" value="0" readonly></td>
+            <td><i class="basura bi bi-trash3"></i></td>
+          </tr>
+        </tbody>
+      </table>
+
+    </br>
+    </br>
+
+      <div class="resumen_compra">
+        <div class="forma_compra row">
+          <div class="col-6">
+            <p class="fs-3">Monto Total:</p>
+          
+          </div>
+          <div class="col-6">
+            <input class="monto_compra" type="text" value="0" readonly>
+          </div>
+          
+        </div>
+
+        <div class="btn_r_c">
+          <button class="btn btn-success" type="button">Realizar Compra</button>
+        </div>
+
+      </div>
+     
+
+  </div>
+  </div>
+
   <!-- jQuery library -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
   <!-- Latest compiled JavaScript -->
@@ -157,48 +248,50 @@
       })
 
     }
-    
+
     var data1 = 0;
 
-     function increment(event) {
+    function increment(event) {
       console.log(event)
-      console.log(event.target )
-        // data1 = data1 + 1;
-        // document.getElementById("cantidad").value = data1;
-       //console.log(document.getElementById("${b.id}").textContent)
-     }
-     //creation of decrement function
-     function decrement() {
- 
-       if (data1 > 0) {
-         data1 = data1 - 1;
-         document.getElementById("cantidad").value = data1;
-       }
- 
-     }
+      console.log(event.target)
+      // data1 = data1 + 1;
+      // document.getElementById("cantidad").value = data1;
+      //console.log(document.getElementById("${b.id}").textContent)
+    }
+    //creation of decrement function
+    function decrement() {
 
-  
+      if (data1 > 0) {
+        data1 = data1 - 1;
+        document.getElementById("cantidad").value = data1;
+      }
+
+    }
+
+
+  </script>
+
+  <script>
+
+    const btnCarro = document.getElementById("btn_carrito");
+    btnCarro.onclick = function () {
+      
+      document.getElementById("bloqueCarta").style.display = "none";
+      document.getElementById("bloqueCarrito").style.display = "block";
+
+    }
+
+    const btnCarta = document.getElementById("btn_carta");
+    btnCarta.onclick = function () {
+      
+      document.getElementById("bloqueCarta").style.display = "block";
+      document.getElementById("bloqueCarrito").style.display = "none";
+
+    }
+
   </script>
 
 
-
-  <!-- <script>
-    var data1 = 0;
-     
-     function increment() {
-       data1 = data1 + 1;
-       document.getElementById("cantidad").value = data1;
-     }
-     //creation of decrement function
-     function decrement() {
- 
-       if (data1 > 0) {
-         data1 = data1 - 1;
-         document.getElementById("cantidad").value = data1;
-       }
- 
-     }
-  </script> -->
 
 
 

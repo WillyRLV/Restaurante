@@ -1,5 +1,9 @@
 <style>
   /*Barra de navegacion*/
+  .btn_barra {
+    border: none;
+    background: none;
+  }
 
   .navbar {
     padding: 0.5rem;
@@ -20,7 +24,7 @@
     display: inline-block;
   }
 
-  .badge {
+  .b_badge {
     margin: 0px 0px 0px 10px;
     background-color: rgb(11, 212, 196);
     text-align: center;
@@ -223,4 +227,171 @@
     transform: translate(3px, 3px);
     box-shadow: none;
   }
+
+  /* .cart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    width: 70px;
+    height: 50px;
+    text-align: center;
+}
+
+.cart i {
+
+    font-size: 2.2em;
+}*/
+
+  .count {
+    position: absolute;
+    background-color: red;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    border-radius: 10px;
+    color: white;
+    top: 0;
+    right: -10px;
+
+  }
+
+
+
+  /*Diseño de Ventana Carrito*/
+   /*Tabla de Carrito*/
+  .Lista_Carrito {
+    margin-left: 100px;
+    min-height: 0.1%;
+    overflow-x: auto;
+    margin-right: 100px;
+  }
+
+  .Lista_Carrito h1 {
+    margin-left: 50px;
+    margin-top: 20px;
+    margin-right: 50px;
+    color: gray;
+    min-height: 0.1%;
+    overflow-x: auto;
+  }
+
+  .table_row {
+    color: inherit;
+    display: table-row;
+    outline: 0;
+    vertical-align: middle;
+  }
+
+  .estilo_celda {
+    color: #3C4858;
+    padding: 12px 10px !important;
+    position: relative;
+    font-size: 1.5rem;
+    /*border-top: 1px solid #ddd;*/
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: bold;
+    text-align: center;
+
+  }
+
+  .jss562 {
+    width: 100%;
+    overflow: auto;
+    max-width: 100%;
+    margin-bottom: 0;
+    border-spacing: 0;
+    border-collapse: collapse;
+    background-color: transparent;
+    text-align: center;
+  }
+
+  .imagen_tabla {
+    width: 80px;
+  }
+
+  .basura {
+    color: red;
+    font-size: 20px;
+  }
+
+  .input_carrito {
+    border: none;
+    color: black;
+    background-color: transparent;
+    outline: none;
+    cursor: pointer;
+    width: 40px;
+  }
+
+  .botonContadorTabla {
+    display: flex;
+    border: 1px solid #ccc;
+    padding: 5px 15px;
+    border-radius: 25px;
+    align-items: center;
+    background-color: #fff;
+    justify-content: space-between;
+    width: 65%;
+  }
+
+  .cantidadTabla {
+    width: 9px;
+    text-align: center;
+    color: #000;
+    font-size: 16px;
+    border-radius: 2px;
+    font-family: TradeGothicLTStd-Bold;
+    line-height: 1;
+    border: none;
+    display: inline-block;
+    background-color: transparent;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .BtnCTabla {
+    font-family: TradeGothicLTStdLight, sans-serif;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+
+  }
+
+  /*Resumen de Compra*/
+  .fs-3{
+    margin-left: 15px;
+  }
+
+  .resumen_compra{
+    background-color: rgb(216, 230, 230);
+    width: 300px;
+    border-radius: 5px;
+    /* display: flex; */
+    text-align: center;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .forma_compra{
+    justify-content: space-between;
+    display: flex;
+    /* margin-left: 15px; */
+    width: auto;
+    padding: 5px 5px 5px 5px;
+  }
+  
+  .btn_r_c{
+    margin-top: 10px;
+  }
+
+  .monto_compra{
+    outline: none;
+    border: none;
+    background: none;
+    text-align: center;
+    width: 85%;
+  }
+
 </style>
