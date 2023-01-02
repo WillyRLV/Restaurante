@@ -42,7 +42,7 @@
             </li>
             <li class="nav-item">
               <button id="btn_carrito" class="nav-link position-relative btn_barra badge b_badge" type="button">Carrito
-                <span class="count badge translate-middle">
+                <span id="count" class="count badge translate-middle">
                   0
                 </span>
               </button>
@@ -91,7 +91,7 @@
       </div>
     </div>
   </div>
-
+<!--carritooo-->
   <div id="bloqueCarrito" style="display: none;">
     <div class="Lista_Carrito">
       <table class="table table-striped jss562">
@@ -105,22 +105,9 @@
             <th class="estilo_celda"></th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td><img class="imagen_tabla" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Lomo-saltado-perudelights.jpg/640px-Lomo-saltado-perudelights.jpg" alt="plato"></td>
-            <td>Lomo Saltado</td>
-            <td>S/ 30</td>
-            <td><div class="BtnCTabla">  
-              <div class="botonContadorTabla">
-                <button  class="operadorMenos btn" type="button" >-</button>
-                <input  type="text" size="25" value="0" class="cantidadTabla" min="1" readonly="readonly" />
-                <button  class="operadorMas btn" type="button" marcador="${b.id}" >+</button>
-              </div>
-            </div></td>
-            <td><input class="input_carrito" type="text" value="0" readonly></td>
-            <td><i class="basura bi bi-trash3"></i></td>
-          </tr>
-          <tr>
+        <tbody id="shop-cart">
+          
+          <!-- <tr>
             <td><img class="imagen_tabla" src="https://portal.andina.pe/EDPfotografia3/Thumbnail/2019/09/28/000623004W.jpg" alt="plato"></td>
             <td>Chancho al palo </td>
             <td>S/ 30</td>
@@ -147,7 +134,7 @@
             </div></td>
             <td><input class="input_carrito" type="text" value="0" readonly></td>
             <td><i class="basura bi bi-trash3"></i></td>
-          </tr>
+          </tr> -->
         </tbody>
       </table>
 
@@ -176,6 +163,8 @@
   </div>
   </div>
 
+  <!--==================================================--->
+
   <!-- jQuery library -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
   <!-- Latest compiled JavaScript -->
@@ -196,6 +185,7 @@
       google.script.run.withSuccessHandler(data => {
 
         renderCard(data.proyectos);
+        console.log(data.proyectos);
         $(document).ready(function () {
           $(".cardlink").click(function () {
             $(".rounded").attr("src", $(this).siblings("img").attr("Src"));
@@ -213,33 +203,35 @@
     // <div class="button">
     //<button class="btn" type="submit"><i class="ver bi bi-search"></i></button>
 
-
-
+    //datos del sheet
+    var basket = JSON.parse(localStorage.getItem("data")) || [];
+///=================================================================
 
     //render dinamic card
     const renderCard = (obj) => {
       const htmlres = document.getElementById('content-card')
       obj.map((b) => {
-
-        const html = `<div class="card " id="${b.id}">
+        let {id,nomb,img,prec,dec} = b
+        let search = basket.find(x =>x.id===id) || [];
+        const html = `<div class="card" id=producto-${id}>
           <div class="card-body text-center">
-            <h2 class="card-title texto-cartas color-texto">${b.nomb}</h2>
-            <img src="${b.img}" class="imagen-cartas" 
+            <h2 class="card-title texto-cartas color-texto">${nomb}</h2>
+            <img src="${img}" class="imagen-cartas" 
               class="card-img-top" alt="..."/>
              
-              <p class="descripcion">${b.dec}</p>
-              <h4>S/ ${b.prec}</h4>
+              <p class="descripcion">${dec}</p>
+              <h4>S/ ${prec}</h4>
               <a href="#" class="cardlink" data-toggle="modal" data-target="#modalId"><i class="ver bi bi-search"></i></a>
               <br>
             <div class="BtnC">  
               <div class="botonContador">
-                <button id="${b.id}" class="operadorMenos btn" type="button" onclick="decrement()">-</button>
-                <input id="cantidad" type="text" size="25" value="0" class="cantidad" min="1" readonly="readonly" />
-                <button id="${b.id}" class="operadorMas btn" type="button" marcador="${b.id}" onclick="increment(this)">+</button>
+                <button id="" class="operadorMenos btn" type="button" onclick="decrement(${id})">-</button>
+                <input id=${id} type="text"  value="${search.item === undefined ? 0 : search.item}"  class="cantidad" />
+                <button id="" class="operadorMas btn" type="button"  onclick="increment(${id})">+</button>
               </div>
             </div>
             <div class="btn_agregar">
-              <button class="agregar" type="button">agregar</button>
+              <button onclick="calculations()" class="agregar" type="button">agregar</button>
             </div>  
           </div>     
         </div>`;
@@ -249,24 +241,127 @@
 
     }
 
-    var data1 = 0;
+    //funcion incremento
 
-    function increment(event) {
-      console.log(event)
-      console.log(event.target)
-      // data1 = data1 + 1;
-      // document.getElementById("cantidad").value = data1;
-      //console.log(document.getElementById("${b.id}").textContent)
+
+    
+let increment = (id) => {
+let idinput = id
+    let search = basket.find(x => x.id === idinput.id)
+    if (search === undefined) {
+        basket.push({
+            id: idinput.id,
+            item: 1
+        })
     }
-    //creation of decrement function
-    function decrement() {
 
-      if (data1 > 0) {
-        data1 = data1 - 1;
-        document.getElementById("cantidad").value = data1;
-      }
-
+    else {
+        search.item += 1;
     }
+
+    update(idinput.id)
+    localStorage.setItem('data', JSON.stringify(basket))
+
+    // console.log(basket)
+}
+
+//decrement 
+let decrement = (id) => {
+  let idinput = id
+    let search = basket.find(x => x.id === idinput.id)
+    if (search === undefined) return;
+
+    else if (search.item === 0) return;
+
+    // else if (basket.map(x => x.item)===0){
+    //     localStorage.clear()
+    // }
+    else {
+        search.item -= 1;
+    }
+
+    // console.log(basket)
+
+    update(idinput.id)
+    basket = basket.filter(x => x.item !== 0)
+    localStorage.setItem('data', JSON.stringify(basket))
+    calculations()
+
+
+}
+
+//imprimir en el input
+let update = (id) => {
+let search = basket.find(x => x.id === id)
+// console.log(search.item)
+
+document.getElementById(id).value = search.item;
+// console.log(search)
+}
+
+
+//calcular cantidades
+let calculations = () => {
+    let cartIcon = document.getElementById("count");
+    let search = basket.map(x => x)
+    console.log(search.length)
+    cartIcon.innerHTML = search.length
+
+    // let mapeo = basket.map(x => x.item)
+    // cartIcon.innerHTML = mapeo.reduce((x, y) => x + y, 0)
+}
+
+calculations()
+
+
+
+
+//carrito
+
+// let shopcart = document.getElementById('shop-cart')
+
+// google.script.run.withSuccessHandler(data => {
+
+//   renderBasCart(data.proyectos);
+     
+      
+
+//       }).dataFood();
+
+
+// const renderBasCart = (obj) => {
+//   if (basket.length !==0) {
+      
+//       obj.map((b) => {
+//         let {id,item} = b
+//         console.log(obj);
+//         let search =obj.find( y => y.id === id) || [];
+//         const html = `<tr>
+//             <td id=${id}><img class="imagen_tabla" src="${search.img}" alt="plato"></td>
+//             <td>${search.nomb}</td>
+//             <td>S/ ${search.prec}</td>
+//             <td><div class="BtnCTabla">  
+//               <div class="botonContadorTabla">
+//                 <button  class="operadorMenos btn" type="button" >-</button>
+//                 <input  type="text" size="25" value="0" class="cantidadTabla" min="1" readonly="readonly" />
+//                 <button  class="operadorMas btn" type="button" marcador="" >+</button>
+//               </div>
+//             </div></td>
+//             <td><input class="input_carrito" type="text" value="0" readonly></td>
+//             <td><i class="basura bi bi-trash3"></i></td>
+//           </tr>`;
+//           shopcart.innerHTML += html;
+
+//       })
+//     }
+//     else {
+//       shopcart.innerHTML = `<h2>Carrito está vació</h2>
+//         <button  onclick="location.href = 'index4.html'">regresar</button>`
+//     }
+
+//     }
+
+
 
 
   </script>
