@@ -1,10 +1,50 @@
 <style>
+  /*Barra de navegacion*/
+
+  .navbar {
+    padding: 0.5rem;
+    background-color: rgb(202, 198, 198);
+  }
+
+  .navbar-collapse {
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .navbar-brand {
+    margin: 0px 50px 0px 50px;
+    padding: 10px 15px;
+  }
+
+  .navbar-brand>img {
+    display: inline-block;
+  }
+
+  .badge {
+    margin: 0px 0px 0px 10px;
+    background-color: rgb(11, 212, 196);
+    text-align: center;
+    font-size: 15px;
+    color: white;
+    width: 85px;
+  }
+
+  /*Iconos de barra de navegación*/
+  .ver {
+    color: rgb(9, 92, 112);
+    font-size: 25px;
+  }
+
+  .icono_persona {
+    width: 30px;
+    margin: 0px 5px 5px 0px;
+    border-radius: 50%;
+  }
+
   /*BODY*/
   * {
-
     padding: 0;
     margin: 0;
-
   }
 
   /*h1*/
@@ -35,12 +75,9 @@
     gap: 10px;
     margin-left: 150px;
     margin-top: 70px;
-
   }
 
   /*CARTAS DE LOS PLATOS*/
-
-
 
   .button {
     text-align: center;
@@ -48,7 +85,7 @@
 
   .card {
     width: 230px;
-    height: 300px;
+    height: auto;
     display: flex;
     flex-wrap: wrap;
     justify-content: center !important;
@@ -68,7 +105,6 @@
   .card:hover {
     box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.4);
   }
-
 
   .color-texto {
     color: rgb(9, 92, 112);
@@ -90,15 +126,12 @@
     border-radius: 10%;
   }
 
-
-
   /*Adaptable(Responsivo)*/
-  @media screen and (max-width:500px) {
+  @media screen and (max-width: 500px) {
     .platos {
       margin-left: 5rem;
       margin-top: 50px;
       text-align: center;
-
     }
 
     .menu {
@@ -107,22 +140,20 @@
 
     hr {
       width: 80%;
-
     }
-
   }
 
   /*----------*/
 
-  .BtnC{
-    font-family: TradeGothicLTStdLight,sans-serif;
+  .BtnC {
+    font-family: TradeGothicLTStdLight, sans-serif;
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
     margin: 10px;
-  } 
-  
-  .botonContador{
+  }
+
+  .botonContador {
     display: flex;
     border: 1px solid #ccc;
     padding: 5px 15px;
@@ -133,7 +164,7 @@
     width: 100%;
   }
 
-  .cantidad{
+  .cantidad {
     width: 60px;
     text-align: center;
     color: #000;
@@ -146,11 +177,10 @@
     background-color: transparent;
     outline: none;
     cursor: pointer;
-
   }
 
- .operadorMenos{
-  background: #fff;
+  .operadorMenos {
+    background: #fff;
     text-align: center;
     line-height: 30px;
     color: #000;
@@ -159,10 +189,10 @@
     padding-bottom: 5px;
     cursor: pointer;
     border: none;
- }
+  }
 
- .operadorMas{
-  background: #fff;
+  .operadorMas {
+    background: #fff;
     text-align: center;
     line-height: 30px;
     color: #000;
@@ -171,9 +201,26 @@
     padding-bottom: 5px;
     cursor: pointer;
     border: none;
- }
+  }
 
+  /*Boton agregar de las cartas*/
 
+  .agregar {
+    padding: 0.5rem 1rem;
+    background: rgb(9, 92, 112);
+    color: white;
+    border-radius: 5px;
+    outline: 0;
+    border: 0;
+    text-decoration: none;
+    text-transform: uppercase;
+    box-shadow: 3px 3px 0 white;
+    cursor: pointer;
+    transition: 0.3s;
+  }
 
-
+  .agregar:active {
+    transform: translate(3px, 3px);
+    box-shadow: none;
+  }
 </style>
