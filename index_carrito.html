@@ -136,56 +136,214 @@
   <script>
     const btnCarta = document.getElementById("btn_carta")
     btnCarta.onclick = () => {
-      localStorage.clear();
+      // localStorage.clear();
       window.open(<?= url ?>, '_top')
     }
   </script>  
 
     <script>
+      
         //carrito
 
-// let shopcart = document.getElementById('shop-cart')
+let shopcart = document.getElementById('shop-cart')
+//datos del sheet
+
+
+
+var datas = []
+
+    var basket = JSON.parse(localStorage.getItem("data")) || [];
+///=================================================================
+
+let calculations = () => {
+    let cartIcon = document.getElementById("count");
+    let search = basket.map(x => x)
+    // console.log(search.length)
+    cartIcon.innerHTML = search.length
+
+
+
+    // let mapeo = basket.map(x => x.item)
+    // cartIcon.innerHTML = mapeo.reduce((x, y) => x + y, 0)
+}
+
+
+
+calculations()
+
+
+//   google.script.run.withSuccessHandler(data => {
+// datas.push(...[data.proyectos])
+
+// }).dataFood();
+
+
+
+
+//render
+
 
 // google.script.run.withSuccessHandler(data => {
 
-//   renderBasCart(data.proyectos);
-     
+// basket.map((b) => {
+//     let {id,item} = b
+//     // console.log(obj);
+//     let search =data.proyectos.find( y => y.id === id) || [];
+//     const html = `<tr>
+//         <td><img class="imagen_tabla" src="${search.img}" alt="plato"></td>
+//         <td>${search.nomb}</td>
+//         <td>S/ ${search.prec}</td>
+//         <td><div class="BtnCTabla">  
+//           <div class="botonContadorTabla">
+//             <button onclick="decrement(${id})"  class="operadorMenos btn" type="button" >-</button>
+//             <input id="${id}"  type="text"  value="${item}" class="cantidadTabla"  readonly="readonly" />
+//             <button   class="operadorMas btn" type="button" onclick="increment(${id})" >+</button>
+//           </div>
+//         </div></td>
+//         <td><input class="input_carrito" type="text" value="${item * search.prec}" readonly></td>
+//         <td><i onclick="removeItem(${id})"  class="basura bi bi-trash3"></i></td>
+//       </tr>`;
+//       shopcart.innerHTML += html;
+
+//   })
+// }).dataFood();
+
+const renderBasCart = () => {
+
+
+  if (basket.length !==0) {
+    google.script.run.withSuccessHandler(data => {
+
+    return (shopcart.innerHTML = basket
+
+            .map(x =>{
+                // console.log(x)
+              
+                let {id,item} =x ;
+                let search =data.proyectos.find( y => y.id === id) || [];
+            return `<tr>
+        <td><img class="imagen_tabla" src="${search.img}" alt="plato"></td>
+        <td>${search.nomb}</td>
+        <td>S/ ${search.prec}</td>
+        <td><div class="BtnCTabla">  
+          <div class="botonContadorTabla">
+            <button onclick="decrement(${id})"  class="operadorMenos btn" type="button" >-</button>
+            <input id="${id}"  type="text"  value="${item}" class="cantidadTabla"  readonly="readonly" />
+            <button   class="operadorMas btn" type="button" onclick="increment(${id})" >+</button>
+          </div>
+        </div></td>
+        <td><input class="input_carrito" type="text" value="${item * search.prec}" readonly></td>
+        <td><i onclick="removeItem(${id})"  class="basura bi bi-trash3"></i></td>
+      </tr>`
       
+        }).join(""))
+      }).dataFood();
+    }
+    else {
+      shopcart.innerHTML = `<h2>Carrito está vació</h2>
+        <button  onclick="location.href = 'index4.html'">regresar</button>`
+    }
 
-//       }).dataFood();
+    }
+
+    renderBasCart()
+  
+// console.log(datas);
+//============================================================================
 
 
-// const renderBasCart = (obj) => {
-//   if (basket.length !==0) {
-      
-//       obj.map((b) => {
-//         let {id,item} = b
-//         console.log(obj);
-//         let search =obj.find( y => y.id === id) || [];
-//         const html = `<tr>
-//             <td id=${id}><img class="imagen_tabla" src="${search.img}" alt="plato"></td>
-//             <td>${search.nomb}</td>
-//             <td>S/ ${search.prec}</td>
-//             <td><div class="BtnCTabla">  
-//               <div class="botonContadorTabla">
-//                 <button  class="operadorMenos btn" type="button" >-</button>
-//                 <input  type="text" size="25" value="0" class="cantidadTabla" min="1" readonly="readonly" />
-//                 <button  class="operadorMas btn" type="button" marcador="" >+</button>
-//               </div>
-//             </div></td>
-//             <td><input class="input_carrito" type="text" value="0" readonly></td>
-//             <td><i class="basura bi bi-trash3"></i></td>
-//           </tr>`;
-//           shopcart.innerHTML += html;
 
-//       })
-//     }
-//     else {
-//       shopcart.innerHTML = `<h2>Carrito está vació</h2>
-//         <button  onclick="location.href = 'index4.html'">regresar</button>`
-//     }
+const increment = (id) => {
+    let idinput = id
+let search = basket.find(x => x.id === idinput.id)
+if (search === undefined) {
+    basket.push({
+        id: id,
+        item: 1
+    })
+}
 
-//     }
+else {
+    search.item += 1;
+}
+
+renderBasCart()
+update(idinput.id)
+localStorage.setItem('data', JSON.stringify(basket))
+// console.log(idinput)
+
+// console.log(idinput.id)
+}
+
+const decrement = (id) => {
+  let idinput = id
+    let search = basket.find(x => x.id === idinput.id)
+    if (search === undefined) return;
+
+    else if (search.item === 0) return;
+
+    else {
+        search.item -= 1;
+    }
+
+    // console.log(basket)
+
+    update(idinput.id)
+    basket = basket.filter(x => x.item !== 0)
+    renderBasCart()
+    calculations()
+    
+    localStorage.setItem('data', JSON.stringify(basket))
+
+
+}
+
+const update = (id) => {
+
+let search = basket.find(x => x.id === id)
+// console.log(search.item)
+document.getElementById(id).value = search.item;
+
+calculations()
+// TotalAmount()
+// console.log(search)
+
+};
+
+const removeItem = (id) => {
+  let idinput = id
+basket=basket.filter(x => x.id !== idinput.id )
+// console.log(id)
+// TotalAmount()
+renderBasCart()
+calculations()
+
+localStorage.setItem("data",JSON.stringify(basket))
+
+}
+
+// let TotalAmount = () => {
+//     if (basket.length !== 0) {
+//         let amount = basket.map(x => {
+//             let {item , id } = x
+//             let search =comidas.proyectos.find( y => y.id === id) || [];
+//             return item * search.precio;
+//         }).reduce((x,y) => x + y,0)
+//         // console.log(amount)
+//         label.innerHTML = `<h2> Total : ${amount} S/.</h2>`;
+        
+//     } 
+    
+    
+//     else return label.innerHTML = `<h2> Total : 0 S/.</h2>`;;
+
+    
+// };
+
+// TotalAmount();
+
+
+
 
     </script>
 
