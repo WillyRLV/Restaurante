@@ -101,29 +101,28 @@
                 </tbody>
             </table>
 
-            </br>
-            </br>
+        
+        </div>
+        </br>
+        </br>
+        <div style="display: none;" id="resumC" class="resumen_compra">
+            <div class="forma_compra row">
+                <div class="col-6">
+                    <p class="fs-3">Monto Total:</p>
 
-            <div style="display: none;" id="resumC" class="resumen_compra">
-                <div class="forma_compra row">
-                    <div class="col-6">
-                        <p class="fs-3">Monto Total:</p>
-
-                    </div>
-                    <div class="col-6">
-                        <input id="montT" class="monto_compra" type="text" value="0" readonly/>
-                    </div>
-                    
                 </div>
-
-                <div class="btn_r_c">
-                    <button class="btn btn-success" type="button">Realizar Compra</button>
+                <div class="col-6">
+                    <input id="montT" class="monto_compra" type="text" value="0" readonly/>
                 </div>
-
+                
             </div>
 
+            <div class="btn_r_c">
+                <button class="btn btn-success" type="button">Realizar Compra</button>
+            </div>
 
         </div>
+
     </div>
 
     <!--==================================================--->
@@ -229,7 +228,7 @@ const renderBasCart = () => {
             <button   class="operadorMas btn" type="button" onclick="increment(${id})" >+</button>
           </div>
         </div></td>
-        <td><input class="input_carrito" type="text" value="${item * search.prec}" readonly></td>
+        <td><input class="input_carrito" type="text" value="S/ ${item * search.prec}" readonly></td>
         <td><i onclick="removeItem(${id})"  class="basura bi bi-trash3"></i></td>
       </tr>`
       

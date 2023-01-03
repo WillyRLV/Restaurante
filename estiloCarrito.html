@@ -172,16 +172,18 @@
   /*Resumen de Compra*/
   .fs-3 {
     margin-left: 15px;
+    font-weight: bolder;
   }
 
   .resumen_compra {
-    background-color: rgb(216, 230, 230);
+    background-color: rgb(237, 245, 245);
     width: 300px;
     border-radius: 5px;
     /* display: flex; */
     text-align: center;
     align-items: center;
     padding: 20px;
+    margin: 20px 100px 20px;
   }
 
   .forma_compra {
@@ -202,5 +204,30 @@
     background: none;
     text-align: center;
     width: 85%;
+    font-size: 15px;
+    font-weight: bolder;
   }
+
+  /*Adaptable(Responsivo)*/
+  @media screen and (max-width:650px){
+    .Lista_Carrito {
+    margin-left: 20px;
+    min-height: 0.1%;
+    overflow-x: auto;
+    margin-right: 20px;
+   }
+
+   .botonContadorTabla {
+    padding: 2px 8px;
+    width: 90%;
+  }
+
+  .resumen_compra {
+    width: 300px;
+    margin: 20px;
+    padding: 20px;
+  }
+
+  } 
+
 </style>
