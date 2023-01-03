@@ -91,86 +91,20 @@
       </div>
     </div>
   </div>
-<!--carritooo-->
-  <div id="bloqueCarrito" style="display: none;">
-    <div class="Lista_Carrito">
-      <table class="table table-striped jss562">
-        <thead>
-          <tr class="table_row">
-            <th class="estilo_celda">Producto</th>
-            <th class="estilo_celda">Descripcion</th>
-            <th class="estilo_celda">Precio/Unidad</th>
-            <th class="estilo_celda">Cantidad</th>
-            <th class="estilo_celda">Monto General</th>
-            <th class="estilo_celda"></th>
-          </tr>
-        </thead>
-        <tbody id="shop-cart">
-          
-          <!-- <tr>
-            <td><img class="imagen_tabla" src="https://portal.andina.pe/EDPfotografia3/Thumbnail/2019/09/28/000623004W.jpg" alt="plato"></td>
-            <td>Chancho al palo </td>
-            <td>S/ 30</td>
-            <td><div class="BtnCTabla">  
-              <div class="botonContadorTabla">
-                <button  class="operadorMenos btn" type="button" >-</button>
-                <input  type="text" size="25" value="0" class="cantidadTabla" min="1" readonly="readonly" />
-                <button  class="operadorMas btn" type="button" >+</button>
-              </div>
-            </div></td>
-            <td><input class="input_carrito" type="text" value="0" readonly></td>
-            <td><i class="basura bi bi-trash3"></i></td>
-          </tr>
-          <tr>
-            <td><img class="imagen_tabla" src="https://i.ytimg.com/vi/U8UTf19AVGA/maxresdefault.jpg" alt="plato"></td>
-            <td>Calamares </td>
-            <td>S/ 45</td>
-            <td><div class="BtnCTabla">  
-              <div class="botonContadorTabla">
-                <button  class="operadorMenos btn" type="button" >-</button>
-                <input  type="text" size="25" value="0" class="cantidadTabla" min="1" readonly="readonly" />
-                <button  class="operadorMas btn" type="button" >+</button>
-              </div>
-            </div></td>
-            <td><input class="input_carrito" type="text" value="0" readonly></td>
-            <td><i class="basura bi bi-trash3"></i></td>
-          </tr> -->
-        </tbody>
-      </table>
 
-    </br>
-    </br>
-
-      <div class="resumen_compra">
-        <div class="forma_compra row">
-          <div class="col-6">
-            <p class="fs-3">Monto Total:</p>
-          
-          </div>
-          <div class="col-6">
-            <input class="monto_compra" type="text" value="0" readonly>
-          </div>
-          
-        </div>
-
-        <div class="btn_r_c">
-          <button class="btn btn-success" type="button">Realizar Compra</button>
-        </div>
-
-      </div>
-     
-
-  </div>
-  </div>
-
-  <!--==================================================--->
 
   <!-- jQuery library -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
   <!-- Latest compiled JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-
+  <script>
+    const btnCarrito = document.getElementById("btn_carrito")
+    btnCarrito.onclick = () => {
+      localStorage.clear();
+      window.open(<?= test[0] ?>, '_top')
+    }
+  </script>
 
 
 
@@ -200,8 +134,8 @@
       }).dataFood();
     })
 
-    // <div class="button">
-    //<button class="btn" type="submit"><i class="ver bi bi-search"></i></button>
+    //  <div class="button">
+    // <button class="btn" type="submit"><i class="ver bi bi-search"></i></button>
 
     //datos del sheet
     var basket = JSON.parse(localStorage.getItem("data")) || [];
@@ -315,80 +249,7 @@ calculations()
 
 
 
-
-//carrito
-
-// let shopcart = document.getElementById('shop-cart')
-
-// google.script.run.withSuccessHandler(data => {
-
-//   renderBasCart(data.proyectos);
-     
-      
-
-//       }).dataFood();
-
-
-// const renderBasCart = (obj) => {
-//   if (basket.length !==0) {
-      
-//       obj.map((b) => {
-//         let {id,item} = b
-//         console.log(obj);
-//         let search =obj.find( y => y.id === id) || [];
-//         const html = `<tr>
-//             <td id=${id}><img class="imagen_tabla" src="${search.img}" alt="plato"></td>
-//             <td>${search.nomb}</td>
-//             <td>S/ ${search.prec}</td>
-//             <td><div class="BtnCTabla">  
-//               <div class="botonContadorTabla">
-//                 <button  class="operadorMenos btn" type="button" >-</button>
-//                 <input  type="text" size="25" value="0" class="cantidadTabla" min="1" readonly="readonly" />
-//                 <button  class="operadorMas btn" type="button" marcador="" >+</button>
-//               </div>
-//             </div></td>
-//             <td><input class="input_carrito" type="text" value="0" readonly></td>
-//             <td><i class="basura bi bi-trash3"></i></td>
-//           </tr>`;
-//           shopcart.innerHTML += html;
-
-//       })
-//     }
-//     else {
-//       shopcart.innerHTML = `<h2>Carrito está vació</h2>
-//         <button  onclick="location.href = 'index4.html'">regresar</button>`
-//     }
-
-//     }
-
-
-
-
   </script>
-
-  <script>
-
-    const btnCarro = document.getElementById("btn_carrito");
-    btnCarro.onclick = function () {
-      
-      document.getElementById("bloqueCarta").style.display = "none";
-      document.getElementById("bloqueCarrito").style.display = "block";
-
-    }
-
-    const btnCarta = document.getElementById("btn_carta");
-    btnCarta.onclick = function () {
-      
-      document.getElementById("bloqueCarta").style.display = "block";
-      document.getElementById("bloqueCarrito").style.display = "none";
-
-    }
-
-  </script>
-
-
-
-
 
 
 </body>
