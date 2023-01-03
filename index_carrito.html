@@ -104,14 +104,14 @@
             </br>
             </br>
 
-            <div class="resumen_compra">
+            <div style="display: none;" id="resumC" class="resumen_compra">
                 <div class="forma_compra row">
                     <div class="col-6">
                         <p class="fs-3">Monto Total:</p>
 
                     </div>
                     <div class="col-6">
-                        <input class="monto_compra" type="text" value="0" readonly/>
+                        <input id="montT" class="monto_compra" type="text" value="0" readonly/>
                     </div>
                     
                 </div>
@@ -177,9 +177,6 @@ calculations()
 
 // }).dataFood();
 
-
-
-
 //render
 
 
@@ -210,10 +207,10 @@ calculations()
 
 const renderBasCart = () => {
 
-
+  google.script.run.withSuccessHandler(data => {
   if (basket.length !==0) {
-    google.script.run.withSuccessHandler(data => {
-
+   
+    document.getElementById('resumC').style.display = "block";
     return (shopcart.innerHTML = basket
 
             .map(x =>{
@@ -236,22 +233,23 @@ const renderBasCart = () => {
         <td><i onclick="removeItem(${id})"  class="basura bi bi-trash3"></i></td>
       </tr>`
       
-        }).join(""))
-      }).dataFood();
+        }).join(""));
+
+        
     }
     else {
-      shopcart.innerHTML = `<h2>Carrito está vació</h2>
-        <button  onclick="location.href = 'index4.html'">regresar</button>`
-    }
+      shopcart.innerHTML = `<h2 class="text-align-center">Carrito está vació</h2>`
+    document.getElementById('resumC').style.display = "none";
 
+     
+    }
+  }).dataFood();
     }
 
     renderBasCart()
   
 // console.log(datas);
 //============================================================================
-
-
 
 const increment = (id) => {
     let idinput = id
@@ -305,7 +303,7 @@ let search = basket.find(x => x.id === id)
 document.getElementById(id).value = search.item;
 
 calculations()
-// TotalAmount()
+TotalAmount()
 // console.log(search)
 
 };
@@ -314,7 +312,7 @@ const removeItem = (id) => {
   let idinput = id
 basket=basket.filter(x => x.id !== idinput.id )
 // console.log(id)
-// TotalAmount()
+TotalAmount()
 renderBasCart()
 calculations()
 
@@ -322,25 +320,29 @@ localStorage.setItem("data",JSON.stringify(basket))
 
 }
 
-// let TotalAmount = () => {
-//     if (basket.length !== 0) {
-//         let amount = basket.map(x => {
-//             let {item , id } = x
-//             let search =comidas.proyectos.find( y => y.id === id) || [];
-//             return item * search.precio;
-//         }).reduce((x,y) => x + y,0)
-//         // console.log(amount)
-//         label.innerHTML = `<h2> Total : ${amount} S/.</h2>`;
-        
-//     } 
-    
-    
-//     else return label.innerHTML = `<h2> Total : 0 S/.</h2>`;;
+let TotalAmount = () => {
+  const label = document.getElementById("montT")
+  google.script.run.withSuccessHandler(data => {
+    if (basket.length !== 0) {
+      
+        let amount = basket.map(x => {
+            let {item , id } = x
+            let search =data.proyectos.find( y => y.id === id) || [];
+            return item * search.prec;
+        }).reduce((x,y) => x + y,0)
+        // console.log(amount)
+        label.value =  amount ;
 
+      
+    } 
     
-// };
+    
+    else return label.value =  "0" ;
 
-// TotalAmount();
+  }).dataFood();
+};
+
+TotalAmount();
 
 
 
