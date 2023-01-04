@@ -51,6 +51,7 @@
     margin: 0;
   }
 
+
   /*h1*/
   .menu {
     margin-left: 100px;
@@ -88,7 +89,8 @@
   }
 
   .card {
-    width: 300px;
+    margin-bottom: 15px;
+    width: 330px;
     height: 400px;
     display: flex;
     flex-wrap: wrap;
@@ -99,12 +101,13 @@
     font-weight: bolder;
     border-radius: 6px;
     border-bottom: rgb(175, 174, 174) 3.5px inset;
-    border-right: rgb(175, 174, 174) 3.5px inset;
+    /* border-right: rgb(175, 174, 174) 3.5px inset; */
     /*box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);*/
     background-color: rgb(192, 190, 190) !important;
     cursor: default;
     transition: all 200ms ease;
   }
+
 
   .card:hover {
     box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.4);
@@ -133,7 +136,7 @@
   /*Adaptable(Responsivo)*/
   @media screen and (max-width: 500px) {
     .platos {
-      margin-left: 5rem;
+      margin-left: 2rem;
       margin-top: 50px;
       text-align: center;
     }
@@ -145,6 +148,16 @@
     hr {
       width: 80%;
     }
+    
+    
+  }
+
+  @media screen and (max-width: 900px) {
+    .b_badge{
+      margin: 0px 0px 15px 10px;
+    }
+    
+    
   }
 
   /*----------*/
