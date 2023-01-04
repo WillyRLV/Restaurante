@@ -63,24 +63,22 @@ function dataCom() {
     var obj = {}
     var datoe = []
     // const valor1 = '95b9f5f3f74dc330b57a9bfbc74be654'
-
     //========================
     //con foreach
     datos.map((dato) => {
 
         const proyectos =
-        {
-            nombre: dato[1],
-            apellido: dato[2],
-            distrito: dato[3],
-            direccion: dato[4],
-            telefono: dato[5],
-            referencia: dato[6],
-            comentario: dato[7],
-            pedidos: dato[8],
-            status: dato[9],
-            fecha: dato[10],
-            hora: dato[11]
+        {   id: dato[0].toString(),
+            nombre: dato[1].toString(),
+            apellido: dato[2].toString(),
+            distrito: dato[3].toString(),
+            direccion: dato[4].toString(),
+            telefono: dato[5].toString(),
+            referencia: dato[6].toString(),
+            comentario: dato[7].toString(),
+            pedidos: dato[8].toString(),
+            fecha: dato[9].toString(),
+            hora: dato[10].toString()
         }
 
         datoe.push(proyectos)
@@ -89,6 +87,28 @@ function dataCom() {
 
 
     return obj
+}
+
+
+function onEdit(data) {
+
+    var archivo = SpreadsheetApp.openById('16i_ZO2y0K4umabI3bJDPFm01RilUpwjlu1pT3hCdwZU')
+    var holadatos = archivo.getSheetByName('Comandas');
+    var holadatos2 = archivo.getSheetByName('Pedidos');
+    var datos = holadatos.getDataRange().getValues()
+    // let val1 = data.getRange("A2").getValue();
+    datos.shift()
+    // var id = 'co7i7QU'
+    datos.map((dato, index) => {
+  
+      if (dato[0] === data) {
+          holadatos2.appendRow(dato)
+          holadatos.deleteRow(index + 2)
+          console.log("listo")
+      
+      }
+    })
+    
 }
 //=========================
 
