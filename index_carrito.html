@@ -256,21 +256,40 @@
     const btnRealizarCompra = document.getElementById("realizar_compra")
     btnRealizarCompra.onsubmit = (e) => {
       e.preventDefault();
-      let nombre = e.target[0].value;
-      let apellido = e.target[1].value;
-      let distrito = e.target[2].value;
-      let direccion = e.target[3].value;
-      let referencia = e.target[4].value;
-      let telefono = e.target[5].value;
-      let comentario = e.target[6].value;
-      let metodoPago = e.target[10].value;
-      let montoPago = e.target[11].value;
+    
+      google.script.run.withSuccessHandler(data => {
+        //Valores de input
+        let nombre = e.target[0].value;
+        let apellido = e.target[1].value;
+        let distrito = e.target[2].value;
+        let direccion = e.target[3].value;
+        let referencia = e.target[4].value;
+        let telefono = e.target[5].value;
+        let comentario = e.target[6].value;
+        let metodoPago = e.target[10].value;
+        let montoPago = e.target[11].value;
 
-      let id=CryptoJS.MD5(`${nombre+apellido+telefono}`).toString()
+        let idPedido=CryptoJS.MD5(`${nombre+apellido+telefono}`).toString()
 
-      // console.log(id)
-      google.script.run.withSuccessHandler().postPedido("f"+id,nombre,apellido,distrito,direccion,referencia,telefono,comentario) 
-        
+        //==================================================================
+        let comidas = []; 
+        let cantidad_platos = [];
+
+          let amount = basket.map(x => {
+            let { item, id } = x
+            let search = data.proyectos.find(y => y.id === id) || [];
+            comidas.push(search.nomb);
+            cantidad_platos.push(item)
+            // console.log(amount)
+            
+          })
+          google.script.run.withSuccessHandler().postPedido("f"+idPedido,nombre,apellido,distrito,direccion,referencia,telefono,comentario,comidas.toString(),cantidad_platos.toString())   
+
+          
+          
+
+      }).dataFood();
+   
     }
 
 
