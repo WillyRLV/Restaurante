@@ -160,25 +160,29 @@
           </div>
 
           <div class="form-floating">
-            <input type="text" required class="input-pedido form-control" placeholder="Telefono">
+            <input type="text" required class="input-pedido form-control" placeholder="Teléfono">
             <label for="floatingTelefono">Telefono</label>
           </div>
 
-            <div class="form-floating">
-              <select class="form-select" id="floatingSelectGrid" style="height: 46px;">
-                <option selected>Open this select menu</option>
-                <option value="1"> Efectivo</option>
-                <option value="2"><img src="" alt=""> Yape</option>
-                <option value="3"><img src="" alt=""> Plin</option>
-              </select>
-              <label for="floatingSelectGrid">Métodos de Pago</label>
-            </div>
 
-            <div class="form-floating">
+            <div class="form-floating col-12 ">
               <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
               <label for="floatingTextarea2">Comentarios</label>
             </div>
 
+          </br>
+
+            <div class="btn-group col-12" role="group" aria-label="Basic example">
+              <button id="pagar_yape" type="button" class="btn btn-primary"><img class="imagen_pago" src="https://seeklogo.com/images/Y/yape-logo-3E473EE7E5-seeklogo.com.png" alt="yape"></button>
+              <button id="pagar_plin" type="button" class="btn btn-primary"><img class="imagen_pago" src="https://seeklogo.com/images/P/plin-logo-0C4106153C-seeklogo.com.png" alt="plin"></button>
+              <button id="pagar_efectivo" type="button" class="btn btn-primary"><img class="imagen_pago" src="https://e7.pngegg.com/pngimages/472/645/png-clipart-money-bag-cash-coin-credit-card-cash-coupon-template-payment-cash.png" alt="efectivo"></button>
+            </div>
+
+            <div id="ApartadoMonto" class="form-floating" style="display: none;">
+              <input type="text" required class="input-pedido form-control" placeholder="Monto Pagar">
+              <label for="floatingPago">Monto Pagar</label>
+            </div>
+            
             <div>
               <button type="button" class="btn_pago_r btn btn-success">Realizar Compra</button>
             </div>
@@ -200,6 +204,29 @@
   <!-- Latest compiled JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+  <!-- Input para monto -->
+  <script>
+    // Efectivo
+    const btnPagarEfectivo=document.getElementById("pagar_efectivo")
+    btnPagarEfectivo.onclick= function () {
+      document.getElementById("ApartadoMonto").style.display="block"
+    }
+
+    //Yape
+    const btnPagarYape=document.getElementById("pagar_yape")
+    btnPagarYape.onclick= function () {
+      document.getElementById("ApartadoMonto").style.display="none"
+    }
+
+    //Plin
+    const btnPagarPlin=document.getElementById("pagar_plin")
+    btnPagarPlin.onclick= function () {
+      document.getElementById("ApartadoMonto").style.display="none"
+    }
+
+  </script>
+
 
   <script>
     const btnCarta = document.getElementById("btn_carta")
