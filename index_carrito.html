@@ -199,7 +199,11 @@
                   alt="efectivo"></button>
           </div>
          
-           
+          <div id="numero_pagar" class="col-12 nm_pagar" style="display: none;">
+            <label for="">Número a pagar: </label>
+            <span class="badge bg-secondary">925816978</span> 
+          
+          </div> 
           
 
           <div class="form-floating" style="display: none;">
@@ -209,7 +213,7 @@
 
           <div id="ApartadoMonto" class="form-floating" style="display: none;">
             <input id="monto_pago" type="text" class="input-pedido form-control" placeholder="Monto Pagar">
-            <label for="floatingPago">Monto Pagar</label>
+            <label for="floatingPago">Monto a pagar</label>
           </div>
 
           <div>
@@ -247,6 +251,7 @@
     const btnPagarEfectivo = document.getElementById("pagar_efectivo")
     btnPagarEfectivo.onclick = function () {
       document.getElementById("ApartadoMonto").style.display = "block"
+      document.getElementById("numero_pagar").style.display = "none"
       document.getElementById("metodo_pago").setAttribute('value', 'Efectivo');
 
     }
@@ -255,6 +260,7 @@
     const btnPagarYape = document.getElementById("pagar_yape")
     btnPagarYape.onclick = function () {
       document.getElementById("ApartadoMonto").style.display = "none"
+      document.getElementById("numero_pagar").style.display = "block"
       document.getElementById("metodo_pago").setAttribute('value', 'Yape');
       document.getElementById("monto_pago").setAttribute('value', 'No');
     }
@@ -263,6 +269,7 @@
     const btnPagarPlin = document.getElementById("pagar_plin")
     btnPagarPlin.onclick = function () {
       document.getElementById("ApartadoMonto").style.display = "none"
+      document.getElementById("numero_pagar").style.display = "block"
       document.getElementById("metodo_pago").setAttribute('value', 'Plin');
       document.getElementById("monto_pago").setAttribute('value', 'No');
     }
