@@ -258,8 +258,10 @@ obj.map((b) => {
 //boton despachar
 
 function despachar(params) {
-  alert(`seleccionas la comanda ${params.id}`)
-  google.script.run.onEdit(params.id)
+
+  ids = params.id
+  // console.log(ids)
+  google.script.run.onEdit(ids)
 }
 //=======================
 
