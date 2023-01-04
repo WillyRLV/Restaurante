@@ -73,12 +73,58 @@ function dataCom() {
             apellido: dato[2].toString(),
             distrito: dato[3].toString(),
             direccion: dato[4].toString(),
-            telefono: dato[5].toString(),
-            referencia: dato[6].toString(),
+            referencia: dato[5].toString(),
+            telefono: dato[6].toString(),
             comentario: dato[7].toString(),
             pedidos: dato[8].toString(),
-            fecha: dato[9].toString(),
-            hora: dato[10].toString()
+            cantidad: dato[9].toString(),
+            fecha: dato[10].toString(),
+            hora: dato[11].toString(),
+            preciounidad: dato[12].toString(),
+            preciot: dato[14].toString(),
+            metodoPago: dato[15].toString(),
+        }
+
+        datoe.push(proyectos)
+        obj = { status: "200", proyectos: datoe }
+    })
+
+
+    return obj
+}
+
+//pedidos realizados
+
+function pedidoComAd() {
+
+    var id = "16i_ZO2y0K4umabI3bJDPFm01RilUpwjlu1pT3hCdwZU";
+    var ss = SpreadsheetApp.openById(id);
+    var hojaUsuarios = ss.getSheetByName("Pedidos");
+    var datos = hojaUsuarios.getDataRange().getValues();
+    datos.shift();
+    var obj = {}
+    var datoe = []
+    // const valor1 = '95b9f5f3f74dc330b57a9bfbc74be654'
+    //========================
+    //con foreach
+    datos.map((dato) => {
+
+        const proyectos =
+        {   id: dato[0].toString(),
+            nombre: dato[1].toString(),
+            apellido: dato[2].toString(),
+            distrito: dato[3].toString(),
+            direccion: dato[4].toString(),
+            referencia: dato[5].toString(),
+            telefono: dato[6].toString(),
+            comentario: dato[7].toString(),
+            pedidos: dato[8].toString(),
+            cantidad: dato[9].toString(),
+            fecha: dato[10].toString(),
+            hora: dato[11].toString(),
+            preciounidad: dato[12].toString(),
+            preciot: dato[14].toString(),
+            metodoPago: dato[15].toString(),
         }
 
         datoe.push(proyectos)
@@ -134,7 +180,7 @@ function doGet(e) {
 
 
 function homePage() {
-    var pages = ['interfaz', 'pizarra'];
+    var pages = ['interfaz', 'pizarra','pedidoadmin'];
     var urls = pages.map(function (name) {
         return getPageUrl(name);
     });

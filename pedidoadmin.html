@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <!-- Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
+    <!-- Latest compiled and minified CSS 3.4 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!--Icono Bootstrap-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+
+    <?!= include('estilopizarra'); ?>
+</head>
+
+<body>
+    <style>
+
+    </style>
+    <header>
+        <nav class="navbar navbar-expand-lg ">
+            <div class="container-fluid">
+
+                <a class="navbar-brand" style="font-size: 13px;"><img class="icono_persona"
+                        src="https://e7.pngegg.com/pngimages/290/731/png-clipart-computer-icons-user-username-avatar-person.png"
+                        alt="logo_persona"> Administrador</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-center">
+                        <li class="nav-item">
+                            <a class="nav-link " aria-current="page"><span class="badge ">Listado</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="cartas" class="nav-link"><span class="badge ">Cartas</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="hola" class="nav-link"><span class="badge ">Pizarra</span></a>
+
+                        </li>
+                        <li class="nav-item">
+                            <a id="pedidoA" class="nav-link"><span class="badge ">Pedidos</span></a>
+
+                        </li>
+                    </ul>
+                    <form class="d-flex form-b" role="search" style="margin-left: 50px;">
+                        <button id="salida" class="btn" type="submit"> <i class="salida bi bi-box-arrow-right"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+
+        }
+    </style>
+    <div class="menu">
+        <h1>Pedidos</h1>
+        <hr>
+    </div>
+
+    <div class="contenido-card container " id="contenido-card">
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Dirección</th>
+                    <th scope="col">numero</th>
+                    <th scope="col">Pedidos</th>
+                    <th scope="col">Tipo de Pago</th>
+                    <th scope="col">Total</th>
+                </tr>
+            </thead>
+            <tbody id="tbodyboot">
+
+            </tbody>
+        </table>
+
+    </div>
+
+
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script>
+
+
+        const btn_salir = document.getElementById("salida")
+        btn_salir.onclick = () => {
+            localStorage.clear();
+            window.open(<?= url ?>, '_top')
+        }
+
+        //ruta pizarra
+
+        document.getElementById("hola").onclick = function () {
+
+
+            google.script.run
+                .withSuccessHandler(function (url) {
+                    window.open(url, '_top');
+                })
+                .getPageUrl('pizarra');
+        };
+        //ruta interfaz
+        document.getElementById("cartas").onclick = function () {
+
+
+            google.script.run
+                .withSuccessHandler(function (url) {
+                    window.open(url, '_top');
+                })
+                .getPageUrl('interfaz');
+        };
+
+        google.script.run.withSuccessHandler(data => {
+
+renderList(data.proyectos);
+
+
+}).pedidoComAd();
+
+        //render dinamic card
+        const renderList = (obj) => {
+            const htmlres = document.getElementById('tbodyboot')
+            obj.map((b , ind)  => {
+                const html = ` 
+                <tr>
+                <th scope="row">${ind}</th>
+                <td>${b.nombre}</td>
+                <td>${b.apellido}</td>
+                <td>${b.direccion}</td>
+                <td>${b.telefono}</td>
+                <td>${b.pedidos}</td>
+                <td>${b.metodoPago}</td>
+                <td>${b.preciot} S/.</td> 
+            </tr>`;
+                htmlres.innerHTML += html;
+            })
+        }
+
+    // <div class="button">
+    //<button class="btn" type="submit"><i class="ver bi bi-search"></i></button>
+
+
+
+
+
+    </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" // //
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" // //
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
