@@ -99,4 +99,13 @@ function dataFood() {
   return obj
 }
 
+function postPedido(id,nombre,apellido,distrito,direccion,referencia,telefono,comentario){
+  var idsheet = "16i_ZO2y0K4umabI3bJDPFm01RilUpwjlu1pT3hCdwZU";
+  var ss = SpreadsheetApp.openById(idsheet);
+  var hojaUsuarios = ss.getSheetByName("Comandas");
+
+  hojaUsuarios.appendRow([id.toString(),nombre,apellido,distrito,direccion,referencia,telefono,comentario]);
+
+}
+
 //==========================================================================
