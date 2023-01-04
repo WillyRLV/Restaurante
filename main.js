@@ -99,13 +99,18 @@ function dataFood() {
   return obj
 }
 
-function postPedido(id,nombre,apellido,distrito,direccion,referencia,telefono,comentario,comida,cantidad){
+function postPedido(id,nombre,apellido,distrito,direccion,referencia,telefono,comentario,comida,cantidad,precio_unidad,precio_unidad_total,precio_total,metodoPago,montoPago){
   var idsheet = "16i_ZO2y0K4umabI3bJDPFm01RilUpwjlu1pT3hCdwZU";
   var ss = SpreadsheetApp.openById(idsheet);
   var hojaUsuarios = ss.getSheetByName("Comandas");
 
-  hojaUsuarios.appendRow([id.toString(),nombre,apellido,distrito,direccion,referencia,telefono,comentario,comida,cantidad]);
-
+  const tiempo = new Date();
+  const fecha =tiempo.getDate() + "/" + (tiempo.getMonth()+1) + "/" + tiempo.getFullYear()
+  const hora =tiempo.getHours() + ":" + tiempo.getMinutes() + ":" + tiempo.getSeconds() 
+  
+  hojaUsuarios.appendRow([id.toString(),nombre,apellido,distrito,direccion,referencia,telefono,comentario,comida,cantidad,`'${fecha}`,`'${hora}`,precio_unidad,precio_unidad_total,precio_total,metodoPago,montoPago]);
+  obj = { status: "200"}
+  return obj;
 }
 
 //==========================================================================

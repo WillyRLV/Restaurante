@@ -24,6 +24,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100&family=Sevillana&display=swap" rel="stylesheet">
 
+  <!-- swal fire -->
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
   <?!= include('estiloCarrito'); ?>
 </head>
 
@@ -167,7 +171,7 @@
           </div>
 
           <div class="form-floating">
-            <input type="tel" required class="input-pedido form-control"   placeholder="Teléfono">
+            <input type="tel" required class="input-pedido form-control" placeholder="Teléfono">
             <label for="floatingTelefono">Teléfono</label>
           </div>
 
@@ -196,7 +200,7 @@
           </div>
 
           <div id="ApartadoMonto" class="form-floating" style="display: none;">
-            <input type="text" class="input-pedido form-control" placeholder="Monto Pagar">
+            <input id="monto_pago" type="text" class="input-pedido form-control" placeholder="Monto Pagar">
             <label for="floatingPago">Monto Pagar</label>
           </div>
 
@@ -228,6 +232,7 @@
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
+
   <!-- Input para monto -->
   <script>
     // Efectivo
@@ -243,6 +248,7 @@
     btnPagarYape.onclick = function () {
       document.getElementById("ApartadoMonto").style.display = "none"
       document.getElementById("metodo_pago").setAttribute('value', 'Yape');
+      document.getElementById("monto_pago").setAttribute('value', 'No');
     }
 
     //Plin
@@ -250,13 +256,13 @@
     btnPagarPlin.onclick = function () {
       document.getElementById("ApartadoMonto").style.display = "none"
       document.getElementById("metodo_pago").setAttribute('value', 'Plin');
-
+      document.getElementById("monto_pago").setAttribute('value', 'No');
     }
 
     const btnRealizarCompra = document.getElementById("realizar_compra")
     btnRealizarCompra.onsubmit = (e) => {
       e.preventDefault();
-    
+
       google.script.run.withSuccessHandler(data => {
         //Valores de input
         let nombre = e.target[0].value;
@@ -269,27 +275,50 @@
         let metodoPago = e.target[10].value;
         let montoPago = e.target[11].value;
 
-        let idPedido=CryptoJS.MD5(`${nombre+apellido+telefono}`).toString()
+        let idPedido = CryptoJS.MD5(`${nombre + apellido + telefono}`).toString()
 
         //==================================================================
-        let comidas = []; 
+        let comidas = [];
         let cantidad_platos = [];
+        let precio_unidad = [];
+        let precio_unidad_total = [];
 
-          let amount = basket.map(x => {
-            let { item, id } = x
-            let search = data.proyectos.find(y => y.id === id) || [];
-            comidas.push(search.nomb);
-            cantidad_platos.push(item)
-            // console.log(amount)
-            
-          })
-          google.script.run.withSuccessHandler().postPedido("f"+idPedido,nombre,apellido,distrito,direccion,referencia,telefono,comentario,comidas.toString(),cantidad_platos.toString())   
 
-          
-          
+        let amount = basket.map(x => {
+          let { item, id } = x
+          let search = data.proyectos.find(y => y.id === id) || [];
+          comidas.push(search.nomb);
+          cantidad_platos.push(item);
+          precio_unidad.push(search.prec);
+          precio_unidad_total.push(item * search.prec);
+          // console.log(amount)
+          return item * search.prec;
+        }).reduce((x, y) => x + y, 0)
+
+        let precio_total = amount;
+
+        google.script.run.withSuccessHandler(re).postPedido("f" + idPedido, nombre, apellido, distrito, direccion, referencia, telefono, comentario, comidas.toString(), cantidad_platos.toString(), precio_unidad.toString(), precio_unidad_total.toString(), precio_total, metodoPago, montoPago)
+
+
+
 
       }).dataFood();
-   
+
+
+
+    }
+
+    const re = (output) => {
+      if (output.status === "200") {
+
+        swal("Pedido Realizado", "Gracias por haber realizado su Compra", "success");
+        localStorage.clear();
+        setTimeout(() => {
+          window.open(<?= url ?>, '_top')
+
+        }, 5000);
+        
+      }
     }
 
 
@@ -497,10 +526,7 @@
           }).reduce((x, y) => x + y, 0)
           // console.log(amount)
           label.value = "S/ " + amount;
-
-
         }
-
 
         else return label.value = "0";
 
