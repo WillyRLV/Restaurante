@@ -217,7 +217,7 @@
           </div>
 
           <div>
-            <button id="" type="submit" class="btn_pago_r btn btn-success">Realizar Compra</button>
+            <button id="btn_realiza_pago" type="submit" class="btn_pago_r btn btn-success">Realizar Compra</button>
           </div>
 
         </div>
@@ -277,7 +277,7 @@
     const btnRealizarCompra = document.getElementById("realizar_compra")
     btnRealizarCompra.onsubmit = (e) => {
       e.preventDefault();
-
+      document.getElementById("btn_realiza_pago").disabled=true;
       google.script.run.withSuccessHandler(data => {
         //Valores de input
         let nombre = e.target[0].value;
@@ -319,7 +319,7 @@
 
       }).dataFood();
 
-
+      
 
     }
 
@@ -327,7 +327,8 @@
       if (output.status === "200") {
 
         swal("Pedido Realizado", "Gracias por haber realizado su Compra", "success");
-        localStorage.clear();
+        // localStorage.clear();
+        localStorage.removeItem("data");
         setTimeout(() => {
           google.script.run
         .withSuccessHandler(function (url) {
