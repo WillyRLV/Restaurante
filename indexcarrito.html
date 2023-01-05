@@ -290,7 +290,7 @@
         let metodoPago = e.target[10].value;
         let montoPago = e.target[11].value;
 
-        let idPedido = CryptoJS.MD5(`${nombre + apellido + telefono}`).toString()
+        let idPedido = CryptoJS.MD5(`${nombre + apellido + telefono+metodoPago}`).toString()
 
         //==================================================================
         let comidas = [];
