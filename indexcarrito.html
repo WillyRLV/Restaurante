@@ -305,11 +305,11 @@
         let referencia = e.target[4].value;
         let telefono = e.target[5].value;
         let comentario = e.target[6].value;
-        let metodoPago = e.target[10].value;
-        let montoPago = e.target[11].value;
+        let metodoPago = e.target[12].value;
+        let montoPago = e.target[13].value;
 
         let idPedido = CryptoJS.MD5(`${nombre + apellido + telefono+metodoPago}`).toString()
-
+      
         //==================================================================
         let comidas = [];
         let cantidad_platos = [];
@@ -332,12 +332,12 @@
 
         google.script.run.withSuccessHandler(re).postPedido("f" + idPedido, nombre, apellido, distrito, direccion, referencia, telefono, comentario, comidas.toString(), cantidad_platos.toString(), precio_unidad.toString(), precio_unidad_total.toString(), precio_total, metodoPago, montoPago)
 
-
-
+        
+        // console.log(e)
 
       }).dataFood();
 
-      
+    
 
     }
 
