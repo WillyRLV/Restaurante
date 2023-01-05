@@ -227,3 +227,26 @@ function ingresar(correo, contraseña) {
 
   return obj
 }
+
+
+function onEdit(data) {
+
+  var archivo = SpreadsheetApp.openById('16i_ZO2y0K4umabI3bJDPFm01RilUpwjlu1pT3hCdwZU')
+  var holadatos = archivo.getSheetByName('Comandas');
+  var holadatos2 = archivo.getSheetByName('Pedidos');
+  var datos = holadatos.getDataRange().getValues()
+  // let val1 = data.getRange("A2").getValue();
+  datos.shift()
+  // var id = 'co7i7QU'
+  datos.map((dato, index) => {
+
+    if (dato[0] === data) {
+        holadatos2.appendRow(dato)
+        holadatos.deleteRow(index + 2)
+        console.log("listo")
+    
+    }
+  })
+  
+}
+//=========================
