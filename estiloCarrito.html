@@ -1,0 +1,429 @@
+<style>
+  /*Barra de navegacion*/
+  .btn_barra {
+    border: none;
+    background: none;
+  }
+
+  .navbar {
+    padding: 0.5rem;
+    background-color: rgb(202, 198, 198);
+  }
+
+  .navbar-collapse {
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .navbar-brand {
+    margin: 0px 50px 0px 50px;
+    padding: 10px 15px;
+  }
+
+  .navbar-brand>img {
+    display: inline-block;
+  }
+
+  .b_badge {
+    margin: 0px 0px 0px 10px;
+    background-color: rgb(11, 212, 196);
+    text-align: center;
+    font-size: 15px;
+    color: white;
+    width: 85px;
+  }
+
+  /*Iconos de barra de navegación*/
+  .ver {
+    color: rgb(9, 92, 112);
+    font-size: 25px;
+  }
+
+  .icono_persona {
+    width: 30px;
+    margin: 0px 5px 5px 0px;
+    border-radius: 50%;
+  }
+
+  /*BODY*/
+  * {
+    padding: 0;
+    margin: 0;
+  }
+
+  .count {
+    position: absolute;
+    background-color: red;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    border-radius: 10px;
+    color: white;
+    top: 0;
+    right: -10px;
+
+  }
+
+  /*Diseño de Ventana Carrito*/
+  /*Tabla de Carrito*/
+  .Lista_Carrito {
+    margin-left: 100px;
+    min-height: 0.1%;
+    overflow-x: auto;
+    margin-right: 100px;
+  }
+
+  .Lista_Carrito h1 {
+    margin-left: 50px;
+    margin-top: 20px;
+    margin-right: 50px;
+    color: gray;
+    min-height: 0.1%;
+    overflow-x: auto;
+  }
+
+  .table_row {
+    color: inherit;
+    display: table-row;
+    outline: 0;
+    vertical-align: middle;
+  }
+
+  .estilo_celda {
+    color: #3C4858;
+    padding: 12px 10px !important;
+    position: relative;
+    /* font-size: 1.5rem; */
+    /*border-top: 1px solid #ddd;*/
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: bold;
+    text-align: center;
+
+  }
+
+  .jss562 {
+    width: 100%;
+    overflow: auto;
+    max-width: 100%;
+    margin-bottom: 0;
+    border-spacing: 0;
+    border-collapse: collapse;
+    background-color: transparent;
+    text-align: center;
+  }
+
+  .imagen_tabla {
+    width: 80px;
+  }
+
+  .basura {
+    cursor: pointer;
+    color: red;
+    font-size: 20px;
+  }
+
+  .basura:hover {
+    color: rgb(75, 25, 25);
+  }
+
+  .input_carrito {
+    border: none;
+    color: black;
+    background-color: transparent;
+    outline: none;
+    cursor: pointer;
+    width: 75px;
+  }
+
+  .botonContadorTabla {
+    display: flex;
+    border: 1px solid #ccc;
+    padding: 5px 15px;
+    border-radius: 25px;
+    align-items: center;
+    background-color: #fff;
+    justify-content: space-between;
+    width: 65%;
+  }
+
+  .cantidadTabla {
+    width: 20px;
+    text-align: center;
+    color: #000;
+    font-size: 16px;
+    border-radius: 2px;
+    font-family: TradeGothicLTStd-Bold;
+    line-height: 1;
+    border: none;
+    display: inline-block;
+    background-color: transparent;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .BtnCTabla {
+    font-family: TradeGothicLTStdLight, sans-serif;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+
+  }
+
+  /*Resumen de Compra*/
+  .texto_carrito {
+    text-align: center;
+    background-color: aqua;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    margin: auto;
+    margin-top: 50px;
+    font-size: 50px;
+    font-family: 'Sevillana', cursive;
+  }
+
+  .fs-3 {
+    margin-left: 15px;
+    font-weight: bolder;
+  }
+
+  .resumen_compra {
+    background-color: rgb(237, 245, 245);
+    width: 450px;
+    border-radius: 5px;
+    /* display: flex; */
+    text-align: center;
+    align-items: center;
+    padding: 20px;
+    margin: 20px 100px 20px;
+  }
+
+  .forma_compra {
+    justify-content: space-between;
+    display: flex;
+    /* margin-left: 15px; */
+    width: auto;
+    padding: 5px 5px 5px 5px;
+  }
+
+  .btn_r_c {
+    margin-top: 10px;
+  }
+
+  .monto_compra {
+    outline: none;
+    border: none;
+    background: none;
+    text-align: center;
+    width: 100%;
+    font-size: 45px;
+    font-weight: bolder;
+    font-family: 'Lato', sans-serif;
+  }
+
+  /*Adaptable(Responsivo)*/
+  @media screen and (max-width:650px) {
+    .Lista_Carrito {
+      margin-left: 20px;
+      min-height: 0.1%;
+      overflow-x: auto;
+      margin-right: 20px;
+    }
+
+    .botonContadorTabla {
+      padding: 2px 8px;
+      width: 90%;
+    }
+
+    .resumen_compra {
+      width: 300px;
+      margin: 20px;
+      padding: 20px;
+    }
+
+  }
+  
+
+  @media screen and (max-width:900px) {
+    .b_badge {
+      margin: 0px 0px 15px 10px;
+    }
+  }
+
+  @media screen and (max-width:1000px) {
+    .botonContadorTabla {
+      padding: 2px 8px;
+      width: 90%;
+    }
+  }
+
+  /* DISEÑO DE BLOQUE PEDIDO */
+  .form_pedido {
+    margin: auto;
+    justify-content: center;
+    display: flex;
+    text-align: center;
+    align-items: center;
+  }
+
+  .form_pedido h1 {
+    font-family: 'Sevillana', cursive;
+    margin: 20px;
+  }
+
+  /* .div_pedido label{
+    padding-top: 5px;
+    display: block;
+    margin-right: 100px;
+  } */
+
+  .form-floating {
+    height: max-content;
+    margin: 10px;
+    height: 100%;
+    width: 50%;
+  }
+
+  .div_pedido {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #ccc;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+  }
+
+  /* .input-pedido{
+    background: transparent;
+    text-align: center;
+    border-radius: 4px;
+    margin: 20px 0px 0px 0px;
+  } */
+
+  .form-floating>.form-control,
+  .form-floating>.form-control-plaintext {
+    padding: 1rem 0.75rem;
+    /* height: 46px; */
+  }
+
+  .form-floating>label {
+    position: absolute;
+    top: 0;
+    left: 5px;
+    width: 100%;
+    height: 100%;
+    padding: 1rem 0.75rem;
+    overflow: hidden;
+    text-align: start;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    pointer-events: none;
+    border: 1px solid transparent;
+    transform-origin: 0 0;
+    transition: opacity .1s ease-in-out, transform .1s ease-in-out;
+  }
+
+  .form-select{
+    height: 46px;
+    font-size: 12px;
+  }
+
+  .imagen_pago {
+    width: 50px;
+    border-radius: 100px;
+  }
+
+  .nm_pagar{
+    margin: 15px;
+  }
+
+  .btn_pago_r{
+    margin-bottom: 10px;
+    margin-top: 10px;
+  }
+
+  .btn-group{
+    margin: 5px;
+    text-align: center;
+    display: flex;
+    flex-wrap: nowrap;
+    align-content: center;
+    width: 2px;
+    justify-content: center;
+  }
+
+  /*Boton copiar numero*/
+  .numero_pagar{
+    align-items: center;
+    justify-content: center;
+  }
+
+  .copy-text{
+
+    position: relative;
+    padding: 10px;
+    background: #fff;
+    border: 1 px solid #ddd;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .copy-text input.text{
+    padding: 10px;
+    font-size: 15px;
+    color: #555;
+    border: none;
+    outline: none; 
+    width: 100px;
+    background: none;
+  }
+
+  .copy-text button{
+    padding: 10px;
+    background: #5784f5;
+    color: #fff;
+    font-size: 15px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  .copy-text button:active{
+    background: #809ce2;
+  }
+
+  .copy-text button:before{
+    content:"Copiado";
+    position: absolute;
+    top: -50px;
+    right: 0px;
+    background: #5c81dc;
+    padding: 8px 10px;
+    border-radius: 20px;
+    font-size: 15px;
+    display: none;
+  }
+
+  .copy-text button:after{
+    content: "";
+    position: absolute;
+    top: -20px;
+    right: 25px;
+    width: 10px;
+    height: 10px;
+    background: #5c81dc;
+    transform: rotate(45deg);
+    display: none;
+  }
+
+  .copy-text.active button:before,
+  .copy-text.active button:after{
+    display: block;
+  }
+
+</style>

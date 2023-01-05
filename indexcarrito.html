@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+
+  <!-- Bootstrap-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://getbootstrap.codocs/5.2/assets/css/docs.m/css" rel="stylesheet"> -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script> -->
+  <!-- Latest compiled and minified CSS 3.4 -->
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" /> -->
+
+  <!--Icono Bootstrap-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" />
+
+  <!-- Letra -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100&family=Sevillana&display=swap" rel="stylesheet">
+
+  <!-- swal fire -->
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+  <?!= include('estiloCarrito'); ?>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg ">
+      <div class="container-fluid">
+
+        <a class="navbar-brand" style="font-size: 13px;"><img class="icono_persona"
+            src="https://e7.pngegg.com/pngimages/290/731/png-clipart-computer-icons-user-username-avatar-person.png"
+            alt="logo_persona"> Cliente</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-center">
+            <li class="nav-item">
+              <button id="btn_carta" class="nav-link btn_barra badge b_badge" type="button">Carta</button>
+            </li>
+            <li class="nav-item">
+              <button id="btn_pedido" class="nav-link btn_barra badge b_badge" type="button">Pedido</button>
+            </li>
+            <li class="nav-item">
+              <button id="btn_carrito" class="nav-link position-relative btn_barra badge b_badge" type="button">Carrito
+                <span id="count" class="count badge translate-middle">
+                  0
+                </span>
+              </button>
+
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!--carritooo-->
+  <div id="bloqueCarrito" style="display: block;">
+    <div class="Lista_Carrito">
+      <table class="table table-striped jss562">
+        <thead>
+          <tr class="table_row">
+            <th class="estilo_celda">Producto</th>
+            <th class="estilo_celda">Descripcion</th>
+            <th class="estilo_celda">Precio/Unidad</th>
+            <th class="estilo_celda">Cantidad</th>
+            <th class="estilo_celda">Monto General</th>
+            <th class="estilo_celda"></th>
+          </tr>
+        </thead>
+        <tbody id="shop-cart">
+
+          <!-- <tr>
+            <td><img class="imagen_tabla" src="https://portal.andina.pe/EDPfotografia3/Thumbnail/2019/09/28/000623004W.jpg" alt="plato"></td>
+            <td>Chancho al palo </td>
+            <td>S/ 30</td>
+            <td><div class="BtnCTabla">  
+              <div class="botonContadorTabla">
+                <button  class="operadorMenos btn" type="button" >-</button>
+                <input  type="text" size="25" value="0" class="cantidadTabla" min="1" readonly="readonly" />
+                <button  class="operadorMas btn" type="button" >+</button>
+              </div>
+            </div></td>
+            <td><input class="input_carrito" type="text" value="0" readonly></td>
+            <td><i class="basura bi bi-trash3"></i></td>
+          </tr>
+          <tr>
+            <td><img class="imagen_tabla" src="https://i.ytimg.com/vi/U8UTf19AVGA/maxresdefault.jpg" alt="plato"></td>
+            <td>Calamares </td>
+            <td>S/ 45</td>
+            <td><div class="BtnCTabla">  
+              <div class="botonContadorTabla">
+                <button  class="operadorMenos btn" type="button" >-</button>
+                <input  type="text" size="25" value="0" class="cantidadTabla" min="1" readonly="readonly" />
+                <button  class="operadorMas btn" type="button" >+</button>
+              </div>
+            </div></td>
+            <td><input class="input_carrito" type="text" value="0" readonly></td>
+            <td><i class="basura bi bi-trash3"></i></td>
+          </tr> -->
+        </tbody>
+      </table>
+
+
+    </div>
+    </br>
+    <div id="shop-mens">
+
+    </div>
+    </br>
+    <div style="display: none;" id="resumC" class="resumen_compra">
+      <div class="forma_compra row">
+        <div class="col-6">
+          <p class="fs-3">Monto Total:</p>
+
+        </div>
+        <div class="col-6">
+          <input id="montT" class="monto_compra" type="text" readonly />
+        </div>
+
+      </div>
+
+      <div class="btn_r_c">
+        <button id="btn_realizar_compra" class="btn btn-success" type="button">Realizar Compra</button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- BLOQUE PEDIDO -->
+
+  <div id="bloquePedido" style="display: none;">
+    <form action="" class="form_pedido" id="realizar_compra">
+      <div class="container">
+        <h1>Ingrese sus Datos Personales</h1>
+        <div class="div_pedido row">
+          <div class="form-floating mb-3">
+            <input type="text" required class="input-pedido form-control" placeholder="Nombre">
+            <label for="floatingNombre">Nombre</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" required class="input-pedido form-control" placeholder="Apellido">
+            <label for="floatingApellido">Apellido</label>
+          </div>
+
+          <div class="form-floating">
+            <input type="text" required class="input-pedido form-control" placeholder="Distrito">
+            <label for="floatingDistrito">Distrito</label>
+          </div>
+
+          <div class="form-floating">
+            <input type="text" required class="input-pedido form-control" placeholder="Dirección">
+            <label for="floatingDireccion">Dirección</label>
+          </div>
+
+          <div class="form-floating">
+            <input type="text" required class="input-pedido form-control" placeholder="Referencia">
+            <label for="floatingDireccion">Referencia</label>
+          </div>
+
+          <div class="form-floating">
+            <input type="tel" required class="input-pedido form-control" placeholder="Celular" maxlength="9" 
+            pattern="9[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]">
+            <label for="floatingTelefono">Celular</label>
+          </div>
+
+
+          <div class="form-floating col-12 ">
+            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
+              style="height: 100px"></textarea>
+            <label for="floatingTextarea2">Comentarios</label>
+          </div>
+
+          </br>
+
+          <div class="col-12">
+            <label for="">Metodos de Pago</label>
+          </div> 
+
+          <div class="btn-group col-12" role="group" aria-label="Basic example">
+              <button id="pagar_yape" type="button" class="btn btn-primary"><img class="imagen_pago"
+                  src="https://seeklogo.com/images/Y/yape-logo-3E473EE7E5-seeklogo.com.png" alt="yape"></button>
+              <button id="pagar_plin" type="button" class="btn btn-primary"><img class="imagen_pago"
+                  src="https://seeklogo.com/images/P/plin-logo-0C4106153C-seeklogo.com.png" alt="plin"></button>
+              <button id="pagar_efectivo" type="button" class="btn btn-primary"><img class="imagen_pago"
+                  src="https://e7.pngegg.com/pngimages/472/645/png-clipart-money-bag-cash-coin-credit-card-cash-coupon-template-payment-cash.png"
+                  alt="efectivo"></button>
+          </div>
+         
+          <div id="numero_pagar" class=" numero_pagar col-12 nm_pagar" style="display: none;">
+            
+            <div class="copy-text">
+              <label for="">Número a pagar: </label>
+              <input type="tex" class="text" value="928991995" readonly />
+              <button type="button"><i class="bi bi-clipboard"></i></button>
+            </div>
+            
+          </div> 
+          
+
+          <div class="form-floating" style="display: none;">
+            <input id="metodo_pago" type="text" class="input-pedido form-control" value="" placeholder="Monto Pagar">
+            <label for="floatingPago">Metodo</label>
+          </div>
+
+          <div id="ApartadoMonto" class="form-floating" style="display: none;">
+            <input id="monto_pago" type="text" class="input-pedido form-control" placeholder="Monto Pagar">
+            <label for="floatingPago">Monto a pagar</label>
+          </div>
+
+          <div>
+            <button id="btn_realiza_pago" type="submit" class="btn_pago_r btn btn-success">Realizar Compra</button>
+          </div>
+
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+
+
+
+
+  <!--==================================================--->
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <!-- Latest compiled JavaScript -->
+  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"
+    integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <!-- copiartexto -->
+  <script>
+    let copyText=document.querySelector(".copy-text");
+    copyText.querySelector("button").addEventListener("click",function(){
+      let input=copyText.querySelector("input.text")
+      input.select();
+      document.execCommand("copy");
+      copyText.classList.add("active");
+      window.getSelection().removeAllRanges();
+      setTimeout(function(){
+        copyText.classList.remove("active");
+      },2500);
+    });
+  </script>
+
+
+  <!-- Input para monto -->
+  <script>
+    // Efectivo
+    const btnPagarEfectivo = document.getElementById("pagar_efectivo")
+    btnPagarEfectivo.onclick = function () {
+      document.getElementById("ApartadoMonto").style.display = "block"
+      document.getElementById("numero_pagar").style.display = "none"
+      document.getElementById("metodo_pago").setAttribute('value', 'Efectivo');
+
+    }
+
+    //Yape
+    const btnPagarYape = document.getElementById("pagar_yape")
+    btnPagarYape.onclick = function () {
+      document.getElementById("ApartadoMonto").style.display = "none"
+      document.getElementById("numero_pagar").style.display = "flex"
+      document.getElementById("metodo_pago").setAttribute('value', 'Yape');
+      document.getElementById("monto_pago").setAttribute('value', 'No');
+    }
+
+    //Plin
+    const btnPagarPlin = document.getElementById("pagar_plin")
+    btnPagarPlin.onclick = function () {
+      document.getElementById("ApartadoMonto").style.display = "none"
+      document.getElementById("numero_pagar").style.display = "flex"
+      document.getElementById("metodo_pago").setAttribute('value', 'Plin');
+      document.getElementById("monto_pago").setAttribute('value', 'No');
+    }
+
+    const btnRealizarCompra = document.getElementById("realizar_compra")
+    btnRealizarCompra.onsubmit = (e) => {
+      e.preventDefault();
+      document.getElementById("btn_realiza_pago").disabled=true;
+      google.script.run.withSuccessHandler(data => {
+        //Valores de input
+        let nombre = e.target[0].value;
+        let apellido = e.target[1].value;
+        let distrito = e.target[2].value;
+        let direccion = e.target[3].value;
+        let referencia = e.target[4].value;
+        let telefono = e.target[5].value;
+        let comentario = e.target[6].value;
+        let metodoPago = e.target[10].value;
+        let montoPago = e.target[11].value;
+
+        let idPedido = CryptoJS.MD5(`${nombre + apellido + telefono+metodoPago}`).toString()
+
+        //==================================================================
+        let comidas = [];
+        let cantidad_platos = [];
+        let precio_unidad = [];
+        let precio_unidad_total = [];
+
+
+        let amount = basket.map(x => {
+          let { item, id } = x
+          let search = data.proyectos.find(y => y.id === id) || [];
+          comidas.push(search.nomb);
+          cantidad_platos.push(item);
+          precio_unidad.push(search.prec);
+          precio_unidad_total.push(item * search.prec);
+          // console.log(amount)
+          return item * search.prec;
+        }).reduce((x, y) => x + y, 0)
+
+        let precio_total = amount;
+
+        google.script.run.withSuccessHandler(re).postPedido("f" + idPedido, nombre, apellido, distrito, direccion, referencia, telefono, comentario, comidas.toString(), cantidad_platos.toString(), precio_unidad.toString(), precio_unidad_total.toString(), precio_total, metodoPago, montoPago)
+
+
+
+
+      }).dataFood();
+
+      
+
+    }
+
+    const re = (output) => {
+      if (output.status === "200") {
+
+        swal("Pedido Realizado", "Gracias por haber realizado su Compra", "success");
+        // localStorage.clear();
+        localStorage.removeItem("data");
+        setTimeout(() => {
+          google.script.run
+        .withSuccessHandler(function (url) {
+          window.open(url, '_top');
+        })
+        .getPageUrl('indexcliente');
+
+        }, 4000);
+        
+      }
+    }
+
+
+  </script>
+
+
+  <script>
+    const btnCarta = document.getElementById("btn_carta")
+    btnCarta.onclick = () => {
+      // localStorage.clear();
+      google.script.run
+        .withSuccessHandler(function (url) {
+          window.open(url, '_top');
+        })
+        .getPageUrl('indexcliente');
+    }
+  </script>
+
+  <script>
+
+    //carrito
+
+    let shopcart = document.getElementById('shop-cart')
+    let shopmens = document.getElementById('shop-mens')
+    //datos del sheet
+
+
+
+    var datas = []
+
+    var basket = JSON.parse(localStorage.getItem("data")) || [];
+    ///=================================================================
+
+    let calculations = () => {
+      let cartIcon = document.getElementById("count");
+      let search = basket.map(x => x)
+      // console.log(search.length)
+      cartIcon.innerHTML = search.length
+
+
+
+      // let mapeo = basket.map(x => x.item)
+      // cartIcon.innerHTML = mapeo.reduce((x, y) => x + y, 0)
+    }
+
+
+
+    calculations()
+
+
+    //   google.script.run.withSuccessHandler(data => {
+    // datas.push(...[data.proyectos])
+
+    // }).dataFood();
+
+    //render
+
+
+    // google.script.run.withSuccessHandler(data => {
+
+    // basket.map((b) => {
+    //     let {id,item} = b
+    //     // console.log(obj);
+    //     let search =data.proyectos.find( y => y.id === id) || [];
+    //     const html = `<tr>
+    //         <td><img class="imagen_tabla" src="${search.img}" alt="plato"></td>
+    //         <td>${search.nomb}</td>
+    //         <td>S/ ${search.prec}</td>
+    //         <td><div class="BtnCTabla">  
+    //           <div class="botonContadorTabla">
+    //             <button onclick="decrement(${id})"  class="operadorMenos btn" type="button" >-</button>
+    //             <input id="${id}"  type="text"  value="${item}" class="cantidadTabla"  readonly="readonly" />
+    //             <button   class="operadorMas btn" type="button" onclick="increment(${id})" >+</button>
+    //           </div>
+    //         </div></td>
+    //         <td><input class="input_carrito" type="text" value="${item * search.prec}" readonly></td>
+    //         <td><i onclick="removeItem(${id})"  class="basura bi bi-trash3"></i></td>
+    //       </tr>`;
+    //       shopcart.innerHTML += html;
+
+    //   })
+    // }).dataFood();
+
+    const renderBasCart = () => {
+
+      google.script.run.withSuccessHandler(data => {
+        if (basket.length !== 0) {
+
+          document.getElementById('resumC').style.display = "block";
+          return (shopcart.innerHTML = basket
+
+            .map(x => {
+              // console.log(x)
+
+              let { id, item } = x;
+              let search = data.proyectos.find(y => y.id === id) || [];
+              return `<tr>
+        <td><img class="imagen_tabla" src="${search.img}" alt="plato"></td>
+        <td>${search.nomb}</td>
+        <td>S/ ${search.prec}</td>
+        <td><div class="BtnCTabla">  
+          <div class="botonContadorTabla">
+            <button onclick="decrement(${id})"  class="operadorMenos btn" type="button" >-</button>
+            <input id="${id}"  type="text"  value="${item}" class="cantidadTabla"  readonly="readonly" />
+            <button   class="operadorMas btn" type="button" onclick="increment(${id})" >+</button>
+          </div>
+        </div></td>
+        <td><input class="input_carrito" type="text" value="S/ ${item * search.prec}" readonly></td>
+        <td><i onclick="removeItem(${id})"  class="basura bi bi-trash3"></i></td>
+      </tr>`
+
+            }).join(""));
+
+
+        }
+        else {
+          shopcart.innerHTML = ""
+          shopmens.innerHTML = `<h2 class="texto_carrito">Carrito está vació</h2>`
+          document.getElementById('resumC').style.display = "none";
+
+
+        }
+      }).dataFood();
+    }
+
+    renderBasCart()
+
+    // console.log(datas);
+    //============================================================================
+
+    const increment = (id) => {
+      let idinput = id
+      let search = basket.find(x => x.id === idinput.id)
+      if (search === undefined) {
+        basket.push({
+          id: id,
+          item: 1
+        })
+      }
+
+      else {
+        search.item += 1;
+      }
+
+      renderBasCart()
+      update(idinput.id)
+      localStorage.setItem('data', JSON.stringify(basket))
+      // console.log(idinput)
+
+      // console.log(idinput.id)
+    }
+
+    const decrement = (id) => {
+      let idinput = id
+      let search = basket.find(x => x.id === idinput.id)
+      if (search === undefined) return;
+
+      else if (search.item === 0) return;
+
+      else {
+        search.item -= 1;
+      }
+
+      // console.log(basket)
+
+      update(idinput.id)
+      basket = basket.filter(x => x.item !== 0)
+      renderBasCart()
+      calculations()
+
+      localStorage.setItem('data', JSON.stringify(basket))
+
+
+    }
+
+    const update = (id) => {
+
+      let search = basket.find(x => x.id === id)
+      // console.log(search.item)
+      document.getElementById(id).value = search.item;
+
+      calculations()
+      TotalAmount()
+      // console.log(search)
+
+    };
+
+    const removeItem = (id) => {
+      let idinput = id
+      basket = basket.filter(x => x.id !== idinput.id)
+      // console.log(id)
+      TotalAmount()
+      renderBasCart()
+      calculations()
+
+      localStorage.setItem("data", JSON.stringify(basket))
+
+    }
+
+    let TotalAmount = () => {
+      const label = document.getElementById("montT")
+      google.script.run.withSuccessHandler(data => {
+        if (basket.length !== 0) {
+
+          let amount = basket.map(x => {
+            let { item, id } = x
+            let search = data.proyectos.find(y => y.id === id) || [];
+            return item * search.prec;
+          }).reduce((x, y) => x + y, 0)
+          // console.log(amount)
+          label.value = "S/ " + amount;
+        }
+
+        else return label.value = "0";
+
+      }).dataFood();
+    };
+
+    TotalAmount();
+
+
+
+
+  </script>
+
+  <script>
+    // const btn_pedido = document.getElementById("btn_pedido");
+    // btn_pedido.onclick = function () {
+
+    //   document.getElementById("bloquePedido").style.display = "block";
+    //   document.getElementById("bloqueCarrito").style.display = "none";
+    //   document.getElementById("bloqueCarta").style.display = "none";
+
+    // }
+
+    // const btnCarrito = document.getElementById("btn_carrito")
+    // btnCarrito.onclick = () => {
+    //   document.getElementById("bloquePedido").style.display = "none";
+    //   document.getElementById("bloqueCarrito").style.display = "block";
+    // }
+
+    const btnRC = document.getElementById("btn_realizar_compra")
+    btnRC.onclick = () => {
+      document.getElementById("bloquePedido").style.display = "block";
+      document.getElementById("bloqueCarrito").style.display = "none";
+    }
+
+
+  </script>
+
+</body>
+
+</html>
