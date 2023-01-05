@@ -199,10 +199,14 @@
                   alt="efectivo"></button>
           </div>
          
-          <div id="numero_pagar" class="col-12 nm_pagar" style="display: none;">
-            <label for="">Número a pagar: </label>
-            <span class="badge bg-secondary">925816978</span> 
-          
+          <div id="numero_pagar" class=" numero_pagar col-12 nm_pagar" style="display: none;">
+            
+            <div class="copy-text">
+              <label for="">Número a pagar: </label>
+              <input type="tex" class="text" value="928991995" readonly />
+              <button type="button"><i class="bi bi-clipboard"></i></button>
+            </div>
+            
           </div> 
           
 
@@ -243,6 +247,20 @@
     integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+  <!-- copiartexto -->
+  <script>
+    let copyText=document.querySelector(".copy-text");
+    copyText.querySelector("button").addEventListener("click",function(){
+      let input=copyText.querySelector("input.text")
+      input.select();
+      document.execCommand("copy");
+      copyText.classList.add("active");
+      window.getSelection().removeAllRanges();
+      setTimeout(function(){
+        copyText.classList.remove("active");
+      },2500);
+    });
+  </script>
 
 
   <!-- Input para monto -->
@@ -260,7 +278,7 @@
     const btnPagarYape = document.getElementById("pagar_yape")
     btnPagarYape.onclick = function () {
       document.getElementById("ApartadoMonto").style.display = "none"
-      document.getElementById("numero_pagar").style.display = "block"
+      document.getElementById("numero_pagar").style.display = "flex"
       document.getElementById("metodo_pago").setAttribute('value', 'Yape');
       document.getElementById("monto_pago").setAttribute('value', 'No');
     }
@@ -269,7 +287,7 @@
     const btnPagarPlin = document.getElementById("pagar_plin")
     btnPagarPlin.onclick = function () {
       document.getElementById("ApartadoMonto").style.display = "none"
-      document.getElementById("numero_pagar").style.display = "block"
+      document.getElementById("numero_pagar").style.display = "flex"
       document.getElementById("metodo_pago").setAttribute('value', 'Plin');
       document.getElementById("monto_pago").setAttribute('value', 'No');
     }
