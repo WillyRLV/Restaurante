@@ -40,7 +40,7 @@ function doGet(e) {
 
 
 function homePage(){
-  var pages = ['indexcliente' , 'indexcarrito','interfaz', 'pizarra','pedidoadmin'];
+  var pages = ['indexcliente' , 'indexcarrito','interfaz','pizarra','pedidoadmin','index_login'];
 var urls = pages.map(function(name){
  return getPageUrl(name);
 });
