@@ -84,6 +84,7 @@
     var form_log = document.getElementById("form-log");
     form_log.onsubmit = (e) => {
       e.preventDefault();
+      document.getElementById("btn-ingresar").disabled = true;
       a = document.getElementById("correo").value;
       b = document.getElementById("contraseña").value;
       google.script.run.withSuccessHandler(i).ingresar(a, b);
