@@ -21,44 +21,44 @@
 // }
 
 function doGet(e) {
-  if (e.parameter.page) {
+  if(e.parameter.page){
     var pageName = e.parameter.page.trim().toLowerCase();
-    if (pageName !== "index_cliente") {
+    if (pageName !== "loginComida"){
       var template = HtmlService.createTemplateFromFile(pageName);
       template.url = getPageUrl();
       var output = template.evaluate();
-      var htmlOutput = HtmlService.createHtmlOutput(output);
-      htmlOutput.addMetaTag('viewport', 'width=device-width, initial-scale=1');
+      var htmlOutput = HtmlService.createHtmlOutput(output);   
+     htmlOutput.addMetaTag('viewport', 'width=device-width, initial-scale=1');   
       return htmlOutput;
-    } else {
+    }else{
       return homePage();
     }
-  } else {
+  }else{
     return homePage();
   }
 }
 
 
-function homePage() {
-  var pages = ['index_carrito'];
-  var urls = pages.map(function (name) {
-    return getPageUrl(name);
-  });
-  var template = HtmlService.createTemplateFromFile("index_cliente");
-  template.test = urls;
-  var output = template.evaluate();
-  var htmlOutput = HtmlService.createHtmlOutput(output);
-  htmlOutput.addMetaTag('viewport', 'width=device-width, initial-scale=1');
+function homePage(){
+  var pages = ['indexcliente' , 'indexcarrito'];
+var urls = pages.map(function(name){
+ return getPageUrl(name);
+});
+var template = HtmlService.createTemplateFromFile("loginComida");
+template.test = urls;
+var output = template.evaluate();
+var htmlOutput = HtmlService.createHtmlOutput(output);   
+  htmlOutput.addMetaTag('viewport', 'width=device-width, initial-scale=1');   
 
-  return htmlOutput;
+return htmlOutput;
 }
 
 
-function getPageUrl(name) {
-  if (name) {
+function getPageUrl(name){
+  if (name){
     var url = ScriptApp.getService().getUrl();
     return url + "?page=" + name;
-  } else {
+  }else{
     return ScriptApp.getService().getUrl();
   }
 }

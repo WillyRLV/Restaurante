@@ -111,7 +111,11 @@
     const btnCarrito = document.getElementById("btn_carrito")
     btnCarrito.onclick = () => {
       // localStorage.clear();
-      window.open(<?= test[0] ?>, '_top')
+      google.script.run
+        .withSuccessHandler(function (url) {
+          window.open(url, '_top');
+        })
+        .getPageUrl('indexcarrito');
     }
   </script>
 

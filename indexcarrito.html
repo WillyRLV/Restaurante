@@ -329,7 +329,11 @@
         swal("Pedido Realizado", "Gracias por haber realizado su Compra", "success");
         localStorage.clear();
         setTimeout(() => {
-          window.open(<?= url ?>, '_top')
+          google.script.run
+        .withSuccessHandler(function (url) {
+          window.open(url, '_top');
+        })
+        .getPageUrl('indexcliente');
 
         }, 4000);
         
@@ -344,7 +348,11 @@
     const btnCarta = document.getElementById("btn_carta")
     btnCarta.onclick = () => {
       // localStorage.clear();
-      window.open(<?= url ?>, '_top')
+      google.script.run
+        .withSuccessHandler(function (url) {
+          window.open(url, '_top');
+        })
+        .getPageUrl('indexcliente');
     }
   </script>
 

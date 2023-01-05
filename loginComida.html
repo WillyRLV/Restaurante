@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
+  <title>Bootstrap Example</title>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Letra -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100&family=Sevillana&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <style>
+    .login_comidas {
+      background-color: aqua;
+      height: auto;
+      display: flex;
+      /* flex-wrap: nowrap; */
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      margin-top: 45px;
+    }
+
+    p {
+      margin: 12px;
+      font-size: 50px;
+      text-align: center;
+      font-family: 'Sevillana', cursive;
+    }
+
+    .boton_continuar {
+      text-align: center;
+    }
+
+    .ventana_admin {
+      text-align: center;
+      margin-top: 13px;
+      margin-bottom: 15px;
+    }
+
+    .imagen_restaurant{
+      width: 180px;
+      margin: 10px;
+      border-radius: 50%;
+    }  
+  </style>
+
+  <!-- Example Code -->
+  <div class="container">
+    <div class="login_comidas">
+
+      <div>
+        <img class="imagen_restaurant" src="https://png.pngtree.com/png-vector/20190223/ourmid/pngtree-restaurant-vector-icon-png-image_711542.jpg" alt="restaurante">
+      </div>
+
+      <div>
+        <p>Bienvenido </p>
+        <p>al restaurante</p>
+        <p>......</p>
+      </div>
+
+      
+
+      <div class="boton_continuar">
+        <button id="boton_comidas" type="button" class="btn btn-success">Continuar</button>
+      </div>
+      <div class="ventana_admin">
+        <a href="">Administrador</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- End Example Code -->
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <!-- Latest compiled JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"
+    integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script>
+    const btnContinuar = document.getElementById("boton_comidas")
+    btnContinuar.onclick = () => {
+      // localStorage.clear();
+      window.open(<?= test[0] ?>, '_top')
+    }
+  </script>
+
+</body>
+
+</html>
