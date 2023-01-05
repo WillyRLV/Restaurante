@@ -1,0 +1,199 @@
+<style>
+   
+  /*Barra de navegacion*/
+
+  
+  .navbar {
+    padding: 0.5rem;
+    background-color: rgb(202, 198, 198);
+  }
+
+  .navbar-collapse {
+    align-items: center;
+    justify-content: space-between;
+    
+  }
+
+  .navbar-brand{
+    margin: 0px 50px 0px 50px;
+  }
+
+  .navbar-brand>img {
+    display: inline-block;
+  }
+
+  .badge{
+    margin: 0px 0px 0px 10px;
+    background-color: rgb(11, 212, 196);
+    text-align: center;
+    font-size: 15px;
+    color: white;
+    width: 85px;
+  }
+
+  /*Iconos de barra de navegación*/
+  .salida{
+    font-size: 27px;
+    color: rgb(11, 212, 196);
+    margin: 0px 50px 0px 0px;
+  }
+
+  .ver{
+    color: rgb(9, 92, 112);
+    font-size: 25px;
+    }
+
+  .icono_persona{
+    width: 30px;
+    margin: 0px 5px 5px 0px;
+    border-radius: 50%;
+  }
+/*BODY*/
+*{
+    /* box-sizing: border-box; */
+    padding: 0;
+    margin: 0;
+    
+  }
+
+  /*h1*/
+  .menu{
+    margin-left: 100px;
+  }
+
+  .menu h1{
+    margin-left: 50px;
+    margin-top: 20px;
+    color: gray;
+  }
+
+  hr{
+    width: 40%;
+    opacity: 80%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid gray;
+  }
+
+  .platos{
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-left: 150px;
+    margin-top: 70px;
+    
+  }
+
+  /*CARTAS DE LOS PLATOS*/
+
+
+
+  .button{
+   text-align: center;
+  }
+  
+  .card{
+    width: 300px ;
+    height: 300px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center !important;
+        align-items: center !important;
+        flex-direction: column !important;
+        gap: 4px;
+        font-weight: bolder;
+        border-radius: 6px;
+        border-bottom: rgb(175, 174, 174) 3.5px inset;
+        border-right: rgb(175, 174, 174) 3.5px inset;
+        /*box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);*/
+        background-color: rgb(192, 190, 190) !important;
+        cursor: default;
+        transition:  all 200ms ease;
+    }
+
+  .card:hover{
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.4);
+  }  
+
+
+  .color-texto{
+    color: rgb(9, 92, 112);
+  }
+
+  .color-texto-1{
+    color: rgb(129, 127, 2);
+  }
+
+  .img-box{
+    width:auto ;
+    height: 130px;
+    background-color: aqua;
+  }
+  
+  .imagen-cartas{
+    width: 100px;
+    margin-top: 10px; 
+    border-radius: 10%;
+   }
+
+   .form-b{
+    justify-content: right;
+   }
+
+   /*Adaptable(Responsivo)*/
+   @media screen and (max-width:500px) {
+    .platos{
+      margin-left: 5rem;
+      margin-top: 50px;
+      text-align: center;
+
+    }
+
+    .menu{
+      margin-left: 5rem;
+    }
+
+    hr{
+      width:80%;
+      
+    }
+  
+    .form-b{
+      justify-content: center;
+    }
+  
+  }
+
+  /*boton prueba*/
+  .boton-prueba{
+    color: white;
+    font-weight: bolder;
+    transition:  all 200ms ease; 
+    border: none;
+  }
+
+  .boton-prueba:hover{
+    font-weight: none;
+    color:white;
+    background-color: transparent;
+  }
+
+  .boton-prueba:focus{
+    border: none !important;
+    color: white;
+    background-color: rgb(11, 212, 196);
+    border-radius: 5px;
+    width:80px;
+    height:24px;
+    font-size: 15px;
+  }
+
+
+  /*carta segundo estilo*/
+  
+
+
+</style>

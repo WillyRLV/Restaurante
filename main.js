@@ -40,7 +40,7 @@ function doGet(e) {
 
 
 function homePage(){
-  var pages = ['indexcliente' , 'indexcarrito'];
+  var pages = ['indexcliente' , 'indexcarrito','interfaz', 'pizarra','pedidoadmin'];
 var urls = pages.map(function(name){
  return getPageUrl(name);
 });
@@ -100,6 +100,9 @@ function dataFood() {
   return obj
 }
 
+
+
+
 function postPedido(id,nombre,apellido,distrito,direccion,referencia,telefono,comentario,comida,cantidad,precio_unidad,precio_unidad_total,precio_total,metodoPago,montoPago){
   var idsheet = "16i_ZO2y0K4umabI3bJDPFm01RilUpwjlu1pT3hCdwZU";
   var ss = SpreadsheetApp.openById(idsheet);
@@ -115,3 +118,112 @@ function postPedido(id,nombre,apellido,distrito,direccion,referencia,telefono,co
 }
 
 //==========================================================================
+
+//rama william
+
+//comandas
+function dataCom() {
+
+  var id = "16i_ZO2y0K4umabI3bJDPFm01RilUpwjlu1pT3hCdwZU";
+  var ss = SpreadsheetApp.openById(id);
+  var hojaUsuarios = ss.getSheetByName("Comandas");
+  var datos = hojaUsuarios.getDataRange().getValues();
+  datos.shift();
+  var obj = {}
+  var datoe = []
+  // const valor1 = '95b9f5f3f74dc330b57a9bfbc74be654'
+  //========================
+  //con foreach
+  datos.map((dato) => {
+
+      const proyectos =
+      {   id: dato[0].toString(),
+          nombre: dato[1].toString(),
+          apellido: dato[2].toString(),
+          distrito: dato[3].toString(),
+          direccion: dato[4].toString(),
+          referencia: dato[5].toString(),
+          telefono: dato[6].toString(),
+          comentario: dato[7].toString(),
+          pedidos: dato[8].toString(),
+          cantidad: dato[9].toString(),
+          fecha: dato[10].toString(),
+          hora: dato[11].toString(),
+          preciounidad: dato[12].toString(),
+          preciot: dato[14].toString(),
+          metodoPago: dato[15].toString(),
+      }
+
+      datoe.push(proyectos)
+      obj = { status: "200", proyectos: datoe }
+  })
+
+
+  return obj
+}
+
+
+function pedidoComAd() {
+
+  var id = "16i_ZO2y0K4umabI3bJDPFm01RilUpwjlu1pT3hCdwZU";
+  var ss = SpreadsheetApp.openById(id);
+  var hojaUsuarios = ss.getSheetByName("Pedidos");
+  var datos = hojaUsuarios.getDataRange().getValues();
+  datos.shift();
+  var obj = {}
+  var datoe = []
+  // const valor1 = '95b9f5f3f74dc330b57a9bfbc74be654'
+  //========================
+  //con foreach
+  datos.map((dato) => {
+
+      const proyectos =
+      {   id: dato[0].toString(),
+          nombre: dato[1].toString(),
+          apellido: dato[2].toString(),
+          distrito: dato[3].toString(),
+          direccion: dato[4].toString(),
+          referencia: dato[5].toString(),
+          telefono: dato[6].toString(),
+          comentario: dato[7].toString(),
+          pedidos: dato[8].toString(),
+          cantidad: dato[9].toString(),
+          fecha: dato[10].toString(),
+          hora: dato[11].toString(),
+          preciounidad: dato[12].toString(),
+          preciot: dato[14].toString(),
+          metodoPago: dato[15].toString(),
+      }
+
+      datoe.push(proyectos)
+      obj = { status: "200", proyectos: datoe }
+  })
+
+
+  return obj
+}
+
+function ingresar(correo, contraseña) {
+  var id = "16i_ZO2y0K4umabI3bJDPFm01RilUpwjlu1pT3hCdwZU";
+  var ss = SpreadsheetApp.openById(id);
+  var hojaUsuarios = ss.getSheetByName("Administrador");
+  var datos = hojaUsuarios.getDataRange().getValues();
+  //datos.shift();
+  var obj = {}
+  datos.forEach((dato) => {
+      if (dato[2] === correo && dato[4] === contraseña) {
+          obj = { status: "200", nombrecompleto: `${dato[0]} ${dato[1]}` }
+      }
+
+      if (dato[2] === correo && dato[4] !== contraseña) {
+          obj = { status: "401" }
+      }
+
+      if (Object.entries(obj).length === 0) {
+          obj = { status: "404" }
+      }
+  })
+
+
+  return obj
+}
