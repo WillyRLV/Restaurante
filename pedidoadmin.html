@@ -85,6 +85,8 @@
                     <th scope="col">Pedidos</th>
                     <th scope="col">Tipo de Pago</th>
                     <th scope="col">Total</th>
+                    <th scope="col">Cantidad</th>
+
                 </tr>
             </thead>
             <tbody id="tbodyboot">
@@ -141,7 +143,14 @@ renderList(data.proyectos);
         //render dinamic card
         const renderList = (obj) => {
             const htmlres = document.getElementById('tbodyboot')
+            
+            const datax = []
+            const datay= []
+
             obj.map((b , ind)  => {
+                datax.push([b.pedidos])
+                datax[ind].push(b.cantidad)
+               
                 const html = ` 
                 <tr>
                 <th scope="row">${ind}</th>
@@ -151,10 +160,14 @@ renderList(data.proyectos);
                 <td>${b.telefono}</td>
                 <td>${b.pedidos}</td>
                 <td>${b.metodoPago}</td>
-                <td>${b.preciot} S/.</td> 
+                <td>${b.preciot} S/.</td>
+                <td>${datax[ind]}</td>
+
             </tr>`;
                 htmlres.innerHTML += html;
             })
+
+            console.log(datax)
         }
 
     // <div class="button">
