@@ -73,7 +73,7 @@
         <button id="boton_comidas" type="button" class="btn btn-success">Continuar</button>
       </div>
       <div class="ventana_admin">
-        <a href="">Administrador</a>
+        <a id="boton_admin" href="" >Administrador</a>
       </div>
     </div>
   </div>
@@ -95,6 +95,12 @@
     btnContinuar.onclick = () => {
       // localStorage.clear();
       window.open(<?= test[0] ?>, '_top')
+    }
+
+    const btnContinuar2 = document.getElementById("boton_admin")
+    btnContinuar2.onclick = () => {
+      // localStorage.clear();
+      window.open(<?= test[2] ?>, '_top')
     }
   </script>
 
