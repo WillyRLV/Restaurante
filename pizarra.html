@@ -35,7 +35,9 @@
       align-items: center;
       gap: 30px;
       flex-wrap: wrap;
-      height: 600px;
+      height: auto;
+      padding-bottom: 30px;
+
     }
 
     .card-p {
@@ -93,7 +95,6 @@
     }
 
     .grupo-pedido p {
-      background-color: rgb(173, 173, 173);
       font-size: 1.2em;
       color: #1f2799;
       text-align: center;
@@ -101,6 +102,17 @@
       font-weight: bold;
       height: 100px;
       padding: 0 30px 5px 30px;
+    }
+
+    /*boton estilo*/
+    .button-st{
+      height: 35px;
+        background-color: #2da894;
+        border: none;
+        color: #fff;
+        font-size : 1.2em;
+        font-weight: bold;
+        border-radius: 8px;
     }
   </style>
   <header>
@@ -271,7 +283,9 @@ google.script.run
                             <dt>Comentario :</dt>
                             <dd>${b.comentario}</dd>  
                             <dt>Método de pago :</dt>
-                            <dd>${b.metodoPago}</dd>  
+                            <dd>${b.metodoPago}</dd>
+                            <dt>Cantidad :</dt>
+                            <dd>${b.cantidad}(respectivamente)</dd>   
                         </dl>
                 </div>
                 <div class="grupo-pedido">
@@ -285,6 +299,7 @@ google.script.run
 
                 </div>
                 <Button onclick="despachar(${b.id})"" class="button-st" id="button-st">Despachar</Button>
+                <div><h3>${b.preciot} S/.</h3></div>
             </div>`;
         htmlres.innerHTML += html;
       })
