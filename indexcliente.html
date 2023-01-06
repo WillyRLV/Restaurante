@@ -18,7 +18,7 @@
   <!--Icono Bootstrap-->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" />
 
-
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
   <?!= include('estiloIndexCliente'); ?>
 </head>
 
@@ -108,6 +108,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"
     integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
   <script>
     const btnCarrito = document.getElementById("btn_carrito")
@@ -180,9 +181,7 @@
                 <button id="" class="operadorMas btn" type="button"  onclick="increment(${id})">+</button>
               </div>
             </div>
-            <div class="btn_agregar">
-              <button onclick="calculations()" class="agregar" type="button">agregar</button>
-            </div>  
+            
           </div>     
         </div>`;
         htmlres.innerHTML += html;
@@ -190,6 +189,27 @@
       })
 
     }
+
+    //==============================================
+    toastr.options = {
+      "closeButton": true,
+      "debug": false,
+      "newestOnTop": false,
+      "progressBar": false,
+      "positionClass": "toast-top-center",
+      "preventDuplicates": false,
+      "onclick": null,
+      "showDuration": "500",
+      "hideDuration": "500",
+      "timeOut": "800",
+      "extendedTimeOut": "1000",
+      "showEasing": "swing",
+      "hideEasing": "linear",
+      "showMethod": "fadeIn",
+      "hideMethod": "fadeOut"
+    }
+
+
 
     //funcion incremento
 
@@ -208,11 +228,12 @@
       else {
         search.item += 1;
       }
-
+      
       update(idinput.id)
       localStorage.setItem('data', JSON.stringify(basket))
-
+      calculations()
       // console.log(basket)
+      toastr["success"](`Producto agregado`)
     }
 
     //decrement 
@@ -236,6 +257,7 @@
       basket = basket.filter(x => x.item !== 0)
       localStorage.setItem('data', JSON.stringify(basket))
       calculations()
+      toastr["warning"](`Producto quitado`)
 
 
     }
@@ -249,9 +271,16 @@
       // console.log(search)
     }
 
+    
+
+    // const alerta_agregar=document.getElementById("btn_alerta");
+    // alerta_agregar.onclick= function(){
+    //   alert("Producto agregado")
+    // }
 
     //calcular cantidades
     let calculations = () => {
+      
       let cartIcon = document.getElementById("count");
       let search = basket.map(x => x)
       console.log(search.length)
@@ -259,6 +288,8 @@
 
       // let mapeo = basket.map(x => x.item)
       // cartIcon.innerHTML = mapeo.reduce((x, y) => x + y, 0)
+      
+      
     }
 
     calculations()
