@@ -149,38 +149,38 @@
       <div class="container">
         <h1>Ingrese sus Datos Personales</h1>
         <div class="div_pedido row">
-          <div class="form-floating mb-3">
+          <div class="form-floating mb-3 input_form">
             <input type="text" required class="input-pedido form-control" placeholder="Nombre">
             <label for="floatingNombre">Nombre</label>
           </div>
-          <div class="form-floating mb-3">
+          <div class="form-floating mb-3 input_form">
             <input type="text" required class="input-pedido form-control" placeholder="Apellido">
             <label for="floatingApellido">Apellido</label>
           </div>
 
-          <div class="form-floating">
+          <div class="form-floating input_form">
             <input type="text" required class="input-pedido form-control" placeholder="Distrito">
             <label for="floatingDistrito">Distrito</label>
           </div>
 
-          <div class="form-floating">
+          <div class="form-floating input_form">
             <input type="text" required class="input-pedido form-control" placeholder="Dirección">
             <label for="floatingDireccion">Dirección</label>
           </div>
 
-          <div class="form-floating">
+          <div class="form-floating input_form">
             <input type="text" required class="input-pedido form-control" placeholder="Referencia">
             <label for="floatingDireccion">Referencia</label>
           </div>
 
-          <div class="form-floating">
+          <div class="form-floating input_form">
             <input type="tel" required class="input-pedido form-control" placeholder="Celular" maxlength="9"
               pattern="9[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]">
             <label for="floatingTelefono">Celular</label>
           </div>
 
 
-          <div class="form-floating col-12 ">
+          <div class="form-floating col-12 input_form">
             <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2"
               style="height: 100px"></textarea>
             <label for="floatingTextarea2">Comentarios</label>
@@ -213,12 +213,12 @@
           </div>
 
 
-          <div class="form-floating" style="display: none;">
+          <div class="form-floating input_form" style="display: none;">
             <input id="metodo_pago" type="text" class="input-pedido form-control" value="" placeholder="Monto Pagar">
             <label for="floatingPago">Metodo</label>
           </div>
 
-          <div id="ApartadoMonto" class="form-floating" style="display: none;">
+          <div id="ApartadoMonto" class="form-floating input_form" style="display: none;">
             <input id="monto_pago" type="text" class="input-pedido form-control" placeholder="Monto Pagar">
             <label for="floatingPago">Monto a pagar</label>
           </div>
@@ -347,17 +347,25 @@
     const re = (output) => {
       if (output.status === "200") {
 
-        swal("Pedido Realizado", "Gracias por haber realizado su Compra", "success");
+        // swal("Pedido Realizado", "Gracias por haber realizado su Compra", "success");
         // localStorage.clear();
         localStorage.removeItem("data");
-        setTimeout(() => {
-          google.script.run
-            .withSuccessHandler(function (url) {
-              window.open(url, '_top');
-            })
-            .getPageUrl('indexcliente');
+        swal("Pedido realizado.", "Gracias por haber realizado su compra.", "success")
+          .then((value) => {
+            google.script.run
+                  .withSuccessHandler(function (url) {
+                    window.open(url, '_top');
+                  })
+                  .getPageUrl('indexcliente');
+          });
+        // setTimeout(() => {
+        //         google.script.run
+        //           .withSuccessHandler(function (url) {
+        //             window.open(url, '_top');
+        //           })
+        //           .getPageUrl('indexcliente');
 
-        }, 3000);
+        // }, 3000);
 
       }
     }
@@ -367,37 +375,37 @@
 
 
   <script>
-    const btnCarta = document.getElementById("btn_carta")
+  const btnCarta = document.getElementById("btn_carta")
     btnCarta.onclick = () => {
-      // localStorage.clear();
-      google.script.run
-        .withSuccessHandler(function (url) {
-          window.open(url, '_top');
-        })
-        .getPageUrl('indexcliente');
+    // localStorage.clear();
+    google.script.run
+      .withSuccessHandler(function (url) {
+        window.open(url, '_top');
+      })
+      .getPageUrl('indexcliente');
     }
   </script>
 
   <script>
 
-    //carrito
+  //carrito
 
-    let shopcart = document.getElementById('shop-cart')
-    let shopmens = document.getElementById('shop-mens')
-    //datos del sheet
+  let shopcart = document.getElementById('shop-cart')
+  let shopmens = document.getElementById('shop-mens')
+  //datos del sheet
 
 
 
-    var datas = []
+  var datas = []
 
-    var basket = JSON.parse(localStorage.getItem("data")) || [];
+  var basket = JSON.parse(localStorage.getItem("data")) || [];
     ///=================================================================
 
     let calculations = () => {
-      let cartIcon = document.getElementById("count");
+    let cartIcon = document.getElementById("count");
       let search = basket.map(x => x)
-      // console.log(search.length)
-      cartIcon.innerHTML = search.length
+  // console.log(search.length)
+  cartIcon.innerHTML = search.length
 
 
 
@@ -407,7 +415,7 @@
 
 
 
-    calculations()
+  calculations()
 
 
     //   google.script.run.withSuccessHandler(data => {
@@ -421,22 +429,22 @@
     // google.script.run.withSuccessHandler(data => {
 
     // basket.map((b) => {
-    //     let {id,item} = b
+    //     let {id, item} = b
     //     // console.log(obj);
     //     let search =data.proyectos.find( y => y.id === id) || [];
     //     const html = `<tr>
     //         <td><img class="imagen_tabla" src="${search.img}" alt="plato"></td>
     //         <td>${search.nomb}</td>
     //         <td>S/ ${search.prec}</td>
-    //         <td><div class="BtnCTabla">  
+    //         <td><div class="BtnCTabla">
     //           <div class="botonContadorTabla">
-    //             <button onclick="decrement(${id})"  class="operadorMenos btn" type="button" >-</button>
-    //             <input id="${id}"  type="text"  value="${item}" class="cantidadTabla"  readonly="readonly" />
-    //             <button   class="operadorMas btn" type="button" onclick="increment(${id})" >+</button>
+    //             <button onclick="decrement(${id})" class="operadorMenos btn" type="button" >-</button>
+    //             <input id="${id}" type="text" value="${item}" class="cantidadTabla" readonly="readonly" />
+    //             <button class="operadorMas btn" type="button" onclick="increment(${id})" >+</button>
     //           </div>
     //         </div></td>
     //         <td><input class="input_carrito" type="text" value="${item * search.prec}" readonly></td>
-    //         <td><i onclick="removeItem(${id})"  class="basura bi bi-trash3"></i></td>
+    //         <td><i onclick="removeItem(${id})" class="basura bi bi-trash3"></i></td>
     //       </tr>`;
     //       shopcart.innerHTML += html;
 
@@ -445,18 +453,18 @@
 
     const renderBasCart = () => {
 
-      google.script.run.withSuccessHandler(data => {
-        if (basket.length !== 0) {
+    google.script.run.withSuccessHandler(data => {
+      if (basket.length !== 0) {
 
-          document.getElementById('resumC').style.display = "block";
-          return (shopcart.innerHTML = basket
+        document.getElementById('resumC').style.display = "block";
+        return (shopcart.innerHTML = basket
 
-            .map(x => {
-              // console.log(x)
+          .map(x => {
+            // console.log(x)
 
-              let { id, item } = x;
-              let search = data.proyectos.find(y => y.id === id) || [];
-              return `<tr>
+            let { id, item } = x;
+            let search = data.proyectos.find(y => y.id === id) || [];
+            return `<tr>
         <td><img class="imagen_tabla" src="${search.img}" alt="plato"></td>
         <td>${search.nomb}</td>
         <td>S/ ${search.prec}</td>
@@ -471,91 +479,91 @@
         <td><i onclick="removeItem(${id})"  class="basura bi bi-trash3"></i></td>
       </tr>`
 
-            }).join(""));
+          }).join(""));
 
 
-        }
-        else {
-          shopcart.innerHTML = ""
-          shopmens.innerHTML = `<h2 class="texto_carrito">Carrito está vació</h2>`
-          document.getElementById('resumC').style.display = "none";
+      }
+      else {
+        shopcart.innerHTML = ""
+        shopmens.innerHTML = `<h2 class="texto_carrito">Carrito está vació</h2>`
+        document.getElementById('resumC').style.display = "none";
 
 
-        }
-      }).dataFood();
+      }
+    }).dataFood();
     }
 
-    renderBasCart()
+  renderBasCart()
 
     // console.log(datas);
     //============================================================================
 
     const increment = (id) => {
-      let idinput = id
+    let idinput = id
       let search = basket.find(x => x.id === idinput.id)
-      if (search === undefined) {
-        basket.push({
-          id: id,
-          item: 1
-        })
+  if (search === undefined) {
+    basket.push({
+      id: id,
+      item: 1
+    })
+  }
+
+  else {
+    search.item += 1;
       }
 
-      else {
-        search.item += 1;
-      }
-
-      renderBasCart()
-      update(idinput.id)
-      localStorage.setItem('data', JSON.stringify(basket))
+  renderBasCart()
+  update(idinput.id)
+  localStorage.setItem('data', JSON.stringify(basket))
       // console.log(idinput)
 
       // console.log(idinput.id)
     }
 
     const decrement = (id) => {
-      let idinput = id
+    let idinput = id
       let search = basket.find(x => x.id === idinput.id)
-      if (search === undefined) return;
+  if (search === undefined) return;
 
-      else if (search.item === 0) return;
+  else if (search.item === 0) return;
 
-      else {
-        search.item -= 1;
+  else {
+    search.item -= 1;
       }
 
-      // console.log(basket)
+  // console.log(basket)
 
-      update(idinput.id)
+  update(idinput.id)
       basket = basket.filter(x => x.item !== 0)
-      renderBasCart()
-      calculations()
+  renderBasCart()
+  calculations()
 
-      localStorage.setItem('data', JSON.stringify(basket))
+  localStorage.setItem('data', JSON.stringify(basket))
 
 
     }
 
     const update = (id) => {
 
-      let search = basket.find(x => x.id === id)
-      // console.log(search.item)
-      document.getElementById(id).value = search.item;
+    let search = basket.find(x => x.id === id)
+  // console.log(search.item)
+  document.getElementById(id).value = search.item;
 
-      calculations()
-      TotalAmount()
+  calculations()
+  TotalAmount()
       // console.log(search)
 
     };
 
     const removeItem = (id) => {
-      let idinput = id
+    let idinput = id
       basket = basket.filter(x => x.id !== idinput.id)
-      // console.log(id)
-      TotalAmount()
-      renderBasCart()
-      calculations()
+  // console.log(id)
+  TotalAmount()
+  renderBasCart()
+  calculations()
 
-      localStorage.setItem("data", JSON.stringify(basket))
+  localStorage.setItem("data", JSON.stringify(basket))
 
     }
 
@@ -564,21 +572,21 @@
       google.script.run.withSuccessHandler(data => {
         if (basket.length !== 0) {
 
-          let amount = basket.map(x => {
-            let { item, id } = x
+    let amount = basket.map(x => {
+    let {item, id} = x
             let search = data.proyectos.find(y => y.id === id) || [];
-            return item * search.prec;
+  return item * search.prec;
           }).reduce((x, y) => x + y, 0)
-          // console.log(amount)
-          label.value = "S/ " + amount;
+  // console.log(amount)
+  label.value = "S/ " + amount;
         }
 
-        else return label.value = "0";
+  else return label.value = "0";
 
       }).dataFood();
     };
 
-    TotalAmount();
+  TotalAmount();
 
 
 
@@ -603,8 +611,8 @@
 
     const btnRC = document.getElementById("btn_realizar_compra")
     btnRC.onclick = () => {
-      document.getElementById("bloquePedido").style.display = "block";
-      document.getElementById("bloqueCarrito").style.display = "none";
+    document.getElementById("bloquePedido").style.display = "block";
+  document.getElementById("bloqueCarrito").style.display = "none";
     }
 
 
