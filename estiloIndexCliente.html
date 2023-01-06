@@ -101,7 +101,7 @@
   .card {
     margin-bottom: 15px;
     width: 330px;
-    height: 400px;
+    height: 500px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center !important;
@@ -116,6 +116,7 @@
     background-color: rgb(192, 190, 190) !important;
     cursor: default;
     transition: all 200ms ease;
+    padding: 0 5px 0 5px;
   }
 
 
@@ -138,10 +139,21 @@
   }
 
   .imagen-cartas {
-    width: 100px;
+    width: 150px;
+    height: 100px;
     margin-top: 10px;
     border-radius: 10%;
+    margin-bottom: 10px;
   }
+
+  .descripcion{
+    padding: 0 30px 0 30px;
+    width: 220px;
+    text-align: center !important;
+    margin: auto;
+    height: 90px;
+  }
+  
 
   /*Adaptable(Responsivo)*/
   @media screen and (max-width: 500px) {
@@ -222,7 +234,7 @@
     align-items: center;
     background-color: #fff;
     justify-content: space-between;
-    width: 100%;
+    /* width: 100%; */
   }
 
   .cantidad {

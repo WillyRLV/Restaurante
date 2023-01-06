@@ -138,7 +138,7 @@
         console.log(data.proyectos);
         $(document).ready(function () {
           $(".cardlink").click(function () {
-            $(".rounded").attr("src", $(this).siblings("img").attr("Src"));
+            $(".rounded").attr("src", $(this).siblings("div").siblings("img").attr("Src"));
             $(".nomb_producto").text($(this).siblings("h2").text());
             $(".producto_desc").text($(this).siblings("p").text());
             $(".producto_precio").text($(this).siblings("h4").text());
@@ -166,9 +166,10 @@
         const html = `<div class="card" id=producto-${id}>
           <div class="card-body text-center">
             <h2 class="card-title texto-cartas color-texto">${nomb}</h2>
-            <img src="${img}" class="imagen-cartas" 
-              class="card-img-top" alt="..."/>
-             
+            
+              <img src="${img}" class="imagen-cartas" 
+               alt="..."/>
+         
               <p class="descripcion">${dec}</p>
               <h4>S/ ${prec}</h4>
               <a type="button" class="cardlink" data-toggle="modal" data-target="#modalId"><i class="ver bi bi-search"></i></a>
