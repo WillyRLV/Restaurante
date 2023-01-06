@@ -19,6 +19,7 @@
 </head>
 
 <body>
+  <audio style="display: none;" id="audio" src="https://firebasestorage.googleapis.com/v0/b/projflask22.appspot.com/o/%F0%9F%93%A2%20Efecto%20de%20Sonido%20%20Tono%20Messenger%20Antiguo%20%F0%9F%93%A9%20(mp3cut.net)%20(2).mp3?alt=media&token=11495768-12bd-44a5-857c-c3f271dcd866"></audio>
   <style>
 
 
@@ -112,6 +113,7 @@
     .button-st{
       height: 35px;
         background-color: #2da894;
+
         border: none;
         color: #fff;
         font-size : 1.2em;
@@ -297,10 +299,6 @@ google.script.run
                     <h3 >PEDIDO(S)</h3><br>
                   </div>
                     <p> ${b.pedidos}</p>
-                    
-
-               
-
                 </div>
                 <Button onclick="despachar(${b.id})"" class="button-st" id="button-st">Despachar</Button>
                 <div><h3>S/. ${b.preciot}</h3></div>
@@ -309,18 +307,30 @@ google.script.run
       })
     }
 
-
+ // <div><Button onclick="changecolor(${b.id})" class="proceso-comida">En proceso</Button></div>
 
 
 
     //boton despachar
 
     function despachar(params) {
-
+     
       ids = params.id
       // console.log(ids)
+      document.getElementById("button-st").disabled = true;
+      document.getElementById("button-st").style.backgroundColor = "#80a09b";
+
+      var audio = document.getElementById("audio");
+
+
+        audio.play();
       google.script.run.onEdit(ids)
     }
+
+    // function changecolor(params) {
+    //   ids = params.id
+    //   document.getElementById(ids).style.backgroundColor = "red";
+    // }
 //=======================
 
   </script>
