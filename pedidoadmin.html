@@ -95,7 +95,7 @@
             
         </table>
         <hr>
-        <h3>Total Ganancia :<span id="totalgananciaadmin">0 s/.</span></h3>
+        <h3>Total Ganancia :<span id="totalgananciaadmin"></span></h3>
     </div>
 
 
@@ -168,7 +168,7 @@ renderList(data.proyectos);
                 <td>${b.telefono}</td>
                 <td>${b.pedidos}</td>
                 <td>${b.metodoPago}</td>
-                <td>${b.preciot} S/.</td>
+                <td>S/. ${b.preciot} </td>
                 <td>${b.cantidad}</td>
 
             </tr>`;
@@ -181,7 +181,7 @@ renderList(data.proyectos);
 
             
             const totl = gananciatotal.reduce((fi,se) => fi + se,0)
-                document.getElementById('totalgananciaadmin').innerHTML = `${totl} S/.`
+                document.getElementById('totalgananciaadmin').innerHTML = `S/.${totl} `
                 console.log(totl)
        
           

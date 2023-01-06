@@ -20,6 +20,9 @@
 
 <body>
   <style>
+
+
+
     .just-especial {
       display: flex;
       align-items: center;
@@ -36,7 +39,7 @@
       gap: 30px;
       flex-wrap: wrap;
       height: auto;
-      padding-bottom: 30px;
+      padding-bottom: 40px !important;
 
     }
 
@@ -45,6 +48,7 @@
       background-color: #E3E3E3;
       width: 400px;
       border-radius: 10px;
+      
     }
 
     .head-time {
@@ -299,7 +303,7 @@ google.script.run
 
                 </div>
                 <Button onclick="despachar(${b.id})"" class="button-st" id="button-st">Despachar</Button>
-                <div><h3>${b.preciot} S/.</h3></div>
+                <div><h3>S/. ${b.preciot}</h3></div>
             </div>`;
         htmlres.innerHTML += html;
       })
