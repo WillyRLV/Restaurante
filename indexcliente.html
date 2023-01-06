@@ -3,7 +3,6 @@
 
 <head>
   <meta charset="UTF-8" />
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Document</title>
 
@@ -138,7 +137,7 @@
         console.log(data.proyectos);
         $(document).ready(function () {
           $(".cardlink").click(function () {
-            $(".rounded").attr("src", $(this).siblings("div").siblings("img").attr("Src"));
+            $(".rounded").attr("src", $(this).siblings("img").attr("Src"));
             $(".nomb_producto").text($(this).siblings("h2").text());
             $(".producto_desc").text($(this).siblings("p").text());
             $(".producto_precio").text($(this).siblings("h4").text());
@@ -172,7 +171,7 @@
          
               <p class="descripcion">${dec}</p>
               <h4>S/ ${prec}</h4>
-              <a type="button" class="cardlink" data-toggle="modal" data-target="#modalId"><i class="ver bi bi-search"></i></a>
+              <a href="#" class="cardlink" data-toggle="modal" data-target="#modalId"><i class="ver bi bi-search"></i></a>
               <br>
             <div class="BtnC">  
               <div class="botonContador">
