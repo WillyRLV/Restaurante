@@ -39,6 +39,13 @@
         <a class="navbar-brand" style="font-size: 13px;"><img class="icono_persona"
             src="https://e7.pngegg.com/pngimages/290/731/png-clipart-computer-icons-user-username-avatar-person.png"
             alt="logo_persona"> Cliente</a>
+
+        <button id="btn_carrito" class="nav-link position-relative btn_barra badge b_c" type="button">Carrito
+          <span id="count" class="count badge translate-middle">
+            0
+          </span>
+        </button>
+
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -51,14 +58,10 @@
             <li class="nav-item">
               <button id="btn_pedido" class="nav-link btn_barra badge b_badge" type="button">Pedido</button>
             </li>
-            <li class="nav-item">
-              <button id="btn_carrito" class="nav-link position-relative btn_barra badge b_badge" type="button">Carrito
-                <span id="count" class="count badge translate-middle">
-                  0
-                </span>
-              </button>
+            <!-- <li class="nav-item">
+              
 
-            </li>
+            </li> -->
           </ul>
         </div>
       </div>
@@ -171,8 +174,8 @@
           </div>
 
           <div class="form-floating">
-            <input type="tel" required class="input-pedido form-control" placeholder="Celular" maxlength="9" 
-            pattern="9[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]">
+            <input type="tel" required class="input-pedido form-control" placeholder="Celular" maxlength="9"
+              pattern="9[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]">
             <label for="floatingTelefono">Celular</label>
           </div>
 
@@ -187,28 +190,28 @@
 
           <div class="col-12">
             <label for="">Metodos de Pago</label>
-          </div> 
+          </div>
 
           <div class="btn-group col-12" role="group" aria-label="Basic example">
-              <button id="pagar_yape" type="button" class="btn btn-primary"><img class="imagen_pago"
-                  src="https://seeklogo.com/images/Y/yape-logo-3E473EE7E5-seeklogo.com.png" alt="yape"></button>
-              <button id="pagar_plin" type="button" class="btn btn-primary"><img class="imagen_pago"
-                  src="https://seeklogo.com/images/P/plin-logo-0C4106153C-seeklogo.com.png" alt="plin"></button>
-              <button id="pagar_efectivo" type="button" class="btn btn-primary"><img class="imagen_pago"
-                  src="https://e7.pngegg.com/pngimages/472/645/png-clipart-money-bag-cash-coin-credit-card-cash-coupon-template-payment-cash.png"
-                  alt="efectivo"></button>
+            <button id="pagar_yape" type="button" class="btn btn-primary"><img class="imagen_pago"
+                src="https://seeklogo.com/images/Y/yape-logo-3E473EE7E5-seeklogo.com.png" alt="yape"></button>
+            <button id="pagar_plin" type="button" class="btn btn-primary"><img class="imagen_pago"
+                src="https://seeklogo.com/images/P/plin-logo-0C4106153C-seeklogo.com.png" alt="plin"></button>
+            <button id="pagar_efectivo" type="button" class="btn btn-primary"><img class="imagen_pago"
+                src="https://e7.pngegg.com/pngimages/472/645/png-clipart-money-bag-cash-coin-credit-card-cash-coupon-template-payment-cash.png"
+                alt="efectivo"></button>
           </div>
-         
+
           <div id="numero_pagar" class=" numero_pagar col-12 nm_pagar" style="display: none;">
-            
+
             <div class="copy-text">
               <label for="">Número a pagar: </label>
               <input type="tex" class="text" value="928991995" readonly />
               <button type="button"><i class="bi bi-clipboard"></i></button>
             </div>
-            
-          </div> 
-          
+
+          </div>
+
 
           <div class="form-floating" style="display: none;">
             <input id="metodo_pago" type="text" class="input-pedido form-control" value="" placeholder="Monto Pagar">
@@ -249,16 +252,16 @@
 
   <!-- copiartexto -->
   <script>
-    let copyText=document.querySelector(".copy-text");
-    copyText.querySelector("button").addEventListener("click",function(){
-      let input=copyText.querySelector("input.text")
+    let copyText = document.querySelector(".copy-text");
+    copyText.querySelector("button").addEventListener("click", function () {
+      let input = copyText.querySelector("input.text")
       input.select();
       document.execCommand("copy");
       copyText.classList.add("active");
       window.getSelection().removeAllRanges();
-      setTimeout(function(){
+      setTimeout(function () {
         copyText.classList.remove("active");
-      },2500);
+      }, 2500);
     });
   </script>
 
@@ -295,7 +298,7 @@
     const btnRealizarCompra = document.getElementById("realizar_compra")
     btnRealizarCompra.onsubmit = (e) => {
       e.preventDefault();
-      document.getElementById("btn_realiza_pago").disabled=true;
+      document.getElementById("btn_realiza_pago").disabled = true;
       google.script.run.withSuccessHandler(data => {
         //Valores de input
         let nombre = e.target[0].value;
@@ -308,8 +311,8 @@
         let metodoPago = e.target[12].value;
         let montoPago = e.target[13].value;
 
-        let idPedido = CryptoJS.MD5(`${nombre + apellido + telefono+metodoPago}`).toString()
-      
+        let idPedido = CryptoJS.MD5(`${nombre + apellido + telefono + metodoPago}`).toString()
+
         //==================================================================
         let comidas = [];
         let cantidad_platos = [];
@@ -332,12 +335,12 @@
 
         google.script.run.withSuccessHandler(re).postPedido("f" + idPedido, nombre, apellido, distrito, direccion, referencia, telefono, comentario, comidas.toString(), cantidad_platos.toString(), precio_unidad.toString(), precio_unidad_total.toString(), precio_total, metodoPago, montoPago)
 
-        
+
         // console.log(e)
 
       }).dataFood();
 
-    
+
 
     }
 
@@ -349,13 +352,13 @@
         localStorage.removeItem("data");
         setTimeout(() => {
           google.script.run
-        .withSuccessHandler(function (url) {
-          window.open(url, '_top');
-        })
-        .getPageUrl('indexcliente');
+            .withSuccessHandler(function (url) {
+              window.open(url, '_top');
+            })
+            .getPageUrl('indexcliente');
 
-        }, 4000);
-        
+        }, 3000);
+
       }
     }
 

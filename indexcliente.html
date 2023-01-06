@@ -31,6 +31,13 @@
         <a class="navbar-brand" style="font-size: 13px;"><img class="icono_persona"
             src="https://e7.pngegg.com/pngimages/290/731/png-clipart-computer-icons-user-username-avatar-person.png"
             alt="logo_persona"> Cliente</a>
+
+        <button id="btn_carrito" class="nav-link position-relative btn_barra badge b_c" type="button">Carrito
+          <span id="count" class="count badge translate-middle">
+            0
+          </span>
+        </button>
+
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -43,14 +50,10 @@
             <li class="nav-item">
               <button id="btn_pedido" class="nav-link btn_barra badge b_badge" type="button">Pedido</button>
             </li>
-            <li class="nav-item">
-              <button id="btn_carrito" class="nav-link position-relative btn_barra badge b_badge" type="button">Carrito
-                <span id="count" class="count badge translate-middle">
-                  0
-                </span>
-              </button>
+            <!-- <li class="nav-item">
 
-            </li>
+
+            </li> -->
           </ul>
         </div>
       </div>
@@ -152,14 +155,14 @@
 
     //datos del sheet
     var basket = JSON.parse(localStorage.getItem("data")) || [];
-///=================================================================
+    ///=================================================================
 
     //render dinamic card
     const renderCard = (obj) => {
       const htmlres = document.getElementById('content-card')
       obj.map((b) => {
-        let {id,nomb,img,prec,dec} = b
-        let search = basket.find(x =>x.id===id) || [];
+        let { id, nomb, img, prec, dec } = b
+        let search = basket.find(x => x.id === id) || [];
         const html = `<div class="card" id=producto-${id}>
           <div class="card-body text-center">
             <h2 class="card-title texto-cartas color-texto">${nomb}</h2>
@@ -191,74 +194,74 @@
     //funcion incremento
 
 
-    
-let increment = (id) => {
-let idinput = id
-    let search = basket.find(x => x.id === idinput.id)
-    if (search === undefined) {
+
+    let increment = (id) => {
+      let idinput = id
+      let search = basket.find(x => x.id === idinput.id)
+      if (search === undefined) {
         basket.push({
-            id: idinput.id,
-            item: 1
+          id: idinput.id,
+          item: 1
         })
-    }
+      }
 
-    else {
+      else {
         search.item += 1;
+      }
+
+      update(idinput.id)
+      localStorage.setItem('data', JSON.stringify(basket))
+
+      // console.log(basket)
     }
 
-    update(idinput.id)
-    localStorage.setItem('data', JSON.stringify(basket))
+    //decrement 
+    let decrement = (id) => {
+      let idinput = id
+      let search = basket.find(x => x.id === idinput.id)
+      if (search === undefined) return;
 
-    // console.log(basket)
-}
+      else if (search.item === 0) return;
 
-//decrement 
-let decrement = (id) => {
-  let idinput = id
-    let search = basket.find(x => x.id === idinput.id)
-    if (search === undefined) return;
-
-    else if (search.item === 0) return;
-
-    // else if (basket.map(x => x.item)===0){
-    //     localStorage.clear()
-    // }
-    else {
+      // else if (basket.map(x => x.item)===0){
+      //     localStorage.clear()
+      // }
+      else {
         search.item -= 1;
+      }
+
+      // console.log(basket)
+
+      update(idinput.id)
+      basket = basket.filter(x => x.item !== 0)
+      localStorage.setItem('data', JSON.stringify(basket))
+      calculations()
+
+
     }
 
-    // console.log(basket)
+    //imprimir en el input
+    let update = (id) => {
+      let search = basket.find(x => x.id === id)
+      // console.log(search.item)
 
-    update(idinput.id)
-    basket = basket.filter(x => x.item !== 0)
-    localStorage.setItem('data', JSON.stringify(basket))
+      document.getElementById(id).value = search.item;
+      // console.log(search)
+    }
+
+
+    //calcular cantidades
+    let calculations = () => {
+      let cartIcon = document.getElementById("count");
+      let search = basket.map(x => x)
+      console.log(search.length)
+      cartIcon.innerHTML = search.length
+
+      // let mapeo = basket.map(x => x.item)
+      // cartIcon.innerHTML = mapeo.reduce((x, y) => x + y, 0)
+    }
+
     calculations()
-
-
-}
-
-//imprimir en el input
-let update = (id) => {
-let search = basket.find(x => x.id === id)
-// console.log(search.item)
-
-document.getElementById(id).value = search.item;
-// console.log(search)
-}
-
-
-//calcular cantidades
-let calculations = () => {
-    let cartIcon = document.getElementById("count");
-    let search = basket.map(x => x)
-    console.log(search.length)
-    cartIcon.innerHTML = search.length
-
-    // let mapeo = basket.map(x => x.item)
-    // cartIcon.innerHTML = mapeo.reduce((x, y) => x + y, 0)
-}
-
-calculations()
 
 
 

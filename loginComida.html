@@ -9,6 +9,9 @@
   <title>Bootstrap Example</title>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
+  <!--Icono Bootstrap-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" />
+
   <!-- Letra -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,14 +22,15 @@
 
   <style>
     .login_comidas {
-      background-color: aqua;
+      /* background-color: rgb(29, 38, 85); */
+      background-color: rgb(40, 72, 149);
       height: auto;
       display: flex;
       /* flex-wrap: nowrap; */
       align-items: center;
       flex-direction: column;
       justify-content: center;
-      margin-top: 45px;
+      margin-top: 20px;
     }
 
     p {
@@ -34,6 +38,7 @@
       font-size: 50px;
       text-align: center;
       font-family: 'Sevillana', cursive;
+      color: white;
     }
 
     .boton_continuar {
@@ -47,10 +52,39 @@
     }
 
     .imagen_restaurant{
-      width: 180px;
+      width: 600px;
       margin: 10px;
-      border-radius: 50%;
-    }  
+      border-radius: 15px;
+      border: 2px solid red;
+    } 
+
+    @media screen and (max-width: 767px) {
+      .imagen_restaurant{
+        width: 400px;
+    } 
+
+    }
+
+    @media screen and (max-width: 460px) {
+      .imagen_restaurant{
+        width: 250px;
+    } 
+
+    }
+
+    
+    
+    .bi-whatsapp{
+      color: green;
+      font-size: 35px;
+    }
+
+    .numero_whatsApp{
+      font-size: 30px;
+      font-family: 'Lato', sans-serif;
+      font-weight: bold;
+      color: white;
+    }
   </style>
 
   <!-- Example Code -->
@@ -58,19 +92,20 @@
     <div class="login_comidas">
 
       <div>
-        <img class="imagen_restaurant" src="https://png.pngtree.com/png-vector/20190223/ourmid/pngtree-restaurant-vector-icon-png-image_711542.jpg" alt="restaurante">
+        <p>Bienvenido a </p>
+        <p>Don Cilindro Danylo</p>
       </div>
 
       <div>
-        <p>Bienvenido </p>
-        <p>al restaurante</p>
-        <p>......</p>
+        <img class="imagen_restaurant" src="https://firebasestorage.googleapis.com/v0/b/hyfpics.appspot.com/o/299480281_499890365474523_3180833923371407359_n.png?alt=media&token=483bbe0d-06aa-471d-b6bb-d042b8ad5ce1" alt="restaurante">
       </div>
 
-      
+      <div>
+        <p class="numero_whatsApp"><i class="bi bi-whatsapp"></i> Pedidos| 956792094</p>
+      </div>
 
       <div class="boton_continuar">
-        <button id="boton_comidas" type="button" class="btn btn-success">Continuar</button>
+        <button id="boton_comidas" type="button" class="btn btn-success">Ver Carta</button>
       </div>
       <div class="ventana_admin">
         <a id="boton_admin" href="" >Administrador</a>
