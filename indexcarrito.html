@@ -249,7 +249,7 @@
             <label for="floatingCorreo">Correo electronico</label>
           </div>
 
-          <button type="button" class="btnConfirmacion btn btn-secondary">Confirmar</button>
+          <button type="submit" class="btnConfirmacion btn btn-secondary">Confirmar</button>
 
         </div>
       </div>
@@ -275,7 +275,12 @@
   <script>
     const btnConfirmar = document.getElementById("confirmaCompra");
     btnConfirmar.onsubmit = (e) => {
-
+      localStorage.removeItem("data");
+      google.script.run
+        .withSuccessHandler(function (url) {
+          window.open(url, '_top');
+        })
+        .getPageUrl('indexcliente');
     }
   </script>
 
