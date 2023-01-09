@@ -273,7 +273,7 @@ bodyem= bodyem.replace("{{total}}",val6);
      to: email ,
      subject: "Excelente",
     htmlBody:bodyem,
-     name: "Pulso de calidad",
+     name: "Pedido restaurante.",
    }
  )
 
