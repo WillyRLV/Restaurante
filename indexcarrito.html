@@ -22,7 +22,8 @@
   <!-- Letra -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100&family=Sevillana&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100&family=Pacifico&family=Sevillana&display=swap"
+    rel="stylesheet">
 
   <!-- swal fire -->
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
@@ -233,6 +234,27 @@
     </form>
   </div>
 
+  <!-- BLOQUE CONFIRMACION -->
+  <div id="bloqueConfirmacion" style="display:none;">
+    <form id="confirmaCompra" action="" class="form_confirmacion">
+      <div class="container">
+        <div class="mensajeConfirmacion">
+          <p>Su pedido ha sido realizado.</p>
+          <p>Si desea más detalles de su compra</p>
+          <p>ingrese correo electronico.</p>
+        </div>
+        <div class="correo_cliente">
+          <div class="form-floating mb-3 input-correo">
+            <input type="email" class=" form-control" placeholder="Correo electronico">
+            <label for="floatingCorreo">Correo electronico</label>
+          </div>
+
+          <button type="button" class="btnConfirmacion btn btn-secondary">Confirmar</button>
+
+        </div>
+      </div>
+    </form>
+  </div>
 
 
 
@@ -249,6 +271,14 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"
     integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script>
+    const btnConfirmar = document.getElementById("confirmaCompra");
+    btnConfirmar.onsubmit = (e) => {
+
+    }
+  </script>
+
 
   <!-- copiartexto -->
   <script>
@@ -336,7 +366,7 @@
         google.script.run.withSuccessHandler(re).postPedido("f" + idPedido, nombre, apellido, distrito, direccion, referencia, telefono, comentario, comidas.toString(), cantidad_platos.toString(), precio_unidad.toString(), precio_unidad_total.toString(), precio_total, metodoPago, montoPago)
 
 
-        // console.log(e)
+        //console.log("Pedido realizado")
 
       }).dataFood();
 
@@ -349,23 +379,15 @@
 
         // swal("Pedido Realizado", "Gracias por haber realizado su Compra", "success");
         // localStorage.clear();
-        localStorage.removeItem("data");
+
+        //=============================================================================
+        //  localStorage.removeItem("data");
         swal("Pedido realizado.", "Gracias por haber realizado su compra.", "success")
           .then((value) => {
-            google.script.run
-                  .withSuccessHandler(function (url) {
-                    window.open(url, '_top');
-                  })
-                  .getPageUrl('indexcliente');
+            document.getElementById("bloquePedido").style.display = "none";
+            document.getElementById("bloqueCarrito").style.display = "none";
+            document.getElementById("bloqueConfirmacion").style.display = "block";
           });
-        // setTimeout(() => {
-        //         google.script.run
-        //           .withSuccessHandler(function (url) {
-        //             window.open(url, '_top');
-        //           })
-        //           .getPageUrl('indexcliente');
-
-        // }, 3000);
 
       }
     }
@@ -375,37 +397,37 @@
 
 
   <script>
-  const btnCarta = document.getElementById("btn_carta")
+    const btnCarta = document.getElementById("btn_carta")
     btnCarta.onclick = () => {
-    // localStorage.clear();
-    google.script.run
-      .withSuccessHandler(function (url) {
-        window.open(url, '_top');
-      })
-      .getPageUrl('indexcliente');
+      // localStorage.clear();
+      google.script.run
+        .withSuccessHandler(function (url) {
+          window.open(url, '_top');
+        })
+        .getPageUrl('indexcliente');
     }
   </script>
 
   <script>
 
-  //carrito
+    //carrito
 
-  let shopcart = document.getElementById('shop-cart')
-  let shopmens = document.getElementById('shop-mens')
-  //datos del sheet
+    let shopcart = document.getElementById('shop-cart')
+    let shopmens = document.getElementById('shop-mens')
+    //datos del sheet
 
 
 
-  var datas = []
+    var datas = []
 
-  var basket = JSON.parse(localStorage.getItem("data")) || [];
+    var basket = JSON.parse(localStorage.getItem("data")) || [];
     ///=================================================================
 
     let calculations = () => {
-    let cartIcon = document.getElementById("count");
+      let cartIcon = document.getElementById("count");
       let search = basket.map(x => x)
-  // console.log(search.length)
-  cartIcon.innerHTML = search.length
+      // console.log(search.length)
+      cartIcon.innerHTML = search.length
 
 
 
@@ -415,7 +437,7 @@
 
 
 
-  calculations()
+    calculations()
 
 
     //   google.script.run.withSuccessHandler(data => {
@@ -453,18 +475,18 @@
 
     const renderBasCart = () => {
 
-    google.script.run.withSuccessHandler(data => {
-      if (basket.length !== 0) {
+      google.script.run.withSuccessHandler(data => {
+        if (basket.length !== 0) {
 
-        document.getElementById('resumC').style.display = "block";
-        return (shopcart.innerHTML = basket
+          document.getElementById('resumC').style.display = "block";
+          return (shopcart.innerHTML = basket
 
-          .map(x => {
-            // console.log(x)
+            .map(x => {
+              // console.log(x)
 
-            let { id, item } = x;
-            let search = data.proyectos.find(y => y.id === id) || [];
-            return `<tr>
+              let { id, item } = x;
+              let search = data.proyectos.find(y => y.id === id) || [];
+              return `<tr>
         <td><img class="imagen_tabla" src="${search.img}" alt="plato"></td>
         <td>${search.nomb}</td>
         <td>S/ ${search.prec}</td>
@@ -479,91 +501,91 @@
         <td><i onclick="removeItem(${id})"  class="basura bi bi-trash3"></i></td>
       </tr>`
 
-          }).join(""));
+            }).join(""));
 
 
-      }
-      else {
-        shopcart.innerHTML = ""
-        shopmens.innerHTML = `<h2 class="texto_carrito">Carrito está vació</h2>`
-        document.getElementById('resumC').style.display = "none";
+        }
+        else {
+          shopcart.innerHTML = ""
+          shopmens.innerHTML = `<h2 class="texto_carrito">Carrito está vació</h2>`
+          document.getElementById('resumC').style.display = "none";
 
 
-      }
-    }).dataFood();
+        }
+      }).dataFood();
     }
 
-  renderBasCart()
+    renderBasCart()
 
     // console.log(datas);
     //============================================================================
 
     const increment = (id) => {
-    let idinput = id
+      let idinput = id
       let search = basket.find(x => x.id === idinput.id)
-  if (search === undefined) {
-    basket.push({
-      id: id,
-      item: 1
-    })
-  }
-
-  else {
-    search.item += 1;
+      if (search === undefined) {
+        basket.push({
+          id: id,
+          item: 1
+        })
       }
 
-  renderBasCart()
-  update(idinput.id)
-  localStorage.setItem('data', JSON.stringify(basket))
+      else {
+        search.item += 1;
+      }
+
+      renderBasCart()
+      update(idinput.id)
+      localStorage.setItem('data', JSON.stringify(basket))
       // console.log(idinput)
 
       // console.log(idinput.id)
     }
 
     const decrement = (id) => {
-    let idinput = id
+      let idinput = id
       let search = basket.find(x => x.id === idinput.id)
-  if (search === undefined) return;
+      if (search === undefined) return;
 
-  else if (search.item === 0) return;
+      else if (search.item === 0) return;
 
-  else {
-    search.item -= 1;
+      else {
+        search.item -= 1;
       }
 
-  // console.log(basket)
+      // console.log(basket)
 
-  update(idinput.id)
+      update(idinput.id)
       basket = basket.filter(x => x.item !== 0)
-  renderBasCart()
-  calculations()
+      renderBasCart()
+      calculations()
 
-  localStorage.setItem('data', JSON.stringify(basket))
+      localStorage.setItem('data', JSON.stringify(basket))
 
 
     }
 
     const update = (id) => {
 
-    let search = basket.find(x => x.id === id)
-  // console.log(search.item)
-  document.getElementById(id).value = search.item;
+      let search = basket.find(x => x.id === id)
+      // console.log(search.item)
+      document.getElementById(id).value = search.item;
 
-  calculations()
-  TotalAmount()
+      calculations()
+      TotalAmount()
       // console.log(search)
 
     };
 
     const removeItem = (id) => {
-    let idinput = id
+      let idinput = id
       basket = basket.filter(x => x.id !== idinput.id)
-  // console.log(id)
-  TotalAmount()
-  renderBasCart()
-  calculations()
+      // console.log(id)
+      TotalAmount()
+      renderBasCart()
+      calculations()
 
-  localStorage.setItem("data", JSON.stringify(basket))
+      localStorage.setItem("data", JSON.stringify(basket))
 
     }
 
@@ -572,21 +594,21 @@
       google.script.run.withSuccessHandler(data => {
         if (basket.length !== 0) {
 
-    let amount = basket.map(x => {
-    let {item, id} = x
+          let amount = basket.map(x => {
+            let { item, id } = x
             let search = data.proyectos.find(y => y.id === id) || [];
-  return item * search.prec;
+            return item * search.prec;
           }).reduce((x, y) => x + y, 0)
-  // console.log(amount)
-  label.value = "S/ " + amount;
+          // console.log(amount)
+          label.value = "S/ " + amount;
         }
 
-  else return label.value = "0";
+        else return label.value = "0";
 
       }).dataFood();
     };
 
-  TotalAmount();
+    TotalAmount();
 
 
 
@@ -611,8 +633,9 @@
 
     const btnRC = document.getElementById("btn_realizar_compra")
     btnRC.onclick = () => {
-    document.getElementById("bloquePedido").style.display = "block";
-  document.getElementById("bloqueCarrito").style.display = "none";
+      document.getElementById("bloquePedido").style.display = "block";
+      document.getElementById("bloqueCarrito").style.display = "none";
+
     }
 
 

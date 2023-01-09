@@ -33,7 +33,7 @@
     width: 85px;
   }
 
-  .b_c{
+  .b_c {
     margin: 0px 0px 0px 10px;
     background-color: rgb(11, 212, 196);
     text-align: center;
@@ -254,8 +254,8 @@
 
   }
 
-  
-  
+
+
 
   @media screen and (max-width:900px) {
     .b_badge {
@@ -275,20 +275,20 @@
       margin: 20px 0px 15px 10px;
     }
 
-    .b_c{
+    .b_c {
       margin: 15px 0px 15px 10px;
     }
 
   }
-    
+
   @media screen and (max-width: 767px) {
     .b_c {
       margin: 0px 0px 0px 0px;
-    } 
+    }
 
     .navbar-brand {
-    margin: 0px 0px 0px 0px; 
-    padding: 10px 15px;
+      margin: 0px 0px 0px 0px;
+      padding: 10px 15px;
     }
 
   }
@@ -323,8 +323,8 @@
 
   @media screen and (max-width:700px) {
     .input_form {
-    width: 80%;
-  }
+      width: 80%;
+    }
 
   }
 
@@ -367,7 +367,7 @@
     transition: opacity .1s ease-in-out, transform .1s ease-in-out;
   }
 
-  .form-select{
+  .form-select {
     height: 46px;
     font-size: 12px;
   }
@@ -377,16 +377,16 @@
     border-radius: 100px;
   }
 
-  .nm_pagar{
+  .nm_pagar {
     margin: 15px;
   }
 
-  .btn_pago_r{
+  .btn_pago_r {
     margin-bottom: 10px;
     margin-top: 10px;
   }
 
-  .btn-group{
+  .btn-group {
     margin: 5px;
     text-align: center;
     display: flex;
@@ -397,12 +397,12 @@
   }
 
   /*Boton copiar numero*/
-  .numero_pagar{
+  .numero_pagar {
     align-items: center;
     justify-content: center;
   }
 
-  .copy-text{
+  .copy-text {
 
     position: relative;
     padding: 10px;
@@ -415,17 +415,17 @@
     text-align: center;
   }
 
-  .copy-text input.text{
+  .copy-text input.text {
     padding: 10px;
     font-size: 15px;
     color: #555;
     border: none;
-    outline: none; 
+    outline: none;
     width: 100px;
     background: none;
   }
 
-  .copy-text button{
+  .copy-text button {
     padding: 10px;
     background: #5784f5;
     color: #fff;
@@ -436,12 +436,12 @@
     cursor: pointer;
   }
 
-  .copy-text button:active{
+  .copy-text button:active {
     background: #809ce2;
   }
 
-  .copy-text button:before{
-    content:"Copiado";
+  .copy-text button:before {
+    content: "Copiado";
     position: absolute;
     top: -50px;
     right: 0px;
@@ -452,7 +452,7 @@
     display: none;
   }
 
-  .copy-text button:after{
+  .copy-text button:after {
     content: "";
     position: absolute;
     top: -20px;
@@ -465,8 +465,72 @@
   }
 
   .copy-text.active button:before,
-  .copy-text.active button:after{
+  .copy-text.active button:after {
     display: block;
+  }
+
+
+  /* BLOQUE CONFIRMACION */
+  .form_confirmacion {
+    /*background: aliceblue;*/
+  }
+
+  .mensajeConfirmacion {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* background: aliceblue; */
+    margin-top: 50px;
+    margin-bottom: 20px;
+    padding: 5px;
+  }
+
+  .mensajeConfirmacion p {
+    color: black;
+    font-family: 'sans-serif', cursive;
+    font-weight: bold;
+    text-align: center;
+    font-size: 30px;
+  }
+
+  .correo_cliente {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .input-correo {
+    margin: 10px;
+    height: 100%;
+    width: 50%;
+  }
+
+  .btnConfirmacion {
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+
+  @media screen and (max-width:550px) {
+    .mensajeConfirmacion p {
+      font-size: 25px;
+    }
+
+    .input-correo {
+      width: 70%;
+    }
+  }
+
+  @media screen and (max-width:400px){
+    .mensajeConfirmacion p {
+      font-size: 18px;
+      text-align: center;
+    }
+
+    .input-correo {
+      width: 80%;
+    }
   }
 
 </style>
