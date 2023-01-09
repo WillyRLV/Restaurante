@@ -151,7 +151,7 @@
         <h1>Ingrese sus Datos Personales</h1>
         <div class="div_pedido row">
           <div class="form-floating mb-3 input_form">
-            <input type="text" required class="input-pedido form-control" placeholder="Nombre">
+            <input id="nombre-send" type="text" required class="input-pedido form-control" placeholder="Nombre">
             <label for="floatingNombre">Nombre</label>
           </div>
           <div class="form-floating mb-3 input_form">
@@ -245,7 +245,7 @@
         </div>
         <div class="correo_cliente">
           <div class="form-floating mb-3 input-correo">
-            <input type="email" class=" form-control" placeholder="Correo electronico">
+            <input id="email-send" type="email" class=" form-control" placeholder="Correo electronico">
             <label for="floatingCorreo">Correo electronico</label>
           </div>
 
@@ -273,8 +273,29 @@
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <script>
+
+    
+var datas = []
+
+var basket = JSON.parse(localStorage.getItem("data")) || [];
+
+var comidas = [];
+        var cantidad_platos = [];
+        var precio_unidad = [];
+        var precio_unidad_total = [];
+     
+
     const btnConfirmar = document.getElementById("confirmaCompra");
     btnConfirmar.onsubmit = (e) => {
+      e.preventDefault()
+      var arre = document.getElementById("email-send").value;
+      var nombre = document.getElementById("nombre-send").value;
+
+      let cantid_to = precio_unidad_total.reduce( (fi,se) => fi + se,0)
+
+// var nombre = 'william'
+    
+   sendemailto(arre,nombre,comidas.toString(),cantidad_platos.toString(),precio_unidad.toString(),cantid_to)
       localStorage.removeItem("data");
       google.script.run
         .withSuccessHandler(function (url) {
@@ -282,6 +303,17 @@
         })
         .getPageUrl('indexcliente');
     }
+
+
+    //function envio email
+    function sendemailto(val,val2,val3,val4,val5,val6){
+  google.script.run.withSuccessHandler(function(output)
+{
+if(output){
+console.log(output)
+}
+}).getemail(val,val2,val3,val4,val5,val6);
+}
   </script>
 
 
@@ -349,10 +381,10 @@
         let idPedido = CryptoJS.MD5(`${nombre + apellido + telefono + metodoPago}`).toString()
 
         //==================================================================
-        let comidas = [];
-        let cantidad_platos = [];
-        let precio_unidad = [];
-        let precio_unidad_total = [];
+        // let comidas = [];
+        // let cantidad_platos = [];
+        // let precio_unidad = [];
+        // let precio_unidad_total = [];
 
 
         let amount = basket.map(x => {
@@ -423,9 +455,6 @@
 
 
 
-    var datas = []
-
-    var basket = JSON.parse(localStorage.getItem("data")) || [];
     ///=================================================================
 
     let calculations = () => {
@@ -614,6 +643,7 @@
     };
 
     TotalAmount();
+
 
 
 

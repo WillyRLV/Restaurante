@@ -250,3 +250,32 @@ function onEdit(data) {
   
 }
 //=========================
+
+//geteamil
+
+
+ function getemail(email,nombre,val3,val4,val5,val6){
+
+
+var bodyem = HtmlService.createHtmlOutputFromFile("bodyemail").getContent();
+// var date = new Date(year,month,day);
+bodyem= bodyem.replace("{{nombre}}",nombre);
+bodyem= bodyem.replace("{{compras}}",val3);
+bodyem= bodyem.replace("{{cantidades}}",val4);
+bodyem= bodyem.replace("{{prec_uni}}",val5);
+bodyem= bodyem.replace("{{total}}",val6);
+
+
+
+
+ MailApp.sendEmail (
+   {
+     to: email ,
+     subject: "Excelente",
+    htmlBody:bodyem,
+     name: "Pulso de calidad",
+   }
+ )
+
+return 'enviado'
+ }
