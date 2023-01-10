@@ -28,6 +28,7 @@
     font-size: 15px;
     color: white;
     width: 85px;
+    cursor: pointer;
   }
 
   /*Iconos de barra de navegación*/
@@ -67,5 +68,54 @@
     border: 0;
     border-top: 1px solid gray;
   }
+
+  /*estiloTablaPedido*/
+
+  .Lista_Carrito {
+      margin-left: 100px;
+      min-height: 0.1%;
+      overflow-x: auto;
+      margin-right: 100px;
+    }
+
+    .table_row {
+      color: inherit;
+      display: table-row;
+      outline: 0;
+      vertical-align: middle;
+    }
+
+    .estilo_celda {
+      color: #3C4858;
+      padding: 12px 10px !important;
+      position: relative;
+      /* font-size: 1.5rem; */
+      /*border-top: 1px solid #ddd;*/
+      font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+      font-weight: bold;
+      text-align: center;
+
+    }
+
+    .jss562 {
+      width: 100%;
+      overflow: auto;
+      max-width: 100%;
+      margin-bottom: 0;
+      border-spacing: 0;
+      border-collapse: collapse;
+      background-color: transparent;
+      text-align: center;
+    }
+
+    /*Adaptable(Responsivo)*/
+  @media screen and (max-width:650px) {
+    .Lista_Carrito {
+      margin-left: 5px;
+      min-height: 0.1%;
+      overflow-x: auto;
+      margin-right: 5px;
+    }
+  }  
 
 </style>

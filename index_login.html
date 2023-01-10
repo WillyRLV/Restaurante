@@ -106,6 +106,7 @@
       else if (output.status === '401') {
         console.log(output)
         toastr["warning"]("Contraseña incorrecta")
+        document.getElementById("btn-ingresar").disabled = false;
 
 
       }
@@ -114,6 +115,8 @@
         console.log(output)
 
         toastr["error"]("Usuario no registrado")
+        document.getElementById("btn-ingresar").disabled = false;
+
 
 
       }
