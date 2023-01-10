@@ -406,8 +406,7 @@ console.log(output)
         //console.log("Pedido realizado")
 
       }).dataFood();
-
-
+      
 
     }
 
@@ -425,10 +424,22 @@ console.log(output)
             document.getElementById("bloqueCarrito").style.display = "none";
             document.getElementById("bloqueConfirmacion").style.display = "block";
           });
-
+          var nombre = document.getElementById("nombre-send").value;
+      let cantid_to = precio_unidad_total.reduce( (fi,se) => fi + se,0)
+      sendemailtoAd(nombre,comidas.toString(),cantidad_platos.toString(),precio_unidad.toString(),cantid_to)
       }
     }
 
+
+    //funcion para envio de comanda al correo del administrador
+    function sendemailtoAd(val2,val3,val4,val5,val6){
+  google.script.run.withSuccessHandler(function(output)
+{
+if(output){
+console.log(output)
+}
+}).getemailAd(val2,val3,val4,val5,val6);
+}
 
   </script>
 

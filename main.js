@@ -279,3 +279,30 @@ bodyem= bodyem.replace("{{total}}",val6);
 
 return 'enviado'
  }
+
+
+ function getemailAd(nombre,val3,val4,val5,val6){
+
+
+  var bodyemcom = HtmlService.createHtmlOutputFromFile("bodyemailcom").getContent();
+  // var date = new Date(year,month,day);
+  bodyemcom= bodyemcom.replace("{{nombre}}",nombre);
+  bodyemcom= bodyemcom.replace("{{compras}}",val3);
+  bodyemcom= bodyemcom.replace("{{cantidades}}",val4);
+  bodyemcom= bodyemcom.replace("{{prec_uni}}",val5);
+  bodyemcom= bodyemcom.replace("{{total}}",val6);
+  
+  
+  
+  
+   MailApp.sendEmail (
+     {
+       to: 'rriveroa@hyfconsult.com' ,
+       subject: `Registro de compra del cliente ${nombre}`,
+      htmlBody:bodyemcom,
+       name: `pedido realizado por ${nombre}`,
+     }
+   )
+  
+  return 'enviado'
+   }
