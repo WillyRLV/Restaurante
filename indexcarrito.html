@@ -283,6 +283,8 @@ var comidas = [];
         var cantidad_platos = [];
         var precio_unidad = [];
         var precio_unidad_total = [];
+        var met_pago=[]
+        var cantidad_pago=[]
      
 
     const btnConfirmar = document.getElementById("confirmaCompra");
@@ -386,7 +388,8 @@ console.log(output)
         // let precio_unidad = [];
         // let precio_unidad_total = [];
 
-
+          met_pago.push(e.target[12].value);
+          cantidad_pago.push(e.target[13].value);
         let amount = basket.map(x => {
           let { item, id } = x
           let search = data.proyectos.find(y => y.id === id) || [];
@@ -394,6 +397,7 @@ console.log(output)
           cantidad_platos.push(item);
           precio_unidad.push(search.prec);
           precio_unidad_total.push(item * search.prec);
+          
           // console.log(amount)
           return item * search.prec;
         }).reduce((x, y) => x + y, 0)
@@ -426,19 +430,19 @@ console.log(output)
           });
           var nombre = document.getElementById("nombre-send").value;
       let cantid_to = precio_unidad_total.reduce( (fi,se) => fi + se,0)
-      sendemailtoAd(nombre,comidas.toString(),cantidad_platos.toString(),precio_unidad.toString(),cantid_to)
+      sendemailtoAd(nombre,comidas.toString(),cantidad_platos.toString(),precio_unidad.toString(),cantid_to,met_pago,cantidad_pago)
       }
     }
 
 
     //funcion para envio de comanda al correo del administrador
-    function sendemailtoAd(val2,val3,val4,val5,val6){
+    function sendemailtoAd(val2,val3,val4,val5,val6,val7,val8){
   google.script.run.withSuccessHandler(function(output)
 {
 if(output){
 console.log(output)
 }
-}).getemailAd(val2,val3,val4,val5,val6);
+}).getemailAd(val2,val3,val4,val5,val6,val7,val8);
 }
 
   </script>

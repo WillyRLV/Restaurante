@@ -281,7 +281,7 @@ return 'enviado'
  }
 
 
- function getemailAd(nombre,val3,val4,val5,val6){
+ function getemailAd(nombre,val3,val4,val5,val6,val7,val8){
 
 
   var bodyemcom = HtmlService.createHtmlOutputFromFile("bodyemailcom").getContent();
@@ -291,6 +291,10 @@ return 'enviado'
   bodyemcom= bodyemcom.replace("{{cantidades}}",val4);
   bodyemcom= bodyemcom.replace("{{prec_uni}}",val5);
   bodyemcom= bodyemcom.replace("{{total}}",val6);
+  bodyemcom= bodyemcom.replace("{{met_pago}}",val7);
+  bodyemcom= bodyemcom.replace("{{efectivo}}",val8);
+
+
   
   
   
