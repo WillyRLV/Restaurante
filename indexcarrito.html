@@ -33,7 +33,7 @@
 </head>
 
 <body>
-  <header>
+  <header id="header">
     <nav class="navbar navbar-expand-md ">
       <div class="container-fluid">
 
@@ -340,6 +340,7 @@ console.log(output)
     // Efectivo
     const btnPagarEfectivo = document.getElementById("pagar_efectivo")
     btnPagarEfectivo.onclick = function () {
+      document.getElementById("monto_pago").value="";
       document.getElementById("ApartadoMonto").style.display = "block"
       document.getElementById("numero_pagar").style.display = "none"
       document.getElementById("metodo_pago").setAttribute('value', 'Efectivo');
@@ -352,7 +353,7 @@ console.log(output)
       document.getElementById("ApartadoMonto").style.display = "none"
       document.getElementById("numero_pagar").style.display = "flex"
       document.getElementById("metodo_pago").setAttribute('value', 'Yape');
-      document.getElementById("monto_pago").setAttribute('value', 'No');
+      document.getElementById("monto_pago").value="No"
     }
 
     //Plin
@@ -361,7 +362,7 @@ console.log(output)
       document.getElementById("ApartadoMonto").style.display = "none"
       document.getElementById("numero_pagar").style.display = "flex"
       document.getElementById("metodo_pago").setAttribute('value', 'Plin');
-      document.getElementById("monto_pago").setAttribute('value', 'No');
+      document.getElementById("monto_pago").value="No"
     }
 
     const btnRealizarCompra = document.getElementById("realizar_compra")
@@ -685,6 +686,7 @@ console.log(output)
     btnRC.onclick = () => {
       document.getElementById("bloquePedido").style.display = "block";
       document.getElementById("bloqueCarrito").style.display = "none";
+      document.getElementById("header").style.display = "none";
 
     }
 
