@@ -40,7 +40,7 @@
     /* font-size: 12px; */
     font-weight: 700;
     line-height: 1;
-}
+  }
 
   .b_c {
     margin: 0px 0px 0px 10px;
@@ -60,7 +60,7 @@
     /* width: 85px; */
   }
 
-  
+
 
   /*Iconos de barra de navegación*/
   .ver {
@@ -330,7 +330,7 @@
     align-items: center;
   }
 
-  .titulo_pedido{
+  .titulo_pedido {
     display: flex;
     justify-content: center;
     text-align: center;
@@ -338,10 +338,17 @@
     position: relative;
   }
 
-  .retroceder_carrito{
+  .retroceder_carrito {
     font-size: 20px;
     position: absolute;
     left: 0;
+  }
+
+  @media screen and (max-width:640px) {
+    .retroceder_carrito {
+      position: initial;
+      left: 0;
+    }
   }
 
   .form_pedido h1 {
@@ -351,10 +358,10 @@
   }
 
   /* .div_pedido label{
-    padding-top: 5px;
-    display: block;
-    margin-right: 100px;
-  } */
+      padding-top: 5px;
+      display: block;
+      margin-right: 100px;
+    } */
 
   .input_form {
     height: max-content;
@@ -370,6 +377,9 @@
 
   }
 
+  
+
+
   .div_pedido {
     display: flex;
     flex-wrap: wrap;
@@ -380,11 +390,11 @@
   }
 
   /* .input-pedido{
-    background: transparent;
-    text-align: center;
-    border-radius: 4px;
-    margin: 20px 0px 0px 0px;
-  } */
+      background: transparent;
+      text-align: center;
+      border-radius: 4px;
+      margin: 20px 0px 0px 0px;
+    } */
 
   .form-floating>.form-control,
   .form-floating>.form-control-plaintext {
@@ -564,7 +574,7 @@
     }
   }
 
-  @media screen and (max-width:400px){
+  @media screen and (max-width:400px) {
     .mensajeConfirmacion p {
       font-size: 18px;
       text-align: center;
@@ -574,5 +584,4 @@
       width: 80%;
     }
   }
-
 </style>
