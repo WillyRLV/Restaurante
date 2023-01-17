@@ -16,6 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100&family=Sevillana&display=swap" rel="stylesheet">
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -85,6 +86,11 @@
       font-weight: bold;
       color: white;
     }
+
+
+    .swal-wide{
+    width:340px !important;
+}
   </style>
 
   <!-- Example Code -->
@@ -126,6 +132,7 @@
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <script>
+    
     const btnContinuar = document.getElementById("boton_comidas")
     btnContinuar.onclick = () => {
       // localStorage.clear();
@@ -137,6 +144,17 @@
       // localStorage.clear();
       window.open(<?= test[5] ?>, '_top')
     }
+
+
+    Swal.fire({
+  title: 'Recomendaciones',
+  text: 'Para una mejor experiencia navegando, te pedimos habilitar todas las cookies en tu dispositivo.',
+  imageUrl: 'https://firebasestorage.googleapis.com/v0/b/hyfpics.appspot.com/o/gif%20vx66%20(1).gif?alt=media&token=c5875b0d-cb8a-4f85-b4d2-43cf111ef056',
+  imageWidth: 310,
+  imageHeight: 310,
+  customClass: 'swal-wide',
+  imageAlt: 'Custom image',
+})
   </script>
 
 </body>
