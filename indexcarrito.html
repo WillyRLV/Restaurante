@@ -33,7 +33,7 @@
 </head>
 
 <body>
-  <header id="header">
+  <header>
     <nav class="navbar navbar-expand-md ">
       <div class="container-fluid">
 
@@ -41,7 +41,9 @@
             src="https://e7.pngegg.com/pngimages/290/731/png-clipart-computer-icons-user-username-avatar-person.png"
             alt="logo_persona"> Cliente</a>
 
-        <button id="btn_carrito" class="nav-link position-relative btn_barra badge b_c" type="button">Carrito
+        <button id="btn_carrito" class="nav-link position-relative btn_barra badge b_ca" type="button">
+          <!-- <i class="bi bi-cart4"></i> -->
+          <i class="bi bi-bag"></i>
           <span id="count" class="count badge translate-middle">
             0
           </span>
@@ -56,11 +58,11 @@
             <li class="nav-item">
               <button id="btn_carta" class="nav-link btn_barra badge b_badge" type="button">Carta</button>
             </li>
-            <li class="nav-item">
-              <button id="btn_pedido" class="nav-link btn_barra badge b_badge" type="button">Pedido</button>
-            </li>
             <!-- <li class="nav-item">
-              
+              <button id="btn_pedido" class="nav-link btn_barra badge b_badge" type="button">Pedido</button>
+            </li> -->
+            <!-- <li class="nav-item">
+
 
             </li> -->
           </ul>
@@ -76,7 +78,7 @@
         <thead>
           <tr class="table_row">
             <th class="estilo_celda">Producto</th>
-            <th class="estilo_celda">Descripcion</th>
+            <th class="estilo_celda">Nombre</th>
             <th class="estilo_celda">Precio/Unidad</th>
             <th class="estilo_celda">Cantidad</th>
             <th class="estilo_celda">Monto General</th>
@@ -148,7 +150,17 @@
   <div id="bloquePedido" style="display: none;">
     <form action="" class="form_pedido" id="realizar_compra">
       <div class="container">
-        <h1>Ingrese sus Datos Personales</h1>
+        <div class="titulo_pedido">
+          <button id="retrocederCarrito" type="button" class="btn retroceder_carrito">
+            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z"></path>
+              <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"></path>
+            </svg>
+            Volver
+          </button>
+          <h1>Ingrese sus Datos Personales</h1>
+        </div>
+        <!-- <h1>Ingrese sus Datos Personales</h1> -->
         <div class="div_pedido row">
           <div class="form-floating mb-3 input_form">
             <input id="nombre-send" type="text" required class="input-pedido form-control" placeholder="Nombre">
@@ -274,18 +286,18 @@
 
   <script>
 
-    
-var datas = []
 
-var basket = JSON.parse(localStorage.getItem("data")) || [];
+    var datas = []
 
-var comidas = [];
-        var cantidad_platos = [];
-        var precio_unidad = [];
-        var precio_unidad_total = [];
-        var met_pago=[]
-        var cantidad_pago=[]
-     
+    var basket = JSON.parse(localStorage.getItem("data")) || [];
+
+    var comidas = [];
+    var cantidad_platos = [];
+    var precio_unidad = [];
+    var precio_unidad_total = [];
+    var met_pago = []
+    var cantidad_pago = []
+
 
     const btnConfirmar = document.getElementById("confirmaCompra");
     btnConfirmar.onsubmit = (e) => {
@@ -293,11 +305,11 @@ var comidas = [];
       var arre = document.getElementById("email-send").value;
       var nombre = document.getElementById("nombre-send").value;
 
-      let cantid_to = precio_unidad_total.reduce( (fi,se) => fi + se,0)
+      let cantid_to = precio_unidad_total.reduce((fi, se) => fi + se, 0)
 
-// var nombre = 'william'
-    
-   sendemailto(arre,nombre,comidas.toString(),cantidad_platos.toString(),precio_unidad.toString(),cantid_to)
+      // var nombre = 'william'
+
+      sendemailto(arre, nombre, comidas.toString(), cantidad_platos.toString(), precio_unidad.toString(), cantid_to)
       localStorage.removeItem("data");
       google.script.run
         .withSuccessHandler(function (url) {
@@ -308,14 +320,13 @@ var comidas = [];
 
 
     //function envio email
-    function sendemailto(val,val2,val3,val4,val5,val6){
-  google.script.run.withSuccessHandler(function(output)
-{
-if(output){
-console.log(output)
-}
-}).getemail(val,val2,val3,val4,val5,val6);
-}
+    function sendemailto(val, val2, val3, val4, val5, val6) {
+      google.script.run.withSuccessHandler(function (output) {
+        if (output) {
+          console.log(output)
+        }
+      }).getemail(val, val2, val3, val4, val5, val6);
+    }
   </script>
 
 
@@ -337,10 +348,17 @@ console.log(output)
 
   <!-- Input para monto -->
   <script>
+    //boton retroceder al carrito
+    const retroCarrito=document.getElementById("retrocederCarrito")
+    retroCarrito.onclick=function(){
+      document.getElementById("bloquePedido").style.display = "none";
+      document.getElementById("bloqueCarrito").style.display = "block";
+    }
+
     // Efectivo
     const btnPagarEfectivo = document.getElementById("pagar_efectivo")
     btnPagarEfectivo.onclick = function () {
-      document.getElementById("monto_pago").value="";
+      document.getElementById("monto_pago").value = "";
       document.getElementById("ApartadoMonto").style.display = "block"
       document.getElementById("numero_pagar").style.display = "none"
       document.getElementById("metodo_pago").setAttribute('value', 'Efectivo');
@@ -353,7 +371,7 @@ console.log(output)
       document.getElementById("ApartadoMonto").style.display = "none"
       document.getElementById("numero_pagar").style.display = "flex"
       document.getElementById("metodo_pago").setAttribute('value', 'Yape');
-      document.getElementById("monto_pago").value="No"
+      document.getElementById("monto_pago").value = "No"
     }
 
     //Plin
@@ -362,7 +380,7 @@ console.log(output)
       document.getElementById("ApartadoMonto").style.display = "none"
       document.getElementById("numero_pagar").style.display = "flex"
       document.getElementById("metodo_pago").setAttribute('value', 'Plin');
-      document.getElementById("monto_pago").value="No"
+      document.getElementById("monto_pago").value = "No"
     }
 
     const btnRealizarCompra = document.getElementById("realizar_compra")
@@ -389,8 +407,8 @@ console.log(output)
         // let precio_unidad = [];
         // let precio_unidad_total = [];
 
-          met_pago.push(e.target[12].value);
-          cantidad_pago.push(e.target[13].value);
+        met_pago.push(e.target[12].value);
+        cantidad_pago.push(e.target[13].value);
         let amount = basket.map(x => {
           let { item, id } = x
           let search = data.proyectos.find(y => y.id === id) || [];
@@ -398,7 +416,7 @@ console.log(output)
           cantidad_platos.push(item);
           precio_unidad.push(search.prec);
           precio_unidad_total.push(item * search.prec);
-          
+
           // console.log(amount)
           return item * search.prec;
         }).reduce((x, y) => x + y, 0)
@@ -411,7 +429,7 @@ console.log(output)
         //console.log("Pedido realizado")
 
       }).dataFood();
-      
+
 
     }
 
@@ -429,22 +447,21 @@ console.log(output)
             document.getElementById("bloqueCarrito").style.display = "none";
             document.getElementById("bloqueConfirmacion").style.display = "block";
           });
-          var nombre = document.getElementById("nombre-send").value;
-      let cantid_to = precio_unidad_total.reduce( (fi,se) => fi + se,0)
-      sendemailtoAd(nombre,comidas.toString(),cantidad_platos.toString(),precio_unidad.toString(),cantid_to,met_pago,cantidad_pago)
+        var nombre = document.getElementById("nombre-send").value;
+        let cantid_to = precio_unidad_total.reduce((fi, se) => fi + se, 0)
+        sendemailtoAd(nombre, comidas.toString(), cantidad_platos.toString(), precio_unidad.toString(), cantid_to, met_pago, cantidad_pago)
       }
     }
 
 
     //funcion para envio de comanda al correo del administrador
-    function sendemailtoAd(val2,val3,val4,val5,val6,val7,val8){
-  google.script.run.withSuccessHandler(function(output)
-{
-if(output){
-console.log(output)
-}
-}).getemailAd(val2,val3,val4,val5,val6,val7,val8);
-}
+    function sendemailtoAd(val2, val3, val4, val5, val6, val7, val8) {
+      google.script.run.withSuccessHandler(function (output) {
+        if (output) {
+          console.log(output)
+        }
+      }).getemailAd(val2, val3, val4, val5, val6, val7, val8);
+    }
 
   </script>
 

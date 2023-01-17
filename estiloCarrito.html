@@ -33,6 +33,15 @@
     width: 85px;
   }
 
+  .badge {
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 6px;
+    /* font-size: 12px; */
+    font-weight: 700;
+    line-height: 1;
+}
+
   .b_c {
     margin: 0px 0px 0px 10px;
     background-color: rgb(11, 212, 196);
@@ -41,6 +50,17 @@
     color: white;
     width: 85px;
   }
+
+  .b_ca {
+    margin: 0px 10px 0px 10px;
+    /* background-color: rgb(11, 212, 196); */
+    text-align: center;
+    font-size: 20px;
+    color: black;
+    /* width: 85px; */
+  }
+
+  
 
   /*Iconos de barra de navegación*/
   .ver {
@@ -69,8 +89,7 @@
     border-radius: 10px;
     color: white;
     top: 0;
-    right: -10px;
-
+    /* right: -10px; */
   }
 
   /*Diseño de Ventana Carrito*/
@@ -123,6 +142,8 @@
 
   .imagen_tabla {
     width: 80px;
+    height: 45px;
+    border-radius: 12px;
   }
 
   .basura {
@@ -279,10 +300,17 @@
       margin: 15px 0px 15px 10px;
     }
 
+    .b_ca {
+      margin: 15px 0px 15px 10px;
+    }
   }
 
   @media screen and (max-width: 767px) {
     .b_c {
+      margin: 0px 0px 0px 0px;
+    }
+
+    .b_ca {
       margin: 0px 0px 0px 0px;
     }
 
@@ -300,6 +328,20 @@
     display: flex;
     text-align: center;
     align-items: center;
+  }
+
+  .titulo_pedido{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    position: relative;
+  }
+
+  .retroceder_carrito{
+    font-size: 20px;
+    position: absolute;
+    left: 0;
   }
 
   .form_pedido h1 {
