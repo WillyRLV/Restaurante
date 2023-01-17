@@ -254,29 +254,7 @@
   }
 
   /*Adaptable(Responsivo)*/
-  @media screen and (max-width:650px) {
-    .Lista_Carrito {
-      margin-left: 20px;
-      min-height: 0.1%;
-      overflow-x: auto;
-      margin-right: 20px;
-    }
-
-    .botonContadorTabla {
-      padding: 2px 8px;
-      width: 90%;
-    }
-
-    .resumen_compra {
-      width: 370px;
-      margin: 5px;
-      padding: 20px;
-    }
-
-  }
-
-
-
+  
 
   @media screen and (max-width:900px) {
     .b_badge {
@@ -337,6 +315,7 @@
     align-items: center;
     position: relative;
   }
+  
 
   .retroceder_carrito {
     font-size: 20px;
@@ -344,12 +323,6 @@
     left: 0;
   }
 
-  @media screen and (max-width:640px) {
-    .retroceder_carrito {
-      position: initial;
-      left: 0;
-    }
-  }
 
   .form_pedido h1 {
     font-family: 'Lato', sans-serif;
@@ -370,9 +343,45 @@
     width: 50%;
   }
 
+  
   @media screen and (max-width:700px) {
     .input_form {
       width: 80%;
+    }
+
+  }
+
+  @media screen and (max-width:650px) {
+    .Lista_Carrito {
+      margin-left: 20px;
+      min-height: 0.1%;
+      overflow-x: auto;
+      margin-right: 20px;
+    }
+
+    .botonContadorTabla {
+      padding: 2px 8px;
+      width: 90%;
+    }
+
+    .resumen_compra {
+      width: 370px;
+      margin: 5px;
+      padding: 20px;
+    }
+
+  }
+
+  @media screen and (max-width: 780px){
+    .retroceder_carrito {
+      position: initial;
+      left: 0;
+      font-size: 12px;
+    }
+
+    .icono_retroceder{
+      width: 18px;
+      height: 18px;
     }
 
   }
@@ -572,6 +581,8 @@
     .input-correo {
       width: 70%;
     }
+
+   
   }
 
   @media screen and (max-width:400px) {
