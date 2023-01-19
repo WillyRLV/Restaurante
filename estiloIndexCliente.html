@@ -56,6 +56,7 @@
   .ver {
     color: rgb(9, 92, 112);
     font-size: 25px;
+    margin: 10px;
   }
 
   .icono_persona {
@@ -93,12 +94,13 @@
 
   .platos {
     display: flex;
-    justify-content: left;
-    flex-wrap: wrap;
-    align-items: center;
     gap: 10px;
-    margin-left: 150px;
+    /* margin-left: 5px; */
     margin-top: 70px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* margin-right: 5px; */
+    justify-content: center;
   }
 
   /*CARTAS DE LOS PLATOS*/
@@ -109,25 +111,41 @@
 
   .card {
     margin-bottom: 15px;
-    width: 330px;
-    height: 500px;
+    width: 700px;
+    height: 200px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center !important;
-    align-items: center !important;
-    flex-direction: column !important;
     gap: 4px;
     font-weight: bolder;
     border-radius: 6px;
     border-bottom: rgb(175, 174, 174) 3.5px inset;
-    /* border-right: rgb(175, 174, 174) 3.5px inset; */
-    /*box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);*/
     background-color: rgb(231 230 230) !important;
     cursor: default;
     transition: all 200ms ease;
     padding: 0 5px 0 5px;
+    align-items: stretch;
   }
 
+  @media screen and (max-width: 500px)  {
+    
+    .card {
+      width: 450px;
+      height: 200px;
+    }
+    
+  }
+
+
+  .card-body {
+    flex: 1 1 auto;
+    display: flex;
+    padding: var(--bs-card-spacer-y) var(--bs-card-spacer-x);
+    color: var(--bs-card-color);
+    flex-direction: row;
+    align-items: center;
+    /* justify-content: center; */
+    width: inherit;
+  }
 
   .card:hover {
     box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.4);
@@ -150,9 +168,10 @@
   .imagen-cartas {
     width: 150px;
     height: 100px;
-    margin-top: 10px;
+    /* margin-top: 10px; */
     border-radius: 10%;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
+    margin: 15px;
   }
 
   .descripcion{
@@ -168,26 +187,9 @@
 }
 
   /*Adaptable(Responsivo)*/
-  @media screen and (max-width: 500px) {
-    .platos {
-      margin-left: 1.5rem;
-      margin-top: 50px;
-      text-align: center;
-      justify-content: center;
-    }
+  
 
-    .menu {
-      margin-left: 5rem;
-    }
-
-    hr {
-      width: 80%;
-    }
-
-
-  }
-
-  @media screen and (max-width: 992px) {
+  @media screen and (max-width: 992px) and (min-width:501px) {
     .b_badge {
       margin: 20px 0px 15px 10px;
     }
@@ -211,6 +213,28 @@
       margin-top: 70px;
     }
 
+    .card{
+      width: 450px;
+    }
+
+    .card-title {
+    font-size: 15px !important;
+    }
+
+    .imagen-cartas {
+    width: 80px;
+    height: 50px;
+    border-radius: 10%;
+    margin: 2px;
+    }
+    .ver {
+    font-size: 20px;
+    margin: 5px;
+    }
+    .BtnC {
+    margin: 2px;
+    }
+
   }
 
   @media screen and (max-width: 767px) {
@@ -225,6 +249,52 @@
     .navbar-brand {
       margin: 0px 0px 0px 0px;
       padding: 10px 15px;
+    }
+
+  }
+
+  @media screen and (max-width: 500px) {
+    .platos {
+      margin-left: 1.5rem;
+      margin-top: 50px;
+      text-align: center;
+      justify-content: center;
+    }
+
+    .menu {
+      margin-left: 5rem;
+    }
+
+    hr {
+      width: 80%;
+    }
+
+    .card {
+      width: 400px;
+      height: 150px;
+    }
+    
+    .card-title {
+    font-size: 13px !important;
+    }
+
+    .imagen-cartas {
+    width: 75px;
+    height: 35px;
+    border-radius: 10%;
+    margin: 2px;
+    }
+    .ver {
+    font-size: 15px;
+    margin: 2px;
+    }
+    .prec_cartas{
+      margin: 2px;
+      font-size: 10px;
+    }
+
+    .BtnC {
+    margin: 2px;
     }
 
   }
