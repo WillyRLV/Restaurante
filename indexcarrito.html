@@ -389,15 +389,16 @@
       document.getElementById("btn_realiza_pago").disabled = true;
       google.script.run.withSuccessHandler(data => {
         //Valores de input
-        let nombre = e.target[0].value;
-        let apellido = e.target[1].value;
-        let distrito = e.target[2].value;
-        let direccion = e.target[3].value;
-        let referencia = e.target[4].value;
-        let telefono = e.target[5].value;
-        let comentario = e.target[6].value;
-        let metodoPago = e.target[12].value;
-        let montoPago = e.target[13].value;
+        // console.log(e);
+        let nombre = e.target[1].value;
+        let apellido = e.target[2].value;
+        let distrito = e.target[3].value;
+        let direccion = e.target[4].value;
+        let referencia = e.target[5].value;
+        let telefono = e.target[6].value;
+        let comentario = e.target[7].value;
+        let metodoPago = e.target[13].value;
+        let montoPago = e.target[14].value;
 
         let idPedido = CryptoJS.MD5(`${nombre + apellido + telefono + metodoPago}`).toString()
 
