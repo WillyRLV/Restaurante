@@ -168,11 +168,10 @@
         let search = basket.find(x => x.id === id) || [];
         const html = `<div class="card" id=producto-${id}>
           <div class="card-body text-center">
+            <img src="${img}" class="imagen-cartas" 
+               alt="..."/>
             <h2 class="card-title texto-cartas color-texto">${nomb}</h2>
             
-              <img src="${img}" class="imagen-cartas" 
-               alt="..."/>
-         
               <a href="#" class="cardlink" data-toggle="modal" data-target="#modalId"><i class="ver bi bi-search"></i></a>
               <h4 class="prec_cartas" style="font-weight:bold;margin:10px;">S/ ${prec}</h4>
               <br>
