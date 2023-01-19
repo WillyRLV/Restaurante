@@ -66,6 +66,13 @@
       <h1>Carta</h1>
       <hr />
     </div>
+
+    <div class="categoria">
+        <a class="texto_cat" href="">Alitas</a>
+        <a class="texto_cat" href="">Mix Alitas</a>
+        <a class="texto_cat" href="">Extra</a>
+
+    </div>
     
     <!-- cartas -->
     <div class="platos" id="content-card">
@@ -80,7 +87,7 @@
             <button type="button" class="close" data-dismiss="modal">
               &times;
             </button>
-            <h1 class="font-weight-light ml-4">Descripcion</h1>
+            <h1 class="font-weight-light ml-4">Descripción</h1>
 
           </div>
           <div class="modal-body">
@@ -142,11 +149,12 @@
         $(document).ready(function () {
           $(".cardlink").click(function () {
             $(".rounded").attr("src", $(this).siblings("img").attr("Src"));
-            $(".nomb_producto").text($(this).siblings("h2").text());
+            $(".nomb_producto").text($(this).parent().parent().siblings("div").text());
             $(".producto_desc").text($(this).siblings("p").text());
-            $(".producto_precio").text($(this).siblings("h4").text());
+            $(".producto_precio").text($(this).parent().siblings("h4").text());
             // $(".id_producto").text($(this).siblings("h3").text());
-
+            //console.log($(this).parent().parent().siblings("div").text())
+            //console.log($(this).parent().siblings("h4").text())
           });
         });
 
@@ -167,12 +175,21 @@
         let { id, nomb, img, prec, dec } = b
         let search = basket.find(x => x.id === id) || [];
         const html = `<div class="card" id=producto-${id}>
+        
+        <div id="contenedor_titulo" class="contenedor_titulo">
+          <h2 id="titulo_carta" class="card-title texto-cartas color-texto">${nomb}</h2>
+        </div>
+
           <div class="card-body text-center">
-            <img src="${img}" class="imagen-cartas" 
-               alt="..."/>
-            <h2 class="card-title texto-cartas color-texto">${nomb}</h2>
             
+            <div class="contenedor_imagen">
+              <img src="${img}" class="imagen-cartas" 
+               alt="..."/>
+            
+            <p class="descripcion" style="display:none;">${dec}</p>
               <a href="#" class="cardlink" data-toggle="modal" data-target="#modalId"><i class="ver bi bi-search"></i></a>
+             </div> 
+            
               <h4 class="prec_cartas" style="font-weight:bold;margin:10px;">S/ ${prec}</h4>
               <br>
             <div class="BtnC">  
