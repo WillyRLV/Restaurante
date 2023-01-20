@@ -14,6 +14,7 @@
 
   <!--Icono Bootstrap-->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
   <?!= include('estilopizarra'); ?>
 </head>
@@ -133,6 +134,82 @@
       border-radius: 8px;
     }
 
+    /*estilo check*/
+    .wrapper {
+      width: 30px;
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 10px;
+    }
+
+    .checkmark__circle {
+      stroke-dasharray: 166;
+      stroke-dashoffset: 166;
+      stroke-width: 2;
+      stroke-miterlimit: 10;
+      stroke: #7ac142;
+      fill: none;
+      animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards
+    }
+
+
+    /* .checkmark__circle-active {
+      stroke-dasharray: 166;
+      stroke-dashoffset: 166;
+      stroke-width: 2;
+      stroke-miterlimit: 10;
+      stroke: #fa0000;
+      fill: none;
+      animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards
+    } */
+
+    .checkmark {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: block;
+      stroke-width: 2;
+      stroke: #fff;
+      stroke-miterlimit: 10;
+      margin: 10% auto;
+      box-shadow: inset 0px 0px 0px #7ac142;
+      animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both
+    }
+
+    .checkmark__check {
+      transform-origin: 50% 50%;
+      stroke-dasharray: 48;
+      stroke-dashoffset: 48;
+      animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards
+    }
+
+    @keyframes stroke {
+      100% {
+        stroke-dashoffset: 0
+      }
+    }
+
+    @keyframes scale {
+
+      0%,
+      100% {
+        transform: none
+      }
+
+      50% {
+        transform: scale3d(1.1, 1.1, 1)
+      }
+    }
+
+    @keyframes fill {
+      100% {
+        box-shadow: inset 0px 0px 0px 30px #7ac142
+      }
+    }
+
+
     
   </style>
   <header>
@@ -176,6 +253,48 @@
     <h1>Pizarra</h1>
     <hr>
   </div>
+  <div style="gap: 7px; display: flex; flex-direction: column;
+  justify-content: center;
+  align-items: center;position: relative; height: auto;">
+    <!--nuevaaaa linea codigooo-->
+    <!-- <form class=" input-group" style="position: absolute;right: 120px;">
+      <input class="form-control " type="text" />
+      <button class="btn btn-secondary " type="submit">Revisar</button>
+    </form> -->
+    <h3>Confirmar pedido</h3>
+    <form id="form-get-data">
+
+
+      <div style="width: 300px;" class="input-group">
+
+        <span class="input-group-btn">
+          <button id="check-but" class="btn btn-secondary text-light" type="submit">Revisar</button>
+          <div id="check-success" style="display: none;" class="wrapper"> <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+              <circle id="circle-backgr" class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+              <!--check-->
+              <path style="display: none;" id="check-anim" class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+              <!--wrong-->
+              <path style="display: none;" id="wrong-anim" class="checkmark_check" fill="none" d="M14.1 14.1l23.8 23.8 m0,-23.8 l-23.8,23.8"/>
+            </svg>
+          </div>
+        </span>
+        <input id="pedido-id-cliente" autocomplete="off" type="text" class="form-control" placeholder="ingrese id" required>
+      </div>
+    </form>
+    <br>
+    <div id="group-det" class="text-center" style="display: none;">
+      <label>Id pedido</label>
+      <input id="id-pedclient" class="form-control" type="text" disabled>
+      <label>Cliente</label>
+      <input id="nomb-pedclient" class="form-control"  type="text" disabled>
+      <br>
+      <button id="btn-confirm" class="btn btn-primary" type="button">Confirmar</button>
+    </div>
+  </div>
+  <!--==================================================-->
+  <br>
+  <hr style="width: 100% !important;">
+  <br>
 
   <div class="contenido-card " id="contenido-card">
 
@@ -214,6 +333,91 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script>
 
+  //linea codigo nuevo
+
+  const pedidospreconfirmado = document.getElementById("form-get-data");
+  const Inputchange = document.getElementById("pedido-id-cliente");
+
+
+pedidospreconfirmado.onsubmit = (e) => {
+  event.preventDefault();
+const valIdinp = document.getElementById("pedido-id-cliente").value;
+
+  
+  google.script.run.withSuccessHandler(pediget).checkpedido(valIdinp);
+
+
+
+}
+
+const pediget = (output) => {
+  if (output.status === '200') {
+    console.log("fino");
+    document.getElementById('group-det').style.display = "block";
+  document.getElementById('check-but').style.display = "none";
+  document.getElementById('check-success').style.display = "inline-flex";
+  document.getElementById('check-anim').style.display = "block";
+  document.getElementById('wrong-anim').style.display = "none";
+  //desaparecer icono rojo
+  // document.getElementById('circle-backgr').style.display = "#7ac142";
+
+  // document.getElementById('check-success').style.backgroundColor = "#7ac142";
+
+  //==========================
+
+    document.getElementById("id-pedclient").value = output.idped;
+    document.getElementById("nomb-pedclient").value = output.nombrecompleto;
+ 
+
+  }
+  else if (output.status === '404') {
+    document.getElementById('check-but').style.display = "none";
+  // document.getElementById('circle-backgr').classList.re('checkmark__circle-active')
+
+  // document.getElementById('circle-backgr').classList.add('checkmark__circle-active')
+
+    document.getElementById('check-success').style.display = "inline-flex";
+    
+    document.getElementById('check-anim').style.display = "none";
+  document.getElementById('wrong-anim').style.display = "block";
+
+    setTimeout(() => {
+      document.getElementById('check-but').style.display = "block";
+      document.getElementById('check-success').style.display = "none";
+}, "1500")
+ 
+  }
+
+
+}
+
+Inputchange.onkeydown = function(){
+  document.getElementById('group-det').style.display = "none";
+  document.getElementById('check-but').style.display = "block";
+  document.getElementById('check-success').style.display = "none";  
+};
+
+
+
+const confirmarpedido = document.getElementById("btn-confirm")
+
+confirmarpedido.onclick = (e) => {
+  Toastify({
+
+text: "añadido a la pizarra correctamente",
+
+duration: 1500
+
+}).showToast();
+  const idpedcon = document.getElementById("id-pedclient").value;
+  document.getElementById('group-det').style.display = "none";
+  document.getElementById('check-but').style.display = "block";
+  document.getElementById('check-success').style.display = "none";
+  document.getElementById("pedido-id-cliente").value = '';
+  google.script.run.PedConfirmado(idpedcon)
+}
+
+//==============================
 
     const btn_salir = document.getElementById("salida")
     btn_salir.onclick = () => {
@@ -349,7 +553,7 @@
 
   </script>
 
-
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" // //
     integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" // //
     crossorigin="anonymous"></script>

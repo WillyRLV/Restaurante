@@ -127,7 +127,7 @@ function dataCom() {
 
   var id = "16i_ZO2y0K4umabI3bJDPFm01RilUpwjlu1pT3hCdwZU";
   var ss = SpreadsheetApp.openById(id);
-  var hojaUsuarios = ss.getSheetByName("Comandas");
+  var hojaUsuarios = ss.getSheetByName("PedidosConfirmados");
   var datos = hojaUsuarios.getDataRange().getValues();
   datos.shift();
   var obj = {}
@@ -233,7 +233,7 @@ function ingresar(correo, contraseña) {
 function onEdit(data) {
 
   var archivo = SpreadsheetApp.openById('16i_ZO2y0K4umabI3bJDPFm01RilUpwjlu1pT3hCdwZU')
-  var holadatos = archivo.getSheetByName('Comandas');
+  var holadatos = archivo.getSheetByName('PedidosConfirmados');
   var holadatos2 = archivo.getSheetByName('Pedidos');
   var datos = holadatos.getDataRange().getValues()
   // let val1 = data.getRange("A2").getValue();
@@ -311,3 +311,71 @@ return 'enviado'
   
   return 'enviado'
    }
+
+
+
+   
+   //funciones nuevas 
+
+   function checkpedido(idp) {
+    var id = "16i_ZO2y0K4umabI3bJDPFm01RilUpwjlu1pT3hCdwZU";
+    var ss = SpreadsheetApp.openById(id);
+    var hojaUsuarios = ss.getSheetByName("Comandas");
+    var datos = hojaUsuarios.getDataRange().getValues();
+    //datos.shift();
+    var obj = {}
+    datos.forEach((dato) => {
+        if (dato[0] === idp ) {
+            obj = { status: "200", idped:dato[0],  nombrecompleto: `${dato[1]} ${dato[2]}` }
+        }
+  
+      
+  
+        if (Object.entries(obj).length === 0) {
+            obj = { status: "404" }
+        }
+    })
+  
+  
+    return obj
+  }
+
+
+  function PedConfirmado(data) {
+
+    var archivo = SpreadsheetApp.openById('16i_ZO2y0K4umabI3bJDPFm01RilUpwjlu1pT3hCdwZU')
+    var holadatos = archivo.getSheetByName('Comandas');
+    var holadatos2 = archivo.getSheetByName('PedidosConfirmados');
+    var datos = holadatos.getDataRange().getValues()
+    // let val1 = data.getRange("A2").getValue();
+    datos.shift()
+    // var id = 'co7i7QU'
+    datos.map((dato, index) => {
+  
+      if (dato[0] === data) {
+          holadatos2.appendRow([
+            dato[0],
+            dato[1],
+            dato[2],
+            dato[3],
+            dato[4],
+            dato[5],
+            dato[6],
+            dato[7],
+            dato[8],
+            dato[9],
+            `'${dato[10]}`,
+            `'${dato[11]}`,
+            dato[12],
+            dato[13],
+            dato[14],
+            dato[15],
+            dato[16],
+          ])
+          holadatos.deleteRow(index + 2)
+          console.log("listo")
+      
+      }
+    })
+    
+  }

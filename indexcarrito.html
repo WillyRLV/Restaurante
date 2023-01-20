@@ -399,8 +399,8 @@
         let comentario = e.target[7].value;
         let metodoPago = e.target[13].value;
         let montoPago = e.target[14].value;
-
-        let idPedido = CryptoJS.MD5(`${nombre + apellido + telefono + metodoPago}`).toString()
+        var idPedido = CryptoJS.SHA3(`${nombre + apellido + telefono + metodoPago}`, { outputLength: 32 }).toString();
+        // let idPedido = CryptoJS.MD5(`${nombre + apellido + telefono + metodoPago}`).toString()
 
         //==================================================================
         // let comidas = [];
