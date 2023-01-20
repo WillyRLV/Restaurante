@@ -490,7 +490,7 @@ duration: 1500
 
     window.addEventListener("DOMContentLoaded", function () {
 
-      // setInterval(function () {-------------
+      setInterval(function () {
         google.script.run.withSuccessHandler(data => {
 
           renderCard(data.proyectos);
@@ -507,7 +507,7 @@ duration: 1500
           //         });
 
         }).dataCom();
-      // }, 2000)--------------------
+      }, 2000)
     })
 
     // <div class="button">
@@ -515,12 +515,12 @@ duration: 1500
 
 
 
-    // const remove = (sel) => document.querySelectorAll(sel).forEach(el => el.remove());----------
+    const remove = (sel) => document.querySelectorAll(sel).forEach(el => el.remove());
 
     //render dinamic card
     const renderCard = (obj) => {
       const htmlres = document.getElementById('contenido-card')
-      // remove(".card-p");------------
+      remove(".card-p");
       // const preciost = []
       obj.map((b) => {
 
