@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+  <base target="_top">
   <meta charset="UTF-8" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -33,7 +34,7 @@
 </head>
 
 <body>
-  <header>
+  <header id="header">
     <nav class="navbar navbar-expand-md ">
       <div class="container-fluid">
 
@@ -152,9 +153,14 @@
       <div class="container">
         <div class="titulo_pedido">
           <button id="retrocederCarrito" type="button" class="btn retroceder_carrito">
-            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-box-arrow-left icono_retroceder" viewBox="0 0 16 16">
-              <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z"></path>
-              <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"></path>
+            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor"
+              class="bi bi-box-arrow-left icono_retroceder" viewBox="0 0 16 16">
+              <path fill-rule="evenodd"
+                d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z">
+              </path>
+              <path fill-rule="evenodd"
+                d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z">
+              </path>
             </svg>
             Volver
           </button>
@@ -187,8 +193,8 @@
           </div>
 
           <div class="form-floating input_form">
-            <input id="tel-send" type="tel" required class="input-pedido form-control" placeholder="Celular" maxlength="9"
-              pattern="9[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]">
+            <input id="tel-send" type="tel" required class="input-pedido form-control" placeholder="Celular"
+              maxlength="9" pattern="9[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]">
             <label for="floatingTelefono">Celular</label>
           </div>
 
@@ -228,7 +234,7 @@
 
           <div class="form-floating input_form" style="display: none;">
             <input id="metodo_pago" type="text" class="input-pedido form-control" value="" placeholder="Monto Pagar">
-            <label for="floatingPago">Metodo</label>
+            <label for="floatingPago">Método</label>
           </div>
 
           <div id="ApartadoMonto" class="form-floating input_form" style="display: none;">
@@ -252,16 +258,15 @@
       <div class="container">
         <div class="mensajeConfirmacion">
           <p>Su pedido ha sido realizado.</p>
-          <p>Si desea más detalles de su compra</p>
-          <p>ingrese correo electronico.</p>
+          <p>Muchas gracias por su compra.</p>
         </div>
         <div class="correo_cliente">
-          <div class="form-floating mb-3 input-correo">
+          <!-- <div class="form-floating mb-3 input-correo">
             <input id="email-send" type="email" class=" form-control" placeholder="Correo electronico">
             <label for="floatingCorreo">Correo electronico</label>
-          </div>
+          </div> -->
 
-          <button type="submit" class="btnConfirmacion btn btn-secondary">Confirmar</button>
+          <button id="btn_confirma" type="button" class="btnConfirmacion btn btn-secondary">Volver</button>
 
         </div>
       </div>
@@ -297,21 +302,21 @@
     var precio_unidad_total = [];
     var met_pago = []
     var cantidad_pago = []
-    var idpedglob =[]
+    var idpedglob = []
 
 
-    const btnConfirmar = document.getElementById("confirmaCompra");
-    btnConfirmar.onsubmit = (e) => {
+    const btnConfirmar = document.getElementById("btn_confirma");
+    btnConfirmar.onclick= (e) => {
       e.preventDefault()
-      var arre = document.getElementById("email-send").value;
-      var nombre = document.getElementById("nombre-send").value;
+      // var arre = document.getElementById("email-send").value;
+      // var nombre = document.getElementById("nombre-send").value;
 
-      let cantid_to = precio_unidad_total.reduce((fi, se) => fi + se, 0)
+      // let cantid_to = precio_unidad_total.reduce((fi, se) => fi + se, 0)
 
-      // var nombre = 'william'
+      // // var nombre = 'william'
 
-      sendemailto(arre, nombre, comidas.toString(), cantidad_platos.toString(), precio_unidad.toString(), cantid_to)
-      localStorage.removeItem("data");
+      // sendemailto(arre, nombre, comidas.toString(), cantidad_platos.toString(), precio_unidad.toString(), cantid_to)
+      // localStorage.removeItem("data");
       google.script.run
         .withSuccessHandler(function (url) {
           window.open(url, '_top');
@@ -350,8 +355,8 @@
   <!-- Input para monto -->
   <script>
     //boton retroceder al carrito
-    const retroCarrito=document.getElementById("retrocederCarrito")
-    retroCarrito.onclick=function(){
+    const retroCarrito = document.getElementById("retrocederCarrito")
+    retroCarrito.onclick = function () {
       document.getElementById("bloquePedido").style.display = "none";
       document.getElementById("bloqueCarrito").style.display = "block";
     }
@@ -427,6 +432,22 @@
 
         google.script.run.withSuccessHandler(re).postPedido("f" + idPedido, nombre, apellido, distrito, direccion, referencia, telefono, comentario, comidas.toString(), cantidad_platos.toString(), precio_unidad.toString(), precio_unidad_total.toString(), precio_total, metodoPago, montoPago)
 
+         //Envio correo
+         sendemailtoAd(nombre, comidas.toString(), cantidad_platos.toString(), precio_unidad.toString(), precio_total, met_pago, cantidad_pago) 
+
+        // bloque whatpapp
+
+        //variables globales
+        var nombrer = document.getElementById("nombre-send").value;
+        var telfo = document.getElementById("tel-send").value;
+        var direcC = document.getElementById("direc-send").value;
+
+        var idped = `f${idpedglob}`
+
+        var urlwssp = "https://api.whatsapp.com/send?phone=51928991585&text=Bienvenido%20a%20Don%20Cilindro%20Danylo%20%E2%9C%8B%20.%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%0A%E2%94%84%E2%94%84%E2%94%84%E2%94%84%E2%94%84%E2%94%84%E2%94%84%E2%94%84%E2%94%84%E2%94%84%E2%94%84%E2%94%84%E2%94%84%0A*Nuevo%20pedido%20(ID%20%3A%20" + idped + ")*%0A%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%0A%E2%96%B8cantidades%20%3A%20%E3%85%A4*" + cantidad_platos + "*%0A%E2%96%B8pedido(s)%3A%E3%85%A4*" + comidas.toString() + "*%0A%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%0ADetalles%20de%20cliente%3A%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%0ANombre%3A%20%E3%85%A4*" + nombrer + "*.%E3%85%A4%E3%85%A4%0ATel%C3%A9fono%3A%20%E3%85%A4*" + telfo + "*.%0ADirecci%C3%B3n%3A%E3%85%A4*" + direcC + "*.%0A%E2%94%84%E2%94%84%E2%94%84%E2%94%84%E2%94%84%E2%94%84%E2%94%84%E2%94%84%E2%94%84%E2%94%84%E2%94%84%E2%94%84%E2%94%84%0AM%C3%A9todo%20de%20pago%20%3A%20*" + met_pago + "*%0ADisposici%C3%B3n%20de%20efectivo%20%3A%20*" + cantidad_pago + "*%0A%0A";
+        window.open(urlwssp, '_blank');
+        //===============================================================================
+
 
         //console.log("Pedido realizado")
 
@@ -437,12 +458,7 @@
 
     const re = (output) => {
       if (output.status === "200") {
-        //variables globales
-        var nombre = document.getElementById("nombre-send").value;
-        var telfo = document.getElementById("tel-send").value;
-        var direcC = document.getElementById("direc-send").value;
 
-var idped = `f${idpedglob}` 
         // swal("Pedido Realizado", "Gracias por haber realizado su Compra", "success");
         // localStorage.clear();
 
@@ -452,17 +468,16 @@ var idped = `f${idpedglob}`
           .then((value) => {
 
             //linea de codigo para envio mensaje wssp william (20/01/23)//
-
-            var urlwssp =  "https://api.whatsapp.com/send?phone=51956792094&text=Bienvenido%20a%20Don%20Cilindro%20Danylo%20%E2%9C%8B%20.%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%0A%E2%94%84%E2%94%84%E2%94%84%E2%94%84%E2%94%84%E2%94%84%E2%94%84%E2%94%84%E2%94%84%E2%94%84%E2%94%84%E2%94%84%E2%94%84%0A*Nuevo%20pedido%20(ID%20%3A%20"+idped+")*%0A%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%0A%E2%96%B8cantidades%20%3A%20%E3%85%A4*"+cantidad_platos+"*%0A%E2%96%B8pedido(s)%3A%E3%85%A4*"+comidas.toString()+"*%0A%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%0ADetalles%20de%20cliente%3A%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%E3%85%A4%0ANombre%3A%20%E3%85%A4*"+nombre+"*.%E3%85%A4%E3%85%A4%0ATel%C3%A9fono%3A%20%E3%85%A4*"+telfo+"*.%0ADirecci%C3%B3n%3A%E3%85%A4*"+direcC+"*.%0A%E2%94%84%E2%94%84%E2%94%84%E2%94%84%E2%94%84%E2%94%84%E2%94%84%E2%94%84%E2%94%84%E2%94%84%E2%94%84%E2%94%84%E2%94%84%0AM%C3%A9todo%20de%20pago%20%3A%20*"+met_pago+"*%0ADisposici%C3%B3n%20de%20efectivo%20%3A%20*"+cantidad_pago+"*%0A%0A";
-            window.open(urlwssp , '_blank')
-
+            localStorage.removeItem("data");
             //=======================================================================
             document.getElementById("bloquePedido").style.display = "none";
             document.getElementById("bloqueCarrito").style.display = "none";
             document.getElementById("bloqueConfirmacion").style.display = "block";
+            document.getElementById("header").style.display = "none";
+
           });
-        let cantid_to = precio_unidad_total.reduce((fi, se) => fi + se, 0)
-        sendemailtoAd(nombre, comidas.toString(), cantidad_platos.toString(), precio_unidad.toString(), cantid_to, met_pago, cantidad_pago)
+        // let cantid_to = precio_unidad_total.reduce((fi, se) => fi + se, 0)
+        // sendemailtoAd(nombre, comidas.toString(), cantidad_platos.toString(), precio_unidad.toString(), cantid_to, met_pago, cantidad_pago)
       }
     }
 
