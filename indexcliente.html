@@ -67,10 +67,11 @@
       <hr />
     </div>
 
-    <div class="categoria">
-        <a class="texto_cat" href="">Alitas</a>
-        <a class="texto_cat" href="">Mix Alitas</a>
-        <a class="texto_cat" href="">Extra</a>
+    <div id="categoria" class="categoria">
+        <button class="texto_cat "  onclick="filterProduct('Todo')">Todo</button>
+        <button class="texto_cat"  onclick="filterProduct('Alitas')">Alitas</button>
+        <button class="texto_cat"  onclick="filterProduct('MixAlitas')">MixAlitas</button>
+        <button class="texto_cat"  onclick="filterProduct('Extra')">Extra</button>
 
     </div>
     
@@ -133,8 +134,6 @@
   </script>
 
 
-
-
   <script>
 
 
@@ -172,9 +171,9 @@
     const renderCard = (obj) => {
       const htmlres = document.getElementById('content-card')
       obj.map((b) => {
-        let { id, nomb, img, prec, dec } = b
+        let { id, nomb, img, prec, dec, cat } = b
         let search = basket.find(x => x.id === id) || [];
-        const html = `<div class="card" id=producto-${id}>
+        const html = `<div class="card ${cat} " id=producto-${id}>
         
         <div id="contenedor_titulo" class="contenedor_titulo">
           <h2 id="titulo_carta" class="card-title texto-cartas color-texto">${nomb}</h2>
@@ -207,6 +206,7 @@
       })
 
     }
+    
 
     //==============================================
     toastr.options = {
@@ -316,6 +316,42 @@
 
 
 
+  </script>
+
+  <!-- funcion de filtrado de barra de navegacion de comidas -->
+  <script>
+    function filterProduct(value){
+      let buttons=document.querySelectorAll(".texto_cat");
+      buttons.forEach((button)=>{
+        if(value.toUpperCase()==button.innerText.toUpperCase()){
+          button.classList.add("active");
+        } else{
+          button.classList.remove("active");
+        }
+      });
+
+      // seleccionar por categoria
+      let elements=document.querySelectorAll(".card");
+      elements.forEach((element)=>{
+        if(value=="Todo"){
+          element.classList.remove("hide");
+        }
+        else{
+          if(element.classList.contains(value)){
+            element.classList.remove("hide");
+          }else{
+            element.classList.add("hide");
+          }
+        }
+      });
+
+    }
+
+    // filterProduct("Todo")
+
+    window.onload=()=>{
+      filterProduct("Todo")
+    };
   </script>
 
 

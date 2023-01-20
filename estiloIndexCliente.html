@@ -99,19 +99,22 @@
     flex-wrap: nowrap;
     align-items: center;
     background-color: #dfdfdf;
-    /* margin: 20px 15px 0px 80px; */
     height: 90px;
-    /* border-radius: 20px;*/
+    justify-content: space-evenly;
   }
 
-  .texto_cat{
-    font-weight: bold;
-    padding: 0 20px 0 20px;
-    font-size: 30px;
-    font-family: 'Lato', sans-serif;
-    width: 100%;
-    text-align: center;
+  .texto_cat {
+    border: 2px solid gray;
+    padding: 1em 2.2em;
+    border-radius:3em;
+    background-color:transparent;
     color: #363b5c;
+    cursor:pointer;
+  }
+
+  .active{
+    background-color:gray;
+    color:#ffffff;
   }
 
   .platos {
@@ -127,6 +130,10 @@
 
   /*CARTAS DE LOS PLATOS*/
 
+  .hide{
+    display:none;
+  }
+  
   .button {
     text-align: center;
   }
@@ -292,7 +299,7 @@
 
   @media screen and (max-width: 500px) {
     .platos {
-      margin-left: 1.5rem;
+      /* margin-left: 1.5rem; */
       margin-top: 50px;
       text-align: center;
       justify-content: center;

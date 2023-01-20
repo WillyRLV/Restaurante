@@ -89,7 +89,8 @@ function dataFood() {
       img: dato[2],
       dec: dato[3],
       prec: dato[4],
-      id: dato[0]
+      id: dato[0],
+      cat: dato[5]
     }
 
     datoe.push(proyectos)
