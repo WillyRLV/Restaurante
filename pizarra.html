@@ -51,11 +51,7 @@
       height: 670px;
     }
 
-    @media screen and (max-width:500px){
-      .card-p{
-        width: 340px;
-      }
-    }
+    
 
 
     .head-time {
@@ -69,14 +65,9 @@
       width: 340px;
       padding: 10px 20px 0 20px;
 
-    }
+    }    
 
-    @media screen and (max-width:500px){
-      .data-client {
-        width: 320px;
-        padding: 1px 3px 0 3px;
-      }
-    }
+    
 
     /* atributo lista */
 
@@ -206,6 +197,55 @@
     @keyframes fill {
       100% {
         box-shadow: inset 0px 0px 0px 30px #7ac142
+      }
+    }
+
+    @media screen and (max-width:800px){
+      .data-client {
+        width: 320px;
+        padding: 1px 3px 0 3px;
+      }
+      .card-p{
+        width: 350px !important;
+        height: 510px !important;
+      }
+      .just-especial {
+        gap: 5px;
+      }
+      .attributes dt {
+        font-size: 14px; 
+      }
+
+      .attributes dd {
+        font-size: 14px;
+      }
+      .grupo-pedido p {
+        font-size: 1.0em;
+        width: 335px;
+        height: 70px;
+      }
+      .Titulo_pedido{
+        font-size: 20px;
+        margin-top: 0px;
+      }
+
+      .F_H{
+        font-size: 20px;
+        margin-top: 8px;
+        margin-bottom: 5px;
+      }
+
+      .precio_pizarra{
+        font-size: 17px;
+        margin-top: 10px;
+      }
+
+      .attributes {
+        grid-gap: 0.2em;
+      }
+
+      dl{
+        margin-bottom: 0;
       }
     }
 
@@ -450,7 +490,7 @@ duration: 1500
 
     window.addEventListener("DOMContentLoaded", function () {
 
-      setInterval(function () {
+      // setInterval(function () {-------------
         google.script.run.withSuccessHandler(data => {
 
           renderCard(data.proyectos);
@@ -467,7 +507,7 @@ duration: 1500
           //         });
 
         }).dataCom();
-      }, 2000)
+      // }, 2000)--------------------
     })
 
     // <div class="button">
@@ -475,20 +515,20 @@ duration: 1500
 
 
 
-    const remove = (sel) => document.querySelectorAll(sel).forEach(el => el.remove());
+    // const remove = (sel) => document.querySelectorAll(sel).forEach(el => el.remove());----------
 
     //render dinamic card
     const renderCard = (obj) => {
       const htmlres = document.getElementById('contenido-card')
-      remove(".card-p");
+      // remove(".card-p");------------
       // const preciost = []
       obj.map((b) => {
 
         // preciost.push([...b.precio )
         const html = `<div id=${b.id} class="card-p just-especial ">
                 <div class="head-time">
-                    <h3>${b.hora}</h3>
-                    <h3>${b.fecha}</h3>
+                    <h3 class="F_H">${b.hora}</h3>
+                    <h3 class="F_H">${b.fecha}</h3>
                 </div>
                 <div class="data-client">
                         <dl class="attributes">
@@ -514,12 +554,12 @@ duration: 1500
                 </div>
                 <div class="grupo-pedido">
                   <div class="titulo-pedido">
-                    <h3 >PEDIDO(S)</h3><br>
+                    <h3 class="Titulo_pedido" >PEDIDO(S)</h3><br>
                   </div>
                     <p> ${b.pedidos}</p>
                 </div>
                 <Button onclick="despachar(${b.id})"" class="button-st" id="button-st">Despachar</Button>
-                <div><h3>S/. ${b.preciot}</h3></div>
+                <div><h3 class="precio_pizarra">S/. ${b.preciot}</h3></div>
             </div>`;
         htmlres.innerHTML += html;
       })
