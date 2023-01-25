@@ -101,8 +101,118 @@ function dataFood() {
   return obj
 }
 
+//CRUD DE COMIDAS
+function registrarPlato(contacto,archivoimg) {  
+  var id = "16i_ZO2y0K4umabI3bJDPFm01RilUpwjlu1pT3hCdwZU";
+  var SS = SpreadsheetApp.openById(id);
+  var ws = SS.getSheetByName("Comidas");
+  var rp='';
+  var head_url="http://drive.google.com/uc?export=view&id=";
+  
+
+    // Funcion Imagen 
+    //  var x= uploadFiles(archivoimg)
+    // if(archivoimg){
+      let blob=Utilities.newBlob(archivoimg.bytes, archivoimg.mimeType,archivoimg.filename);
+      let archivo=DriveApp.getFolderById('1iFGJMeJrqACG3FGHZCgKOIB-wit44wY_');
+      var createFile = archivo.createFile(blob);
+      // return createFile.getId();
+    // }
+
+    const imgplato=head_url+createFile.getId();
+
+    //================================================
+      rp='false';
+      ws.appendRow([`f${contacto.id_pe}`,contacto.nom_pe,imgplato,contacto.dec_pe,contacto.prec_pe,contacto.cat_pe]);
+
+    return rp;
+}
+
+function actualizar_plato(val) {
+  var id = "16i_ZO2y0K4umabI3bJDPFm01RilUpwjlu1pT3hCdwZU";
+  var ss = SpreadsheetApp.openById(id);
+  var colUser = ss.getSheetByName("Comidas");
+  var userDates = colUser.getDataRange().getValues();
+  
+  var obj={}
+
+   for (var fila = 1; fila < userDates.length; fila++){
+
+     if (val.toString() === userDates[fila][0].toString()){
+      var id_p1 = userDates[fila][0];
+       var nom_p1= userDates[fila][1];     
+       var link_p1= userDates[fila][2];  
+       var dec_p1= userDates[fila][3];  
+       var pre_p1= userDates[fila][4];
+       var cat_p1= userDates[fila][5];  
+
+       obj={id_p1:id_p1,nom_p1:nom_p1,link_p1:link_p1,dec_p1:dec_p1,pre_p1:pre_p1,cat_p1,cat_p1}
+     } 
+   }
+
+   return obj; 
+}
+
+function actualizar(contacto,archivoimg){
+  var id = "16i_ZO2y0K4umabI3bJDPFm01RilUpwjlu1pT3hCdwZU";
+  var SS = SpreadsheetApp.openById(id);
+  var ws = SS.getSheetByName("Comidas");
+  var cantFila = ws.getDataRange().getValues();
+  var cantFila1 = ws.getMaxRows();
+
+   var head_url="http://drive.google.com/uc?export=view&id=";
+  
+  if(archivoimg){
+    // Funcion Imagen 
+      var blob=Utilities.newBlob(archivoimg.bytes, archivoimg.mimeType,archivoimg.filename);
+      let archivo=DriveApp.getFolderById('1iFGJMeJrqACG3FGHZCgKOIB-wit44wY_');
+      var createFile = archivo.createFile(blob);
+
+    const imgplato=head_url+createFile.getId();
+
+    contacto.img_pe=imgplato;
+
+  }
+  
+    for (var fila = 2; fila <= cantFila1; fila++){
+      
+      if (contacto.id_pe === cantFila[fila-1][0].toString()){
+
+          ws.getRange("B"+(fila).toString()).setValue(contacto.nom_pe);
+          ws.getRange("C"+(fila).toString()).setValue(contacto.img_pe);
+          ws.getRange("D"+(fila).toString()).setValue(contacto.dec_pe);
+          ws.getRange("E"+(fila).toString()).setValue(contacto.prec_pe);
+          ws.getRange("F"+(fila).toString()).setValue(contacto.cat_pe);
+          
+          break;
+      }
+    }
 
 
+    
+}
+
+
+function eliminar_plato(val){
+
+  var id = "16i_ZO2y0K4umabI3bJDPFm01RilUpwjlu1pT3hCdwZU";
+  var ss = SpreadsheetApp.openById(id);
+  var colUser = ss.getSheetByName("Comidas");
+  var userDates = colUser.getDataRange().getValues();
+  
+
+   for (var fila = 1; fila < userDates.length; fila++){
+     var id = userDates[fila][0];
+      console.log(id)
+     if (val.toString() === id.toString()){
+       colUser.deleteRow(fila+1);
+        SpreadsheetApp.flush();
+     } 
+   }
+}
+
+
+//============================================================================
 
 function postPedido(id,nombre,apellido,distrito,direccion,referencia,telefono,comentario,comida,cantidad,precio_unidad,precio_unidad_total,precio_total,metodoPago,montoPago){
   var idsheet = "16i_ZO2y0K4umabI3bJDPFm01RilUpwjlu1pT3hCdwZU";

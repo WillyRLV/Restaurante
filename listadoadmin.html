@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>    var basket = JSON.parse(localStorage.getItem("data")) || [];</script>
+
+  <!-- Bootstrap-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
+
+  <!--Icono Bootstrap-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+
+  <!-- toast -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+
+
+  <?!= include('estiloListadoAdmin'); ?>
+
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-md ">
+      <div class="container-fluid">
+
+        <a class="navbar-brand" style="font-size: 13px;"><img class="icono_persona"
+            src="https://e7.pngegg.com/pngimages/290/731/png-clipart-computer-icons-user-username-avatar-person.png"
+            alt="logo_persona"> Administrador</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-center">
+            <li class="nav-item">
+              <a id="listado" class="nav-link " aria-current="page"><span class="badge ">Listado</span></a>
+            </li>
+            <li class="nav-item">
+              <a id="cartas" class="nav-link"><span class="badge ">Cartas</span></a>
+            </li>
+            <li class="nav-item">
+              <a id="hola" class="nav-link"><span class="badge ">Pizarra</span></a>
+
+            </li>
+            <li class="nav-item">
+              <a id="pedidoA" class="nav-link"><span class="badge ">Pedidos</span></a>
+
+            </li>
+          </ul>
+          <form class="d-flex form-b" role="search" style="margin-left: 50px;">
+            <button id="salida" class="btn" type="submit"> <i class="salida bi bi-box-arrow-right"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="bloqueListado">
+    <div class="tituloListado">
+      <p>Listado de Comidas</p>
+      <hr>
+    </div>
+
+    <div class="boton_B d-flex justify-content-between mb-3">
+      <div class="col">
+        <button type="button" id="btn_agregar_plato" class="btn btn-primary" data-bs-toggle="modal"
+          data-bs-target="#createModal"><i class="bi bi-plus"></i>Agregar</button>
+      </div>
+      <div class="input_buscar col-3">
+        <input type="text" class="form-control" id="buscarPlato" placeholder="Buscar por nombre...">
+      </div>
+    </div>
+
+    <div class="Lista_Carrito">
+      <table id="tabla_platos" class="table table-striped jss562">
+        <thead>
+          <tr class="table_row">
+            <th class="estilo_celda">Id</th>
+            <th class="estilo_celda">Producto</th>
+            <th class="estilo_celda">Nombre</th>
+            <th class="estilo_celda">Descripcion</th>
+            <th class="estilo_celda">Precio/Unidad</th>
+            <th class="estilo_celda">Categoria</th>
+            <th class="estilo_celda"></th>
+            <th class="estilo_celda"></th>
+          </tr>
+        </thead>
+        <tbody id="tabla-comidas">
+
+
+        </tbody>
+      </table>
+
+
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="createModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="createModalLabel">Formulario Plato</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form action="" id="crearPlato">
+
+              <div id="id_plato" class="form-floating mb-3" style="display: none;">
+                <input type="text" class="form-control" id="floatingId" placeholder="pr-01" readonly>
+                <label for="floatingId">Id</label>
+              </div>
+
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingNombre" placeholder="name@example.com" required>
+                <label for="floatingNombre">Nombre plato</label>
+              </div>
+
+              <!-- <div class="mb-3">
+                <label for="formFile" class="form-label">Sube aquí tu archivo</label>
+                <input class="form-control" type="file" id="upinput">
+              </div>
+
+              <div id="preview" class="mb-3"></div>
+
+              <button type="button" id="btn-submit" class="btn btn-primary"> Subir </button>
+              </div> -->
+
+              <div class="form-floating mb-3">
+                <input class="form-control" type="file" id="upinput" placeholder="Seleccionar Imagen" required>
+                <label for="floatingLink">Seleccionar Imagen</label>
+              </div>
+
+              <div id="preview" class="mb-3">
+
+              </div>
+
+              <!-- <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingLink" placeholder="name@example.com">
+                <label for="floatingLink">Link imagen</label>
+              </div> -->
+              <div class="form-floating mb-3">
+                <textarea class="form-control" placeholder="Leave a comment here" id="floatingDescripcion"></textarea required>
+                        <label for="floatingDescripcion">Descripción</label>
+                      </div>
+
+                      <div class="form-floating mb-3">
+                        <input type="number" class="form-control" id="floatingPrecio" placeholder="Precio" min="1"  required>
+                        <label for="floatingPrecio">Precio</label>
+                      </div>
+
+                      <div class="form-floating mb-3">
+                        <!-- <input type="text" class="form-control" id="floatingCategoria" placeholder="Categoria"required>
+                        <label for="floatingCategoria">Categoria</label> -->
+                        
+                         <select class="form-select" id="floatingCategoria" aria-label="Floating label select example">
+                          <option selected>Escoja su categoria</option>
+                          <option value="Alitas">Alitas</option>
+                          <option value="MixAlitas">MixAlitas</option>
+                          <option value="Extra">Extra</option>
+                        </select>
+                        <label for="floatingCategoria">Categoria</label>
+
+                      </div>
+
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                  <button id="boton_guardar_plato" type="submit" class="btn btn-primary">Guardar</button>
+                  <div id="texto_boton" style="display:none;">
+                    <button class="btn btn-primary" type="button" disabled="">
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    Guardando...
+                    </button>
+                  </div>
+                  <button id="boton_actualizar_plato" type="button" class="btn btn-info" style="display: none;">Actualizar</button>
+                  <div id="texto_actualizar" style="display:none">
+                  <button class="btn btn-info" type="button" disabled="">
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                    Actualizando...
+                  </button>
+                  </div>
+                </div>
+            </form>
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+
+
+        <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"
+    integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+   <script>
+
+      toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": false,
+        "positionClass": "toast-top-center",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "200",
+        "hideDuration": "500",
+        "timeOut": "2500",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+      }
+    </script>
+
+    <!-- navegacion de nvbar -->
+    <script>
+        const btn_salir1 = document.getElementById("salida")
+        btn_salir1.onclick = () => {
+            localStorage.clear();
+            window.open(<?= url ?>, '_top')
+        }
+
+        //ruta pizarra
+
+        document.getElementById("hola").onclick = function () {
+
+            google.script.run
+                .withSuccessHandler(function (url) {
+                    window.open(url, '_top');
+                })
+                .getPageUrl('pizarra');
+        };
+        //ruta interfaz
+        document.getElementById("cartas").onclick = function () {
+
+
+            google.script.run
+                .withSuccessHandler(function (url) {
+                    window.open(url, '_top');
+                })
+                .getPageUrl('interfaz');
+        };
+
+        //ruta pedidos
+        document.getElementById("pedidoA").onclick = function () {
+
+
+            google.script.run
+                .withSuccessHandler(function (url) {
+                    window.open(url, '_top');
+                })
+                .getPageUrl('pedidoadmin');
+        };
+
+    </script>
+
+    <script>
+      google.script.run.withSuccessHandler(data => {
+
+        renderList(data.proyectos);
+
+      }).dataFood();
+
+      // const remove = (sel) => document.querySelectorAll(sel).forEach(el => el.remove());
+
+      //render dinamic card
+      const renderList = (obj) => {
+        const htmlres = document.getElementById('tabla-comidas')
+        // remove(".tab_p");
+        
+
+        const datax = []
+        // const datay= []
+        // const dataz= []
+
+
+        obj.map((b, ind) => {
+          datax.push([b.pedidos])
+          const html = ` 
+                <tr id="tab_p">
+                <td scope="row">${b.id}</td>
+                <td><img class="imagen_tabla" src="${b.img}" alt="plato"></td>
+                <td>${b.nomb}</td>
+                <td>${b.dec}</td>
+                <td>S/. ${b.prec} </td>
+                <td>${b.cat} </td>
+                <td><i class="editItem editar bi bi-pencil-square"></i></td>
+                <td><i class="deleteItem basura bi bi-trash3"></i></td>
+
+            </tr>`;
+          htmlres.innerHTML += html;
+          //    const arre= datay[1].map( dx => dx)
+          //    if (Array.isArray(datay[ind])) {
+          //     console.log(datay[ind])
+          //    }
+        })
+
+
+
+      }
+
+    </script> 
+    
+    <!-- funciones para input imagen -->
+    <script>
+
+      document.getElementById("upinput").addEventListener("change",handleFiles,false);
+      // var button = document.getElementById('btn-submit');
+      // button.addEventListener('click', uploadFile);
+      
+      function handleFiles(f) {
+      
+        const previewDiv=document.getElementById("preview").innerHTML='';
+      
+        const files = document.getElementById("upinput").files;
+        for (let i = 0; i < files.length; i++) {
+          const file = files[i];
+      
+          if (!file.type.startsWith('image/')){ continue }
+      
+          const img = document.createElement("img");
+          img.classList.add("obj");
+          img.file = file;
+          preview.appendChild(img).setAttribute('style','width:200px')
+          document.querySelector(".obj").setAttribute("id","JP");
+          // Assuming that "preview" is the div output where the content will be displayed.
+      
+          const reader = new FileReader();
+          reader.onload = (e) => { img.src = e.target.result; };
+          reader.readAsDataURL(file);
+        }
+      }
+      
+      
+      // function uploadFile(){
+      //   const selectFile = document.getElementById('upinput').files[0];
+      //   // console.log(selectFile);
+      
+      //   const imgs = document.querySelectorAll(".obj");
+      //   for (let i = 0 ; i < imgs.length; i++)
+      //   {
+      // new FileUpload(imgs[i], imgs[i].file);
+      // console.log(imgs[i], imgs[i].file);
+      //   }
+      
+      // }
+      
+      function FileUpload(contacto,archivoimg){
+        // const obj= {}
+        
+              var reader = new FileReader();
+              reader.readAsArrayBuffer(archivoimg);
+              reader.onload = function(event) {
+            // El texto del archivo se mostrará por consola aquí
+                // console.log(event.target.result)
+      
+                const obj = {
+                  filename: archivoimg.name,
+                  mimeType:archivoimg.type,
+                  bytes:[...new Int8Array(event.target.result)]
+      
+                };
+      
+                // console.log(obj.bytes);
+
+                google.script.run.withSuccessHandler( result=>{
+
+                  const crearModal = bootstrap.Modal.getOrCreateInstance('#createModal')
+                  crearModal.hide();
+                  toastr["success"]("Registrado")
+                  // alert("registrado")
+                  var tableBody=document.getElementById("tabla-comidas");
+                  tableBody.innerHTML="";
+                  google.script.run.withSuccessHandler(data => {renderList(data.proyectos);}).dataFood();
+                }).
+                registrarPlato(contacto,obj);
+                // google.script.run
+                // .withSuccessHandler((e) => console.log(e))
+                // .registrarPlato(contacto,obj);
+              };
+      
+  
+      
+      }
+
+      function FileUploadModificar(contacto,archivoimg){
+        // const obj= {}
+        
+              var reader1 = new FileReader();
+              reader1.readAsArrayBuffer(archivoimg);
+              reader1.onload = function(event) {
+            // El texto del archivo se mostrará por consola aquí
+                // console.log(event.target.result)
+      
+                const obj = {
+                  filename: archivoimg.name,
+                  mimeType:archivoimg.type,
+                  bytes:[...new Int8Array(event.target.result)]
+      
+                };
+      
+                // console.log(obj.bytes);
+
+                google.script.run.withSuccessHandler( result=>{
+
+                  const crearModal = bootstrap.Modal.getOrCreateInstance('#createModal')
+                  crearModal.hide();
+                  toastr["success"]("Actualizado")
+                  // alert("actualizado")
+                  var tableBody=document.getElementById("tabla-comidas");
+                  tableBody.innerHTML="";
+                  google.script.run.withSuccessHandler(data => {renderList(data.proyectos);}).dataFood();
+                }).
+                actualizar(contacto,obj);
+                // google.script.run
+                // .withSuccessHandler((e) => console.log(e))
+                // .registrarPlato(contacto,obj);
+              };
+      
+  
+      
+      }
+      </script>
+    
+    <!-- estilo para el modal -->
+    <script>
+      const btn_crear_plato = document.getElementById("btn_agregar_plato")
+      btn_crear_plato.onclick = function () {
+        document.getElementById("boton_guardar_plato").disabled=false;
+        document.getElementById("texto_boton").style.display="none";
+        document.getElementById("floatingId").setAttribute('value', '');
+        document.getElementById("floatingNombre").setAttribute('value', '');
+        document.getElementById("preview").innerHTML='';
+        document.getElementById("floatingPrecio").setAttribute('value', '');
+        document.getElementById("floatingCategoria").setAttribute('value', '');
+        document.getElementById("id_plato").style.display = "none"; 
+        document.getElementById("boton_actualizar_plato").style.display = "none";
+        document.getElementById("texto_actualizar").style.display = "none";
+        document.getElementById("boton_guardar_plato").style.display = "block";
+        document.getElementById("crearPlato").reset();
+      }
+    </script>
+
+
+    <!-- funcion para crear plato -->
+    <script>
+      // const crear_plato = document.getElementById("boton_guardar_plato")
+      // crear_plato.onclick = function () {
+
+      //   document.getElementById("texto_boton").style.display="block";
+      //   document.getElementById("boton_guardar_plato").style.display="none";
+      //   document.getElementById("boton_guardar_plato").disabled=true;
+
+      //   let contacto=datosCliente();
+      //   let archivoimg= document.getElementById('upinput').files[0];
+  
+
+      //   // funcion subir foto a drive
+      //     FileUpload(contacto,archivoimg);
+
+      //   //======================================================================
+
+        
+      // }
+
+     const crear_plato = document.getElementById("crearPlato")
+      crear_plato.onsubmit = (e) => {
+      e.preventDefault();
+        document.getElementById("texto_boton").style.display="block";
+        document.getElementById("boton_guardar_plato").style.display="none";
+        document.getElementById("boton_guardar_plato").disabled=true;
+
+        let contacto=datosCliente();
+        let archivoimg= document.getElementById('upinput').files[0];
+  
+
+        // funcion subir foto a drive
+          FileUpload(contacto,archivoimg);
+
+        //======================================================================
+
+        
+      }
+
+
+      function datosCliente(){
+
+        // const img_p= document.getElementById("upinput").src;           
+
+        const nom_p = document.getElementById("floatingNombre").value;
+        const dec_p = document.getElementById("floatingDescripcion").value;
+        const prec_p = document.getElementById("floatingPrecio").value;
+        const cat_p = document.getElementById("floatingCategoria").value
+        
+        const cliente={nom_pe:nom_p,
+                    // img:img_p,
+                    dec_pe:dec_p,
+                    prec_pe:prec_p,
+                    cat_pe:cat_p,
+                    id_pe: CryptoJS.SHA3(`${nom_p + dec_p + prec_p + cat_p}`, { outputLength: 16 }).toString()};
+
+        
+
+         return cliente;           
+      }
+
+      function datosClienteModificar(){
+
+        const img_p=document.getElementById("JP").src;
+        const nom_p = document.getElementById("floatingNombre").value;
+        const dec_p = document.getElementById("floatingDescripcion").value;
+        const prec_p = document.getElementById("floatingPrecio").value;
+        const cat_p = document.getElementById("floatingCategoria").value
+        const id_p = document.getElementById("floatingId").value
+        
+        const cliente={nom_pe:nom_p,
+                    img_pe:img_p,
+                    dec_pe:dec_p,
+                    prec_pe:prec_p,
+                    cat_pe:cat_p,
+                    id_pe: id_p};
+
+        
+
+         return cliente;           
+      }
+
+      const rp = (output) => {
+        
+        
+      }
+    </script>
+
+    <!-- funcion para editar plato  -->
+    <script>
+
+      // cargar inputs modal      
+
+      const tablaTitulos1 = document.getElementById("tabla_platos");
+      tablaTitulos1.addEventListener("click", verificarClic1);
+    
+      function verificarClic1(b) {
+        document.getElementById("preview").innerHTML='';
+        document.getElementById("crearPlato").reset();
+
+        //console.log(v.target);
+        if (b.target.matches(".editItem")) {
+          //console.log("Ahora sí, eliminar fila");
+          // console.log(b.target.parentNode.parentNode.rowIndex);
+          const tIndex1 = b.target.parentNode.parentNode.rowIndex
+          //tablaTitulos.deleteRow(tIndex);
+
+
+          // vamos al elemento padre (<tr>) y buscamos todos los elementos <td>
+          // que contenga el elemento padre
+          for (var i = 0; i <= tIndex1; i++) {
+
+            if (tIndex1 == i) {
+
+              var elementosTD1 = document.getElementById('tabla_platos').tBodies[0].rows[i - 1].cells[0].innerHTML;// ID
+
+              // console.log(elementosTD1);
+
+              google.script.run.withSuccessHandler(w).actualizar_plato(elementosTD1);
+
+            }
+          }
+
+        }
+
+      }
+
+      const w = (output) => {
+
+        if (output.id_p1) {
+          const crearModal = bootstrap.Modal.getOrCreateInstance('#createModal')
+          crearModal.show();
+
+
+          document.getElementById("floatingId").setAttribute('value', output.id_p1);
+          document.getElementById("floatingNombre").setAttribute('value', output.nom_p1);
+  
+          const img = document.createElement("img");
+          img.classList.add("obj");
+          const preview=document.getElementById("preview");
+          
+          //  img.src=output.link_1;
+          preview.appendChild(img).setAttribute('style','width:200px');
+          document.querySelector(".obj").setAttribute("src",output.link_p1.toString());
+          document.querySelector(".obj").setAttribute("id","JP");
+          
+
+          document.getElementById("floatingDescripcion").value = output.dec_p1
+          document.getElementById("floatingPrecio").setAttribute('value', output.pre_p1);
+          document.getElementById("floatingCategoria").value = output.cat_p1;
+
+          document.getElementById("id_plato").style.display = "block";
+          document.getElementById("boton_actualizar_plato").style.display = "block";
+          document.getElementById("boton_guardar_plato").style.display = "none";
+          document.getElementById("texto_boton").style.display="none";
+          document.getElementById("texto_actualizar").style.display = "none";
+          document.getElementById("boton_actualizar_plato").disabled=false;
+
+
+
+          // document.getElementById("registrarcita").style.display = "none";
+
+        }
+
+      }
+
+      var actC = document.getElementById("boton_actualizar_plato");
+      actC.onclick = function () {
+        // e.preventDefault();
+        document.getElementById("boton_actualizar_plato").disabled=true;
+        document.getElementById("texto_actualizar").style.display = "block";
+        document.getElementById("boton_actualizar_plato").style.display = "none";
+        let contacto=datosClienteModificar();
+        let archivoimg= document.getElementById('upinput').files[0];
+
+        // funcion subir foto a drive
+        if(archivoimg){
+          FileUploadModificar(contacto,archivoimg);
+        }
+        else 
+          google.script.run.withSuccessHandler( result=>{
+
+            const crearModal = bootstrap.Modal.getOrCreateInstance('#createModal')
+            crearModal.hide();
+            toastr["success"]("Actualizado")
+            var tableBody=document.getElementById("tabla-comidas");
+            tableBody.innerHTML="";
+             google.script.run.withSuccessHandler(data => {renderList(data.proyectos);}).dataFood();
+          }).
+          actualizar(contacto);
+        
+        // google.script.run.withSuccessHandler(z).actualizar(id_p2, nom_p2, link_p2, dec_p2, pre_p2, cat_p2);
+
+      }
+
+      const z=(output)=>{
+        // alert("actualizado")
+        // var tableBody=document.getElementById("tabla-comidas");
+        // tableBody.innerHTML="";
+        // google.script.run.withSuccessHandler(data => {renderList(data.proyectos);}).dataFood();
+      } 
+      
+    </script>
+
+     <!-- ELIMINAR DATOS -->
+
+    <script>
+
+      const tablaTitulos = document.getElementById("tabla_platos");
+      tablaTitulos.addEventListener("click", verificarClic);
+
+      function verificarClic(v) {
+        //console.log(v.target);
+        if (v.target.matches(".deleteItem")) {
+          //console.log("Ahora sí, eliminar fila");
+          console.log(v.target.parentNode.parentNode.rowIndex);
+          const tIndex = v.target.parentNode.parentNode.rowIndex
+          //tablaTitulos.deleteRow(tIndex);
+
+
+          // vamos al elemento padre (<tr>) y buscamos todos los elementos <td>
+          // que contenga el elemento padre
+          for (var i = 0; i <= tIndex; i++) {
+
+            if (tIndex == i) {
+
+              var elementosTD = document.getElementById('tabla_platos').tBodies[0].rows[i - 1].cells[0].innerHTML;
+              console.log(elementosTD);
+              swal({
+                  title: "Desea eliminar el plato?",
+                  // text: "Once deleted, you will not be able to recover this imaginary file!",
+                  icon: "warning",
+                  buttons: true,
+                  dangerMode: true,
+                  closeOnEsc: false,
+                })
+                .then((willDelete) => {
+                  if (willDelete) {
+                    swal("Se elimino correctamente.", {
+                      icon: "success", 
+                    });
+                    tablaTitulos.deleteRow(tIndex);
+                    google.script.run.eliminar_plato(elementosTD);
+                  }
+               });
+
+              
+            }
+            //console.log(elementosTD);
+          }
+          //console.log(elementosTD);
+        }
+      }
+
+    </script>
+
+    <!-- input buscar nombre -->
+    
+    <script>
+      document.getElementById("buscarPlato").addEventListener("input", onInputChange)
+
+      function onInputChange() {
+        var inputText = document.getElementById("buscarPlato").value.toString().toLowerCase();
+        // console.log(inputText)
+        var tableBody = document.getElementById("tabla-comidas");
+        var tableRows = tableBody.getElementsByTagName("tr");
+        // console.log(tableRows)
+        for (var i = 0; i < tableRows.length; i++) {
+          // console.log(tableRows[i].cells[1].textContent);
+          var textoConsulta = tableRows[i].cells[2].textContent.toString().toLowerCase();
+          if (textoConsulta.indexOf(inputText) === -1) {
+            tableRows[i].style.visibility = "collapse";
+          } else {
+            tableRows[i].style.visibility = "";
+          }
+        }
+      }
+
+    </script>
+    
+    
+    
+
+
+</body>
+
+</html>
